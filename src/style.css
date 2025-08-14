@@ -1,0 +1,25 @@
+main {
+  height: 100vh;
+}
+
+#grid {
+  display: grid;
+  gap: 6px;
+  background: pink;
+}
+
+.tile {
+  outline: 1px solid black;
+  background: aliceblue;
+  /* aspect-ratio: 1 / 1;
+  width: 50px;
+  height: 50px; */
+}
+
+#cat {
+  width: 50px;
+  height: 100px;
+  border-radius: 100%;
+  background: black;
+  position: absolute;
+}
