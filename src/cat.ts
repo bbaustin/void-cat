@@ -1,10 +1,12 @@
-export type Direction = 'left' | 'right' | 'top' | 'bottom';
+import type { Orientation } from './cardEffects';
 
+// TODO: I'm not actually using this anywhere yet
+// I should probably use this in createCat?
 export type Cat = {
   headX: number;
   headY: number;
   length: number;
-  facing: Direction;
+  orientation: Orientation;
 };
 
 /** These are the CSS classes for each cat part.
