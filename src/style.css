@@ -2,6 +2,10 @@ main {
   height: 100vh;
 }
 
+/**********************
+GRID
+**********************/
+
 #grid {
   display: grid;
   gap: 6px;
@@ -15,6 +19,10 @@ main {
   width: 50px;
   height: 50px; */
 }
+
+/**********************
+CAT
+**********************/
 
 #cat {
   position: relative;
@@ -129,4 +137,16 @@ main {
   bottom: 20px;
   right: 40px;
   transform: rotate(10deg);
+}
+
+/**********************
+CARD
+**********************/
+#card-holder {
+}
+
+.card {
+  width: 75px;
+  height: 100px;
+  border: 1px solid black;
 }
