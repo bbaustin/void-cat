@@ -17,9 +17,116 @@ main {
 }
 
 #cat {
-  width: 50px;
-  height: 100px;
-  border-radius: 100%;
+  position: relative;
+  width: 200px;
+  height: 300px;
+  border-radius: 50% / 55%;
   background: black;
+  zoom: 40%;
+}
+
+.ear {
   position: absolute;
+  width: 40px;
+  height: 40px;
+  background: black;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  top: -9px;
+}
+
+.ear.left {
+  left: 10px;
+  transform: rotate(-44deg);
+}
+
+.ear.right {
+  right: 10px;
+  transform: rotate(44deg);
+}
+
+.face {
+  position: relative;
+  top: -16px;
+}
+
+.eye {
+  position: absolute;
+  width: 30px;
+  height: 16px;
+  background: #bad500;
+  border-radius: 50%;
+  top: 45px;
+}
+
+.eye::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 20px;
+  background: black;
+  border-radius: 50%;
+  top: -2px;
+  left: 9px;
+}
+
+.eye.left {
+  left: 59px;
+}
+
+.eye.right {
+  right: 59px;
+}
+
+.nose {
+  position: absolute;
+  background: #ffddee;
+  width: 9px;
+  height: 5px;
+  top: 63px;
+  left: 95px;
+  border-radius: 5px;
+}
+
+.smile {
+  position: absolute;
+  width: 25px;
+  height: 12px;
+  border-bottom: 3px solid rgb(255, 136, 195);
+  border-radius: 0 0 60px 60px;
+  top: 68px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.paw {
+  position: absolute;
+  width: 40px;
+  height: 60px;
+  background: black;
+  border-radius: 50%;
+  border: 3px solid #727272;
+}
+
+.paw.front-left {
+  top: 100px;
+  left: 30px;
+  transform: rotate(-30deg);
+}
+
+.paw.front-right {
+  top: 100px;
+  right: 20px;
+  transform: rotate(21deg);
+}
+
+.paw.back-left {
+  bottom: 20px;
+  left: 40px;
+  transform: rotate(-10deg);
+}
+
+.paw.back-right {
+  bottom: 20px;
+  right: 40px;
+  transform: rotate(10deg);
 }
