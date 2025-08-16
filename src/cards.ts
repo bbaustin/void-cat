@@ -1,6 +1,8 @@
+import { move } from './cardsMoves';
+
 interface Card {
   text: string[];
-  effect: string[]; // should this be a function?
+  effect: (() => void)[]; // should this be a function?
   level?: number;
 }
 
@@ -9,7 +11,7 @@ interface Card {
 export const ALL_CARDS: Card[] = [
   {
     text: ['Roll 1 space up', 'Roll 2 spaces up'],
-    effect: [], // Figure out how to do this
+    effect: [() => move(1, 'right'), () => move(2, 'right')], // Figure out how to do this
   },
   {
     text: ['Assume defensive nap position'],
@@ -80,20 +82,31 @@ export function addCardsToHand(
 
     /** Use the level to determine the text;
      * otherwise, if there's no level, use the first element  */
-    const textToAppend = getCardText(card);
+    const textToAppend = getCardAttribute(card, 'text');
     cardToAdd.innerHTML = textToAppend;
+
+    /** Same as above, but with effect instead of text */
+    const effectToApply = getCardAttribute(card, 'effect');
+    cardToAdd.addEventListener('click', effectToApply);
+
+    console.log(cardToAdd);
 
     document.getElementById('card-holder')?.appendChild(cardToAdd);
   }
 }
 
+type CardAttribute = Exclude<keyof Card, 'level'>;
+
 /**
- * Takes in a card, and returns the text of the card,
- * taking into account if the card has a "level" property or not
+ * Takes in a card, and returns an attribute (e.g., text or effect),
+ * TAKING INTO ACCOUNT the card's level
  * @param card Card
- * @returns string - the text of the card
+ * @returns type of whatever attribute you're querying for
  */
-function getCardText(card: Card): string {
-  const cardLevel = card.level || 0;
-  return card.text[cardLevel];
+function getCardAttribute<K extends CardAttribute>(
+  card: Card,
+  attribute: K
+): Card[K][number] {
+  const cardLevel = card.level ?? 0;
+  return card[attribute][cardLevel];
 }

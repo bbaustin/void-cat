@@ -35,7 +35,7 @@ export function setGrid(grid: Grid) {
   const gridRows = grid.length;
   const gridColumns = grid[0].length;
 
-  const tileSize = 64; // px
+  const tileSize = 68; // px
 
   container.style.gridTemplateRows = `repeat(${gridRows}, ${tileSize}px)`;
   container.style.gridTemplateColumns = `repeat(${gridColumns}, ${tileSize}px)`;

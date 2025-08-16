@@ -31,6 +31,10 @@ CAT
   border-radius: 50% / 55%;
   background: black;
   zoom: 40%;
+  /* Temporary */
+  top: -1820px;
+  left: -16px;
+  transition: left 0.5s;
 }
 
 .ear {
