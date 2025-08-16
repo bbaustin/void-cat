@@ -4,7 +4,12 @@ import { delay } from './utils';
 
 export const ONE_MOVE = 175;
 
-export function move(numberOfTiles: number, direction: Direction) {
+/**
+ * Function to move the cat upon playing a "movement" card
+ * @param numberOfTiles number of tiles to move
+ * @param direction direction to move in. Default is 'right'
+ */
+export function move(numberOfTiles: number, direction: Direction = 'right') {
   console.log(VOID_CAT);
   for (let i = 1; i <= numberOfTiles; i++) {
     let x = parseInt(VOID_CAT.dataset.x!);
@@ -15,4 +20,10 @@ export function move(numberOfTiles: number, direction: Direction) {
     VOID_CAT.style.left = `${x * ONE_MOVE}px`;
     delay(250);
   }
+}
+
+type Stance = 'standard' | 'nap' | 'longcat';
+
+export function changeStance(stance: Stance) {
+  VOID_CAT.dataset.stance = stance;
 }

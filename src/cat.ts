@@ -43,9 +43,10 @@ export function createCat(
     cat.appendChild(catElement);
   });
 
-  /** Add x and y data-attribute */
+  /** Add data-attributes */
   cat.dataset.x = startingX.toString();
   cat.dataset.y = startingY.toString();
+  cat.dataset.stance = 'standard';
 
   return cat;
 }
