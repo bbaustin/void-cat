@@ -1,5 +1,6 @@
 main {
   height: 100vh;
+  font-family: monospace;
 }
 
 /**********************
@@ -147,10 +148,25 @@ CAT
 CARD
 **********************/
 #card-holder {
+  display: flex;
+  gap: 32px;
 }
 
 .card {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 12px 6px;
   width: 75px;
   height: 100px;
   border: 1px solid black;
+  background: lightblue;
+}
+
+.card.level2 {
+  background: lightyellow;
+}
+
+.card.level3 {
+  background: lightsalmon;
 }

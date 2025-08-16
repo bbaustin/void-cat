@@ -10,7 +10,7 @@ interface Card {
 // when cat is rotated, will change that the "left/right"
 export const ALL_CARDS: Card[] = [
   {
-    text: ['Roll 1 space up', 'Roll 2 spaces up'],
+    text: ['Roll 1 space right', 'Roll 2 spaces right'],
     effect: [() => move(1, 'right'), () => move(2, 'right')], // Figure out how to do this
   },
   {
@@ -27,9 +27,9 @@ export const ALL_CARDS: Card[] = [
   },
   {
     text: [
-      'Roll 1 space up, then 1 space down',
-      'Roll 2 spaces up, then 2 spaces down',
-      'Roll 3 spaces up, then 3 spaces down',
+      'Roll 1 space right, then 1 space left',
+      'Roll 2 spaces right, then 2 spaces left',
+      'Roll 3 spaces right, then 3 spaces left',
     ],
     effect: [],
   },
