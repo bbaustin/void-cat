@@ -1,15 +1,16 @@
-import { addCardsToHand, INITIAL_CARDS, shuffleCards } from './cards';
-import { addCatToGrid, createCat } from './cat';
+import { addCardsToHand, INITIAL_CARDS, shuffleCards } from './card';
+import { addDOMCatToGrid, createDOMCat } from './cat';
 import { createGrid, setGrid } from './grid';
+import { STAGES, type Stage } from './stage';
 
-export const VOID_CAT = createCat();
+export const DOM_CAT = createDOMCat();
 
-function initGame() {
-  const grid = createGrid(10, 10);
+function initGame({ gridSize }: Stage) {
+  const grid = createGrid(gridSize.x, gridSize.y);
   setGrid(grid);
   const shuffledHand = shuffleCards(INITIAL_CARDS);
   addCardsToHand(shuffledHand);
-  addCatToGrid(VOID_CAT);
+  addDOMCatToGrid(DOM_CAT);
 }
 
-initGame();
+initGame(STAGES[2]);

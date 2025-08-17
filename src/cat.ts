@@ -1,12 +1,11 @@
-import type { Orientation } from './cardEffects';
+import type { Direction, Stance } from './cardEffects';
 
-// TODO: I'm not actually using this anywhere yet
-// I should probably use this in createCat?
 export type Cat = {
   headX: number;
   headY: number;
   length: number;
-  orientation: Orientation;
+  headFacing: Direction; // I had this as Orientation, but maybe better to be specific
+  stance: Stance;
 };
 
 /** These are the CSS classes for each cat part.
@@ -24,35 +23,50 @@ const catClasses = [
   'paw back-right',
 ];
 
+export const CAT_OF_TRUTH: Cat = {
+  headX: 0,
+  headY: 0,
+  length: 2,
+  headFacing: 'top',
+  stance: 'standard',
+};
+
 /**
- * Creates voidCat div and applies classes, attributes, etc.
- * Does NOT append it (done in addCatToGrid)
- * @param startingX - number; the starting x value, saved as data-x in HTML. Default is 0
- * @param startingY - number; the starting y value, saved as data-y in HTML. Default is 0
+ * Creates cat div in the DOM and applies classes, attributes, etc.
+ * The initial settings come from the "source of truth," CAT_OF_TRUTH
+ * Does NOT append it (that's done in addCatToGrid),
+ * just in case you want to do anything else before appending.
+ * @param startingX - number; the starting x value, saved as data-x in HTML. Default is CAT_OF_TRUTH's headX (0), but it can be overwritten
+ * @param startingY - number; the starting y value, saved as data-y in HTML. Default is CAT_OF_TRUTH's headY (0), but it can be overwritten
  * @returns HTMLDivElement - DOM element of **the** cat
  */
-export function createCat(
-  startingX: number = 0,
-  startingY: number = 0
+export function createDOMCat(
+  startingX: number = CAT_OF_TRUTH.headX,
+  startingY: number = CAT_OF_TRUTH.headY
 ): HTMLDivElement {
-  const cat = document.createElement('div');
+  const { length, headFacing, stance } = CAT_OF_TRUTH;
+
+  const domCat = document.createElement('div');
 
   /** Add id (for container) and classes (for body parts) */
-  cat.id = 'cat';
+  domCat.id = 'cat';
   catClasses.forEach((catClass) => {
     const catElement = document.createElement('div');
     catElement.className += ` ${catClass}`;
-    cat.appendChild(catElement);
+    domCat.appendChild(catElement);
   });
 
   /** Add data-attributes */
-  cat.dataset.x = startingX.toString();
-  cat.dataset.y = startingY.toString();
-  cat.dataset.stance = 'standard';
+  // TODO: Worth wondering if these are needed
+  domCat.dataset.x = startingX.toString();
+  domCat.dataset.y = startingY.toString();
+  domCat.dataset.length = length.toString();
+  domCat.dataset.headFacing = headFacing;
+  domCat.dataset.stance = stance;
 
-  return cat;
+  return domCat;
 }
 
-export function addCatToGrid(catDiv: HTMLDivElement) {
+export function addDOMCatToGrid(catDiv: HTMLDivElement) {
   document.getElementById('grid')?.appendChild(catDiv);
 }

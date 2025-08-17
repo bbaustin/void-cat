@@ -7,7 +7,11 @@ import { changeStance, move } from './cardEffects';
 export const ALL_CARDS: Card[] = [
   {
     text: ['Roll 1 space right', 'Roll 2 spaces right'],
-    effect: [() => move(1), () => move(2)], // Figure out how to do this
+    effect: [() => move(1), () => move(2)],
+  },
+  {
+    text: ['Roll 1 space left', 'Roll 2 spaces left'],
+    effect: [() => move(1, 'left'), () => move(2, 'left')],
   },
   {
     text: ['Assume defensive nap position'],

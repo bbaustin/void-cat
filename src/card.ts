@@ -17,11 +17,11 @@ export const INITIAL_CARDS: Card[] = [
   ALL_CARDS[0],
   ALL_CARDS[1],
   ALL_CARDS[2],
-  ALL_CARDS[3],
-  { ...ALL_CARDS[0], level: 1 },
-  ALL_CARDS[4],
   ALL_CARDS[5],
-  ALL_CARDS[6],
+  { ...ALL_CARDS[0], level: 1 },
+  ALL_CARDS[0],
+  ALL_CARDS[1],
+  ALL_CARDS[5],
 ];
 
 /**
