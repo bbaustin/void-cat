@@ -2,6 +2,7 @@
 
 import type { Card } from './card';
 import { changeStance, move } from './cardEffects';
+import { handleEffectsSequentially } from './utils';
 
 // when cat is rotated, will change that to "up/down"
 export const ALL_CARDS: Card[] = [
@@ -38,16 +39,13 @@ export const ALL_CARDS: Card[] = [
     ],
     effect: [
       () => {
-        move(1);
-        move(1, 'left');
+        handleEffectsSequentially([() => move(1), () => move(1, 'left')]);
       },
       () => {
-        move(2);
-        move(2, 'left');
+        handleEffectsSequentially([() => move(2), () => move(2, 'left')]);
       },
       () => {
-        move(3);
-        move(3, 'left');
+        handleEffectsSequentially([() => move(3), () => move(3, 'left')]);
       },
     ],
   },
@@ -55,8 +53,7 @@ export const ALL_CARDS: Card[] = [
     text: ['Roll 1 space right, then assume defensive nap position'],
     effect: [
       () => {
-        move(1);
-        changeStance('nap');
+        handleEffectsSequentially([() => move(1), () => changeStance('nap')]);
       },
     ],
   },
@@ -64,8 +61,10 @@ export const ALL_CARDS: Card[] = [
     text: ['Roll 1 space right, then assume longcat position'],
     effect: [
       () => {
-        move(1);
-        changeStance('longcat');
+        handleEffectsSequentially([
+          () => move(1),
+          () => changeStance('longcat'),
+        ]);
       },
     ],
   },
@@ -75,9 +74,11 @@ export const ALL_CARDS: Card[] = [
     ],
     effect: [
       () => {
-        changeStance('longcat');
-        move(1);
-        changeStance('nap');
+        handleEffectsSequentially([
+          () => changeStance('longcat'),
+          () => move(1),
+          () => changeStance('nap'),
+        ]);
       },
     ],
   },
