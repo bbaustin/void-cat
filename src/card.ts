@@ -1,8 +1,10 @@
 import { ALL_CARDS } from './cardAll';
 
+export type Effect = () => void;
+
 export interface Card {
   text: string[];
-  effect: (() => void)[];
+  effect: Effect[];
   level?: number;
   /** Description of stuff that might not make sense immediately.
    * Note that (for now) this is NOT an array.

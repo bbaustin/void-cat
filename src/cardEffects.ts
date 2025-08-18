@@ -1,5 +1,6 @@
 import { CAT_OF_TRUTH } from './cat';
 import { DOM_CAT } from './main';
+import { isOutOfBounds } from './stage';
 import { delay } from './utils';
 
 /** Distance in pixels one move left or right should take */
@@ -32,14 +33,16 @@ export function move(
      * to get the current horizontal px count. */
     const xInPx = CAT_OF_TRUTH.headX * ONE_MOVE_PX_X;
 
-    /** Add or subtract 1 to the current x */
-    CAT_OF_TRUTH.headX += factor;
+    if (!isOutOfBounds(direction)) {
+      /** Add or subtract 1 to the current x */
+      CAT_OF_TRUTH.headX += factor;
 
-    /** Also update the data-attribute */
-    DOM_CAT.dataset.x = CAT_OF_TRUTH.headX.toString();
+      /** Also update the data-attribute */
+      DOM_CAT.dataset.x = CAT_OF_TRUTH.headX.toString();
 
-    /** Finally actually move the cat */
-    DOM_CAT.style.left = `${xInPx + ONE_MOVE_PX_X * factor}px`;
+      /** Finally actually move the cat */
+      DOM_CAT.style.left = `${xInPx + ONE_MOVE_PX_X * factor}px`;
+    }
 
     delay(250);
   }
