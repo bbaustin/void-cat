@@ -1,6 +1,6 @@
 import { CAT_OF_TRUTH } from './cat';
 import { DOM_CAT } from './main';
-import { isOutOfBounds } from './stage';
+import { isOutOfBounds } from './grid';
 import { delay } from './utils';
 
 /** Distance in pixels one move left or right should take */

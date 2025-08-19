@@ -24,12 +24,3 @@ export const STAGES: Stage[] = [
     gridSize: { x: 10, y: 10 },
   },
 ];
-
-export function isOutOfBounds(direction: Direction) {
-  const addend = direction === 'right' || direction === 'bottom' ? 1 : -1;
-
-  return (
-    CAT_OF_TRUTH.headX + addend < 0 ||
-    CAT_OF_TRUTH.headX + addend >= STAGES[CURRENT_STAGE].gridSize.x
-  );
-}

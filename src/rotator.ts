@@ -1,6 +1,7 @@
 import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
 import { DOM_CAT } from './main';
+import { CURRENT_STAGE, STAGES } from './stage';
 
 export function initRotator() {
   const buttonLeft = document.querySelector('.arrow.left');
@@ -60,6 +61,20 @@ export function getRotatedDirection(
  * @param rotationDirection 'clockwise' or 'counterClockwise', depending on which button pressed
  */
 export function rotate(rotationDirection: RotationDirection) {
+  if (
+    willRotationBeOutOfBounds(
+      CAT_OF_TRUTH.headX,
+      CAT_OF_TRUTH.headY,
+      CAT_OF_TRUTH.headFacing,
+      rotationDirection,
+      CAT_OF_TRUTH.length,
+      STAGES[CURRENT_STAGE].gridSize // TODO: Make this a global somewhere
+    )
+  ) {
+    console.log("Can't rotate, would go out of bounds!");
+    return;
+  }
+
   /* Determine what the next direction is */
   const newDirection = getRotatedDirection(
     CAT_OF_TRUTH.headFacing,
@@ -76,4 +91,48 @@ export function rotate(rotationDirection: RotationDirection) {
   /* Update DOM */
   DOM_CAT.style.transform = `rotate(${angle}deg) translate(${x}px, ${y}px)`;
   DOM_CAT.style.transformOrigin = 'top'; // keep this fixed
+}
+
+function getOccupiedTiles(
+  headX: number,
+  headY: number,
+  facing: Direction,
+  length: number
+): { x: number; y: number }[] {
+  const tiles = [{ x: headX, y: headY }]; // head always included
+
+  for (let i = 1; i < length; i++) {
+    switch (facing) {
+      case 'top':
+        tiles.push({ x: headX, y: headY + i });
+        break;
+      case 'bottom':
+        tiles.push({ x: headX, y: headY - i });
+        break;
+      case 'left':
+        tiles.push({ x: headX + i, y: headY });
+        break;
+      case 'right':
+        tiles.push({ x: headX - i, y: headY });
+        break;
+    }
+  }
+
+  return tiles;
+}
+
+function willRotationBeOutOfBounds(
+  headX: number,
+  headY: number,
+  currentFacing: Direction,
+  rotation: RotationDirection,
+  length: number,
+  gridSize: { x: number; y: number }
+): boolean {
+  const newFacing = getRotatedDirection(currentFacing, rotation);
+  const occupied = getOccupiedTiles(headX, headY, newFacing, length);
+
+  return occupied.some(
+    ({ x, y }) => x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y
+  );
 }
