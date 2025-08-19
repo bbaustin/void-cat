@@ -64,6 +64,11 @@ export function createDOMCat(
   domCat.dataset.headFacing = headFacing;
   domCat.dataset.stance = stance;
 
+  /** Add initial position */
+  // This is temporary and shoudl be handled better later...
+  domCat.style.top = '-890px';
+  domCat.style.left = '-16px';
+
   return domCat;
 }
 

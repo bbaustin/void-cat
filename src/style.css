@@ -33,9 +33,6 @@ CAT
   border-radius: 50% / 55%;
   background: black;
   zoom: 40%;
-  /* Temporary */
-  top: -890px;
-  left: -16px;
   transition: left 0.5s, top 0.5s;
 }
 
