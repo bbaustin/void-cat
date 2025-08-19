@@ -11,6 +11,7 @@ GRID
   display: grid;
   gap: 6px;
   background: pink;
+  margin: 0 auto;
 }
 
 .tile {
@@ -169,4 +170,11 @@ CARD
 
 .card.level3 {
   background: lightsalmon;
+}
+
+/**********************
+ROTATOR
+**********************/
+.arrow {
+  font-size: 24px;
 }
