@@ -36,7 +36,7 @@ CAT
   /* Temporary */
   top: -890px;
   left: -16px;
-  transition: left 0.5s;
+  transition: left 0.5s, top 0.5s;
 }
 
 .ear {
