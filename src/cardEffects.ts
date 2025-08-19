@@ -22,8 +22,8 @@ export type Orientation = 'ns' | 'ew';
 // Otherwise you'd get weird stuff like left: 180px; right 180px; etc
 export function move(
   numberOfTiles: number,
-  direction: Direction = 'right',
-  orientation: Orientation = 'ew'
+  direction: Direction,
+  orientation: Orientation
 ) {
   /** This determines which direction we're moving.
    * Specifically, if we add neg or pos pixels */

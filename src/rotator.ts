@@ -71,7 +71,6 @@ export function rotate(rotationDirection: RotationDirection) {
       STAGES[CURRENT_STAGE].gridSize // TODO: Make this a global somewhere
     )
   ) {
-    console.log("Can't rotate, would go out of bounds!");
     return;
   }
 
