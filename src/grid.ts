@@ -69,8 +69,18 @@ export function setGrid(grid: Grid) {
 export function isOutOfBounds(direction: Direction) {
   const addend = direction === 'right' || direction === 'bottom' ? 1 : -1;
 
+  /**
+   * If the cat's head is facing top or bottom, move headX
+   * If the cat's head is facing left or right, move headY
+   */
+  const isCatVertical =
+    CAT_OF_TRUTH.headFacing === 'top' || CAT_OF_TRUTH.headFacing === 'bottom';
+
+  const headXOrHeadY = isCatVertical ? 'headX' : 'headY';
+  const xOrY = isCatVertical ? 'x' : 'y';
+
   return (
-    CAT_OF_TRUTH.headX + addend < 0 ||
-    CAT_OF_TRUTH.headX + addend >= STAGES[CURRENT_STAGE].gridSize.x
+    CAT_OF_TRUTH[headXOrHeadY] + addend < 0 ||
+    CAT_OF_TRUTH[headXOrHeadY] + addend >= STAGES[CURRENT_STAGE].gridSize[xOrY]
   );
 }

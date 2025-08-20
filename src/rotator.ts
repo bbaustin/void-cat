@@ -68,9 +68,11 @@ export function rotate(rotationDirection: RotationDirection) {
       CAT_OF_TRUTH.headFacing,
       rotationDirection,
       CAT_OF_TRUTH.length,
-      STAGES[CURRENT_STAGE].gridSize // TODO: Make this a global somewhere
+      STAGES[CURRENT_STAGE].gridSize
     )
   ) {
+    // TODO: Ideally do some half-animation and communicate that it'll be out of bounds.
+    // Or, you could grey out the button when this is the case. Not sure how hard that would be
     return;
   }
 
