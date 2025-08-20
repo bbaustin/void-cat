@@ -1,3 +1,7 @@
+import type { Direction } from './cardEffects';
+import { CAT_OF_TRUTH } from './cat';
+import { CURRENT_STAGE, STAGES } from './stage';
+
 type Terrain =
   | 'floor'
   | 'street'
@@ -60,4 +64,23 @@ export function setGrid(grid: Grid) {
       container.appendChild(tileEl);
     }
   }
+}
+
+export function isOutOfBounds(direction: Direction) {
+  const addend = direction === 'right' || direction === 'bottom' ? 1 : -1;
+
+  /**
+   * If the cat's head is facing top or bottom, move headX
+   * If the cat's head is facing left or right, move headY
+   */
+  const isCatVertical =
+    CAT_OF_TRUTH.headFacing === 'top' || CAT_OF_TRUTH.headFacing === 'bottom';
+
+  const headXOrHeadY = isCatVertical ? 'headX' : 'headY';
+  const xOrY = isCatVertical ? 'x' : 'y';
+
+  return (
+    CAT_OF_TRUTH[headXOrHeadY] + addend < 0 ||
+    CAT_OF_TRUTH[headXOrHeadY] + addend >= STAGES[CURRENT_STAGE].gridSize[xOrY]
+  );
 }

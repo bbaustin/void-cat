@@ -11,6 +11,7 @@ GRID
   display: grid;
   gap: 6px;
   background: pink;
+  margin: 0 auto;
 }
 
 .tile {
@@ -32,10 +33,7 @@ CAT
   border-radius: 50% / 55%;
   background: black;
   zoom: 40%;
-  /* Temporary */
-  top: -890px;
-  left: -16px;
-  transition: left 0.5s;
+  transition: left 0.5s, top 0.5s, transform 0.5s;
 }
 
 .ear {
@@ -169,4 +167,11 @@ CARD
 
 .card.level3 {
   background: lightsalmon;
+}
+
+/**********************
+ROTATOR
+**********************/
+.arrow {
+  font-size: 24px;
 }
