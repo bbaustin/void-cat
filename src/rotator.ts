@@ -94,6 +94,16 @@ export function rotate(rotationDirection: RotationDirection) {
   DOM_CAT.style.transformOrigin = 'top'; // keep this fixed
 }
 
+/**
+ * Returns all tiles that the cat is currently occupying,
+ * taking into account its current coordinates,
+ * direction, and length
+ * @param headX x-coordinate of cat head
+ * @param headY y-coordinate of cat head
+ * @param facing which direction cat is facing
+ * @param length current length of cat
+ * @returns array of x and y coordinates
+ */
 function getOccupiedTiles(
   headX: number,
   headY: number,
@@ -122,6 +132,19 @@ function getOccupiedTiles(
   return tiles;
 }
 
+/**
+ * Takes the coordinates / direction / length of cat,
+ * figure out all of the coordinates that it would be occupying
+ * were it to complete a rotation, and determines if any of those
+ * coordinates would be oob. Returns a boolean as such.
+ * @param headX x-coordinate of cat head
+ * @param headY y-coordinate of cat head
+ * @param currentFacing which direction cat head is facing
+ * @param rotation which direction cat wants to rotate
+ * @param length length of cat
+ * @param gridSize dimensions of current level
+ * @returns boolean - if the cat will be oob or not
+ */
 function willRotationBeOutOfBounds(
   headX: number,
   headY: number,
