@@ -66,8 +66,10 @@ export function createDOMCat(
 
   /** Add initial position */
   // This is temporary and shoudl be handled better later...
-  domCat.style.top = '-890px';
-  domCat.style.left = '-16px';
+  domCat.style.marginTop = '-890px';
+  domCat.style.marginLeft = '-16px';
+  domCat.style.top = '0px';
+  domCat.style.left = '0px';
 
   return domCat;
 }

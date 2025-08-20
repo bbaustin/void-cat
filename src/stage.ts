@@ -1,6 +1,3 @@
-import type { Direction } from './cardEffects';
-import { CAT_OF_TRUTH } from './cat';
-
 /** This is the current stage you are playing.
  * It's just a number, so access it by using STAGES[CURRENT_STAGE] */
 export const CURRENT_STAGE = 2;
