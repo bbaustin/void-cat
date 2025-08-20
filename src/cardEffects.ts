@@ -18,10 +18,6 @@ export type Orientation = 'ns' | 'ew';
  * @param direction direction to move in. Default is 'right'
  * @param orientation which way you expect to move, based if the cat is horizontally or vertically oriented
  */
-
-// TODO: Where you at: you probably only want to affect left and top
-// Do + / - for these
-// Otherwise you'd get weird stuff like left: 180px; right 180px; etc
 export function move(
   numberOfTiles: number,
   // Can do cooler type for this if you want
@@ -36,19 +32,9 @@ export function move(
     CAT_OF_TRUTH.headFacing === 'top' || CAT_OF_TRUTH.headFacing === 'bottom';
 
   const oneMovePx = shouldMoveHorizontally ? ONE_MOVE_PX_X : ONE_MOVE_PX_Y;
-
   const headDirection = shouldMoveHorizontally ? 'headX' : 'headY';
-
   const xOrY = shouldMoveHorizontally ? 'x' : 'y';
-
   const leftOrTop = shouldMoveHorizontally ? 'left' : 'top';
-
-  console.log(leftOrTop);
-
-  // WHERE YOU AT -- vertical movement!!
-  // I guess the thing to do is, before the loop,
-  // set constants; instead of xInPx, set it to
-  // pxToMove = orientation === "ew" ? CAT_OF_TRUTH.headX : CAT_OF_TRUTH.headY
 
   for (let i = 1; i <= numberOfTiles; i++) {
     /** Get the current x and multiply it by tile width
