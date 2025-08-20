@@ -6,7 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐈‍⬛</text></svg>" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐈‍⬛</text></svg>"
+    />
     <link
       href="src/style.css"
       rel="stylesheet"
@@ -15,18 +18,20 @@
   </head>
   <body>
     <main>
-      <div id="card-holder">
-      </div>
-      <div id="game">
+      <!-- GAME SCREEN! -->
+      <section id="screen-game">
+        <div id="card-holder"></div>
         <div id="rotator">
           <button class="arrow left">↻</button>
           <button class="arrow right">↺</button>
         </div>
         <div id="grid">
-          <div id="cat">
+          <div id="cat"></div>
         </div>
-      </div>
-      <div id="result"></div>
+      </section>
+      <section id="screen-intermission">
+        <div id="view-deck"></div>
+      </section>
     </main>
     <script
       type="module"

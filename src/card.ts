@@ -1,7 +1,3 @@
-import { CARD_LIBRARY } from './cardLibrary';
-
-export type Effect = () => void;
-
 export interface Card {
   text: string[];
   effect: Effect[];
@@ -15,19 +11,13 @@ export interface Card {
   minimumStage?: number;
 }
 
-export const INITIAL_CARDS: Card[] = [
-  CARD_LIBRARY[0],
-  CARD_LIBRARY[1],
-  CARD_LIBRARY[2],
-  CARD_LIBRARY[5],
-  { ...CARD_LIBRARY[0], level: 1 },
-  CARD_LIBRARY[0],
-  CARD_LIBRARY[1],
-  CARD_LIBRARY[5],
-];
+export type Effect = () => void;
+
+type CardAttribute = Extract<keyof Card, 'text' | 'effect'>;
 
 /**
  * Takes an array of cards, randomizes it, and returns the randomized array.
+ * Intended to be used to shuffle your deck (global).
  * Uses the Schwartzian transform.
  * https://stackoverflow.com/a/46545530
  */
@@ -38,34 +28,52 @@ export function shuffleCards(cards: Card[]): Card[] {
     .map(({ value }) => value);
 }
 
-export function addCardsToHand(
+// TODO: This should take into account the deck; discard pile and such
+export function addXCardsToHand(
   cards: Card[],
   handSize: number = 3,
   positionInDeck: number = 0
 ) {
   for (let i = 0; i <= handSize - 1; i++) {
     const cardPositionInDeck = positionInDeck + i;
-
     const card = cards[cardPositionInDeck];
-
-    /** Create DOM element */
-    const cardToAdd = document.createElement('div');
-    cardToAdd.classList.add('card');
-
-    /** Use the level to determine the text;
-     * otherwise, if there's no level, use the first element  */
-    const textToAppend = getCardAttribute(card, 'text');
-    cardToAdd.innerHTML = textToAppend;
-
-    /** Same as above, but with effect instead of text */
-    const effectToApply = getCardAttribute(card, 'effect');
-    cardToAdd.addEventListener('click', effectToApply);
-
+    const cardToAdd = createDOMCard(card, true);
     document.getElementById('card-holder')?.appendChild(cardToAdd);
   }
 }
 
-type CardAttribute = Extract<keyof Card, 'text' | 'effect'>;
+/**
+ * Takes in a card's data (text, effect, etc...)
+ * and creates a div with the needed data rendered.
+ * Can avoid adding the click event if needed.
+ * Does NOT append the card to the DOM.
+ * @param card Data for a card
+ * @param shouldApplyEffect Whether or not to add the click event; would refrain, for example, in the "view deck" page
+ * @returns HTML div
+ */
+export function createDOMCard(
+  card: Card,
+  shouldApplyEffect: boolean
+): HTMLDivElement {
+  /** Create DOM element */
+  const cardToAdd = document.createElement('div');
+  cardToAdd.classList.add('card');
+
+  /** Use the level to determine the text;
+   * otherwise, if there's no level, use the first element  */
+  const textToAppend = getCardAttribute(card, 'text');
+  cardToAdd.innerHTML = textToAppend;
+
+  /** Same as above, but with effect instead of text
+   * We might not want to apply the effect if
+   * viewing all cards during intermission, for example */
+  if (shouldApplyEffect) {
+    const effectToApply = getCardAttribute(card, 'effect');
+    cardToAdd.addEventListener('click', effectToApply);
+  }
+
+  return cardToAdd;
+}
 
 /**
  * Takes in a card, and returns an attribute (e.g., text or effect),
