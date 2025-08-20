@@ -1,4 +1,4 @@
-import { ALL_CARDS } from './cardAll';
+import { CARD_LIBRARY } from './cardLibrary';
 
 export type Effect = () => void;
 
@@ -16,14 +16,14 @@ export interface Card {
 }
 
 export const INITIAL_CARDS: Card[] = [
-  ALL_CARDS[0],
-  ALL_CARDS[1],
-  ALL_CARDS[2],
-  ALL_CARDS[5],
-  { ...ALL_CARDS[0], level: 1 },
-  ALL_CARDS[0],
-  ALL_CARDS[1],
-  ALL_CARDS[5],
+  CARD_LIBRARY[0],
+  CARD_LIBRARY[1],
+  CARD_LIBRARY[2],
+  CARD_LIBRARY[5],
+  { ...CARD_LIBRARY[0], level: 1 },
+  CARD_LIBRARY[0],
+  CARD_LIBRARY[1],
+  CARD_LIBRARY[5],
 ];
 
 /**
