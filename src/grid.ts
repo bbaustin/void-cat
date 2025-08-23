@@ -1,6 +1,7 @@
 import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
 import { CURRENT_STAGE, STAGES } from './stage';
+import { generateCrystal } from './things';
 
 export type Terrain = 'floor' | 'grass' | 'street' | 'space';
 
@@ -67,6 +68,13 @@ export function renderGrid(grid: Grid) {
       tileDiv.dataset.y = y.toString();
 
       tileDiv.classList.add('attack');
+
+      tileDiv.appendChild(generateCrystal());
+
+      // where you at
+      // you probably want this to take an array, unless you're sure it's gonna have nothing
+      // and/or have an array of tiles to add stuff to
+      // you also need to draw and add the stuff TO the tile
 
       gridContainer.appendChild(tileDiv);
     }
