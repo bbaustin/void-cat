@@ -16,33 +16,6 @@ export type Effect = () => void;
 type CardAttribute = Extract<keyof Card, 'text' | 'effect'>;
 
 /**
- * Takes an array of cards, randomizes it, and returns the randomized array.
- * Intended to be used to shuffle your deck (global).
- * Uses the Schwartzian transform.
- * https://stackoverflow.com/a/46545530
- */
-export function shuffleCards(cards: Card[]): Card[] {
-  return cards
-    .map((value) => ({ value, order: Math.random() }))
-    .sort((a, b) => a.order - b.order)
-    .map(({ value }) => value);
-}
-
-// TODO: This should take into account the deck; discard pile and such
-export function addXCardsToHand(
-  cards: Card[],
-  handSize: number = 3,
-  positionInDeck: number = 0
-) {
-  for (let i = 0; i <= handSize - 1; i++) {
-    const cardPositionInDeck = positionInDeck + i;
-    const card = cards[cardPositionInDeck];
-    const cardToAdd = createDOMCard(card, true);
-    document.getElementById('card-holder')?.appendChild(cardToAdd);
-  }
-}
-
-/**
  * Takes in a card's data (text, effect, etc...)
  * and creates a div with the needed data rendered.
  * Can avoid adding the click event if needed.
