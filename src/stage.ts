@@ -1,3 +1,5 @@
+import type { Terrain } from './grid';
+
 /** This is the current stage you are playing.
  * It's just a number, so access it by using STAGES[CURRENT_STAGE] */
 export const CURRENT_STAGE = 2;
@@ -5,6 +7,7 @@ export const CURRENT_STAGE = 2;
 // TODO: If you have a map of terrains, you might not need gridSize, only array row/col
 export interface Stage {
   gridSize: { x: number; y: number };
+  terrain?: Terrain;
 }
 
 export const STAGES: Stage[] = [
@@ -16,6 +19,7 @@ export const STAGES: Stage[] = [
   },
   {
     gridSize: { x: 5, y: 5 },
+    terrain: 'grass',
   },
   {
     gridSize: { x: 10, y: 10 },

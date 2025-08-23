@@ -2,30 +2,36 @@ import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
 import { CURRENT_STAGE, STAGES } from './stage';
 
-type Terrain =
-  | 'floor'
-  | 'street'
-  | 'wall'
+export type Terrain = 'floor' | 'grass' | 'street' | 'space';
+
+export type ThingOnBoard =
+  | 'crystal'
   | 'house'
+  | 'human'
+  | 'dog'
+  | 'tank'
   | 'tree'
-  | 'gunner'
-  | 'space'
   | 'planet';
 
 type Tile = {
   x: number;
   y: number;
   terrain: Terrain;
+  thing?: ThingOnBoard;
 };
 
 type Grid = Tile[][];
 
-export function createGrid(width: number, height: number): Grid {
+export function createEmptyGrid(
+  width: number,
+  height: number,
+  terrain: Terrain = 'floor'
+): Grid {
   const grid: Grid = [];
   for (let y = 0; y < height; y++) {
     const row: Tile[] = [];
     for (let x = 0; x < width; x++) {
-      row.push({ x, y, terrain: 'floor' });
+      row.push({ x, y, terrain });
     }
     grid.push(row);
   }
@@ -33,35 +39,33 @@ export function createGrid(width: number, height: number): Grid {
 }
 
 export function renderGrid(grid: Grid) {
-  const container = document.getElementById('grid');
-  if (!container) return;
+  const gridContainer = document.getElementById('grid');
+  if (!gridContainer) return;
 
   const gridRows = grid.length;
   const gridColumns = grid[0].length;
 
   const tileSize = 68; // px
 
-  container.style.gridTemplateRows = `repeat(${gridRows}, ${tileSize}px)`;
-  container.style.gridTemplateColumns = `repeat(${gridColumns}, ${tileSize}px)`;
+  gridContainer.style.gridTemplateRows = `repeat(${gridRows}, ${tileSize}px)`;
+  gridContainer.style.gridTemplateColumns = `repeat(${gridColumns}, ${tileSize}px)`;
 
   // The container will now auto-size to fit all tiles
-  container.style.width = `${gridRows * (tileSize + 6)}px`;
-  container.style.height = `${gridColumns * (tileSize + 6)}px`;
+  gridContainer.style.width = `${gridRows * (tileSize + 6)}px`;
+  gridContainer.style.height = `${gridColumns * (tileSize + 6)}px`;
 
-  container.innerHTML = '';
+  gridContainer.innerHTML = '';
 
   // Populate DOM
   for (let y = 0; y < gridColumns; y++) {
     for (let x = 0; x < gridRows; x++) {
       const tileEl = document.createElement('div');
       tileEl.className = 'tile';
+      tileEl.classList.add(grid[y][x].terrain);
       tileEl.dataset.x = x.toString();
       tileEl.dataset.y = y.toString();
 
-      // Example: set terrain type as a class
-      // tileEl.classList.add(grid[y][x].terrain);
-
-      container.appendChild(tileEl);
+      gridContainer.appendChild(tileEl);
     }
   }
 }
