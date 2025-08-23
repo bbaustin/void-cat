@@ -1,4 +1,5 @@
 // NOTE: Make all cards use "right/left", but run it through a helper which
+// Slightly big todo: would be better not to these functions in the effect array... just want to list them. annoying type problem
 
 import type { Card } from './card';
 import { changeStance, move } from './cardEffects';

@@ -15,10 +15,11 @@ export function delay(ms: number) {
  * @param delayInMs Default is 500 ms, but if you need longer you can overwrite
  */
 export async function handleEffectsSequentially(
-  effects: Effect[],
+  effects: Effect | Effect[],
   delayInMs: number = 500
 ) {
-  for (const effect of effects) {
+  const effectsList = Array.isArray(effects) ? effects : [effects];
+  for (const effect of effectsList) {
     effect();
     await delay(delayInMs);
   }

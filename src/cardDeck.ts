@@ -3,6 +3,7 @@ import { CARD_LIBRARY } from './cardLibrary';
 
 type DeckOfTruthType = {
   unusedCards: Card[];
+  hand: Card[];
   discardPile: Card[];
 };
 
@@ -17,6 +18,7 @@ export let DECK_OF_TRUTH: DeckOfTruthType = {
     CARD_LIBRARY[1],
     CARD_LIBRARY[5],
   ],
+  hand: [],
   discardPile: [],
 };
 /**
@@ -65,11 +67,30 @@ export function addXCardsToHand(handSize: number = 3) {
     const card = drawCard();
     if (!card) break;
 
-    const cardToAdd = createDOMCard(card, true);
-    document.getElementById('card-holder')?.appendChild(cardToAdd);
+    DECK_OF_TRUTH.hand.push(card);
+    console.log(DECK_OF_TRUTH.hand);
 
+    addCardToHandVisually(card);
     cardsDrawn++;
   }
+}
+
+export function addCardToHandVisually(card: Card) {
+  const cardToAdd = createDOMCard(card, true);
+  document.getElementById('card-holder')?.appendChild(cardToAdd);
+}
+
+function clearHandVisually() {
+  document.getElementById('card-holder')!.innerHTML = '';
+}
+
+export function addWholeHandVisually() {
+  // Note: This might not be ideal? But OK for now
+  clearHandVisually();
+  const cardHolder = document.getElementById('card-holder');
+  DECK_OF_TRUTH.hand.forEach((card) =>
+    cardHolder?.appendChild(createDOMCard(card, true))
+  );
 }
 
 export function renderDiscardPile() {

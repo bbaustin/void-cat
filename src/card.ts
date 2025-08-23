@@ -1,3 +1,10 @@
+import {
+  DECK_OF_TRUTH,
+  addCardToHandVisually,
+  addWholeHandVisually,
+} from './cardDeck';
+import { handleEffectsSequentially } from './utils';
+
 export interface Card {
   text: string[];
   effect: Effect[];
@@ -42,7 +49,24 @@ export function createDOMCard(
    * viewing all cards during intermission, for example */
   if (shouldApplyEffect) {
     const effectToApply = getCardAttribute(card, 'effect');
-    cardToAdd.addEventListener('click', effectToApply);
+    const finalEffectToApply = () => {
+      const { hand, discardPile } = DECK_OF_TRUTH;
+      const indexOfUsedCard = DECK_OF_TRUTH.hand.indexOf(card);
+
+      /* Do the effects */
+      handleEffectsSequentially(effectToApply);
+
+      /* Remove the card from your hand,
+       * first in state, and then visually  */
+      hand.splice(indexOfUsedCard, 1);
+      addWholeHandVisually();
+
+      /* Add to discard pile */
+      discardPile.push(card);
+
+      console.log(DECK_OF_TRUTH);
+    };
+    cardToAdd.addEventListener('click', finalEffectToApply);
   }
 
   return cardToAdd;
