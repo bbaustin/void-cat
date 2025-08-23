@@ -175,3 +175,11 @@ ROTATOR
 .arrow {
   font-size: 24px;
 }
+
+/**********************
+VIEW DECK
+**********************/
+#view-deck {
+  display: flex;
+  justify-content: space-around;
+}

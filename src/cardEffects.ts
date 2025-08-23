@@ -9,8 +9,7 @@ export const ONE_MOVE_PX_X = 175;
 export const ONE_MOVE_PX_Y = 175;
 
 export type Direction = 'left' | 'right' | 'top' | 'bottom';
-// Do I need anything here
-export type Orientation = 'ns' | 'ew';
+export type Stance = 'standard' | 'nap' | 'longcat';
 
 /**
  * Function to move the cat upon playing a "movement" card
@@ -57,8 +56,6 @@ export function move(
     delay(250);
   }
 }
-
-export type Stance = 'standard' | 'nap' | 'longcat';
 
 export function changeStance(stance: Stance) {
   DOM_CAT.dataset.stance = stance;

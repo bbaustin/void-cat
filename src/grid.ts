@@ -32,7 +32,7 @@ export function createGrid(width: number, height: number): Grid {
   return grid;
 }
 
-export function setGrid(grid: Grid) {
+export function renderGrid(grid: Grid) {
   const container = document.getElementById('grid');
   if (!container) return;
 

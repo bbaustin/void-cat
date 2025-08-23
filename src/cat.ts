@@ -77,3 +77,7 @@ export function createDOMCat(
 export function addDOMCatToGrid(catDiv: HTMLDivElement) {
   document.getElementById('grid')?.appendChild(catDiv);
 }
+
+export function removeDOMCatFromGrid(catDiv: HTMLDivElement) {
+  document.getElementById('grid')?.removeChild(catDiv);
+}
