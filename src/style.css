@@ -21,6 +21,17 @@ GRID
   height: 50px; */
 }
 
+.attack::after {
+  content: '';
+  background: red;
+  opacity: 50%;
+  display: block;
+  aspect-ratio: 1/1;
+  /* If you want it to be above cat */
+  /* z-index: 100;
+  position: relative; */
+}
+
 .floor {
   background: aliceblue;
 }

@@ -18,6 +18,7 @@ type Tile = {
   y: number;
   terrain: Terrain;
   thing?: ThingOnBoard;
+  incomingAttack?: boolean;
 };
 
 type Grid = Tile[][];
@@ -59,13 +60,15 @@ export function renderGrid(grid: Grid) {
   // Populate DOM
   for (let y = 0; y < gridColumns; y++) {
     for (let x = 0; x < gridRows; x++) {
-      const tileEl = document.createElement('div');
-      tileEl.className = 'tile';
-      tileEl.classList.add(grid[y][x].terrain);
-      tileEl.dataset.x = x.toString();
-      tileEl.dataset.y = y.toString();
+      const tileDiv = document.createElement('div');
+      tileDiv.className = 'tile';
+      tileDiv.classList.add(grid[y][x].terrain);
+      tileDiv.dataset.x = x.toString();
+      tileDiv.dataset.y = y.toString();
 
-      gridContainer.appendChild(tileEl);
+      tileDiv.classList.add('attack');
+
+      gridContainer.appendChild(tileDiv);
     }
   }
 }

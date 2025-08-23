@@ -8,6 +8,8 @@ import { handleEffectsSequentially } from './utils';
 export interface Card {
   text: string[];
   effect: Effect[];
+  cost: number[];
+  caloriesBurned: number[];
   level?: number;
   /** Description of stuff that might not make sense immediately.
    * Note that (for now) this is NOT an array.
