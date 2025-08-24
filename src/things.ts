@@ -6,27 +6,38 @@ export function generateCrystal() {
 
 export type ThingCoordinates = [number, number][];
 
-export const STAGE_2_CRYSTALS: ThingCoordinates = [
-  [2, 0],
-  [1, 1],
-  [3, 1],
-  [0, 2],
-  [4, 2],
-  [1, 3],
-  [3, 3],
-  [2, 4],
-];
+// NOTE: This is not really needed if you prefer to use functions instead.
+// Leaving as reference for now
+// export const STAGE_2_CRYSTALS: ThingCoordinates = [
+//   [2, 0],
+//   [1, 1],
+//   [3, 1],
+//   [0, 2],
+//   [4, 2],
+//   [1, 3],
+//   [3, 3],
+//   [2, 4],
+// ];
 
-export function generateThingsInDiamondShape(n: number): [number, number][] {
-  if (n % 2 === 0) {
+/**
+ * This gives the coordinates of things in a "diamond" shape on the grid.
+ * You pass in the largest x or y value; either is OK (it's a square),
+ * and you can pass in, for example, `gridRows`.
+ * @param maxCoordinate the largest x or y value (assuming a square grid)
+ * @returns an array of all of the coordinates of the diamonds to append
+ */
+export function generateThingsInDiamondShape(
+  maxCoordinate: number
+): ThingCoordinates {
+  if (maxCoordinate % 2 === 0) {
     throw new Error('Grid size must be odd to have a center.');
   }
 
-  const center = Math.floor(n / 2);
+  const center = Math.floor(maxCoordinate / 2);
   const coords: ThingCoordinates = [];
 
-  for (let y = 0; y < n; y++) {
-    for (let x = 0; x < n; x++) {
+  for (let y = 0; y < maxCoordinate; y++) {
+    for (let x = 0; x < maxCoordinate; x++) {
       if (Math.abs(x - center) + Math.abs(y - center) === center) {
         coords.push([x, y]);
       }
@@ -35,3 +46,22 @@ export function generateThingsInDiamondShape(n: number): [number, number][] {
 
   return coords;
 }
+
+export function generateThingsInStraightRows(
+  maxCoordinate: number,
+  rowYs: number[]
+): ThingCoordinates {
+  const coords: ThingCoordinates = [];
+  rowYs.forEach((y) => {
+    for (let i = 0; i < maxCoordinate; i++) {
+      coords.push([i, y]);
+    }
+  });
+  console.log(coords);
+  return coords;
+}
+
+export function generateThingsInStraightCols(
+  maxCoordinate: number,
+  colXs: number[]
+) {}
