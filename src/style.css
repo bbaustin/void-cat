@@ -55,14 +55,25 @@ GRID
 
 .space {
   background: black;
+  background-image: radial-gradient(white 1px, transparent 1px),
+    radial-gradient(#888 1px, transparent 1px),
+    radial-gradient(#fff 1px, transparent 1px);
+  background-size: 50px 50px, 80px 80px, 120px 120px;
+  background-position: 0 0, 20px 20px, 40px 60px;
 }
 
-.crystal {
-  width: 10px;
-  height: 10px;
-  background: blue;
+.coin {
+  width: 20px;
+  height: 20px;
+  box-shadow: orange -2px 1px;
+  background: gold;
+  color: orangered;
   border-radius: 100%;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
 }
 
 /**********************
@@ -184,6 +195,10 @@ CAT
   bottom: 20px;
   right: 40px;
   transform: rotate(10deg);
+}
+
+.glowing {
+  box-shadow: rgb(255, 136, 195);
 }
 
 /**********************

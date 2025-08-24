@@ -1,7 +1,8 @@
-export function generateCrystal() {
-  const crystal = document.createElement('div');
-  crystal.classList.add('crystal');
-  return crystal;
+export function generateCoin() {
+  const coin = document.createElement('div');
+  coin.classList.add('coin');
+  coin.innerHTML = '1';
+  return coin;
 }
 
 export type ThingCoordinates = [number, number][];

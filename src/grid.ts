@@ -2,17 +2,16 @@ import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
 import { CURRENT_STAGE, STAGES } from './stage';
 import {
-  generateCrystal,
+  generateCoin,
   generateThingsInDiamondShape,
   generateThingsInStraightRowsOrColumns,
-  // STAGE_2_CRYSTALS,
   type ThingCoordinates,
 } from './things';
 
 export type Terrain = 'floor' | 'grass' | 'street' | 'space';
 
 export type ThingOnBoard =
-  | 'crystal'
+  | 'coin'
   | 'house'
   | 'human'
   | 'dog'
@@ -84,7 +83,7 @@ export function renderGrid(grid: Grid) {
       // (like rows of houses, for example)
 
       //////
-      tileDiv.classList.add('attack');
+      // tileDiv.classList.add('attack');
       /* Assumes that gridColumns === gridRows */
       // addCrystalsToGrid(generateThingsInDiamondShape(gridColumns));
       //////
@@ -100,15 +99,15 @@ export function renderGrid(grid: Grid) {
   addThingsToGrid(generateThingsInDiamondShape(5));
 }
 
-function addThingsToGrid(crystalLayout: ThingCoordinates) {
-  crystalLayout.forEach((crystalLocation) => {
-    const [x, y] = crystalLocation;
+function addThingsToGrid(thingLayout: ThingCoordinates) {
+  thingLayout.forEach((thingLocation) => {
+    const [x, y] = thingLocation;
     const tileToAppendTo = getTile(x, y);
     if (!tileToAppendTo) {
       return;
     } else {
       tileToAppendTo.innerHTML = '';
-      tileToAppendTo.appendChild(generateCrystal());
+      tileToAppendTo.appendChild(generateCoin());
     }
   });
 }
