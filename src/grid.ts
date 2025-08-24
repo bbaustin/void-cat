@@ -72,21 +72,7 @@ export function renderGrid(grid: Grid) {
       tileDiv.dataset.x = x.toString();
       tileDiv.dataset.y = y.toString();
 
-      // where you at
-      // you probably want this to take an array, unless you're sure it's gonna have nothing
-      // and/or have an array of tiles to add stuff to
-      // you also need to draw and add the stuff TO the tile
-
-      // written out a little more precisely,
-      // you should create some "elegant" attack patterns
-      // that can also be reused to create things on the grid
-      // (like rows of houses, for example)
-
-      //////
       // tileDiv.classList.add('attack');
-      /* Assumes that gridColumns === gridRows */
-      // addCrystalsToGrid(generateThingsInDiamondShape(gridColumns));
-      //////
 
       gridContainer.appendChild(tileDiv);
     }
@@ -96,18 +82,47 @@ export function renderGrid(grid: Grid) {
   //   generateThingsInStraightRows(gridColumns, [0, 2, 4], 'column')
   // );
 
-  addThingsToGrid(generateThingsInDiamondShape(5));
+  addThingsToGrid(generateThingsInDiamondShape(5), { thing: 'coin' });
+  addThingsToGrid(
+    generateThingsInStraightRowsOrColumns(gridColumns, [0, 2, 4], 'column'),
+    { className: 'attack' }
+  );
 }
 
-function addThingsToGrid(thingLayout: ThingCoordinates) {
-  thingLayout.forEach((thingLocation) => {
+type ThingOrClass =
+  | { thing: ThingOnBoard; className?: never }
+  | { thing?: never; className: string };
+
+/**
+ * This does the actual appending on stuff to the board.
+ * Stuff refers to either Things (like coins) or CSS classes (like 'attack')
+ * @param coordinates these are [x, y][] coordinates, but most likely come from a function like generateThingsInDiamondShape, which generate these for you
+ * @param thingOrClass you should pass either {className: 'whatever'} OR {thing: 'coin'}, but not both
+ */
+function addThingsToGrid(
+  coordinates: ThingCoordinates,
+  thingOrClass: ThingOrClass
+) {
+  coordinates.forEach((thingLocation) => {
     const [x, y] = thingLocation;
+    const { thing, className } = thingOrClass;
+
     const tileToAppendTo = getTile(x, y);
     if (!tileToAppendTo) {
       return;
-    } else {
+    }
+
+    if (thing) {
+      // NOTE: Clear out div first
+      // You might not want/need to do this
       tileToAppendTo.innerHTML = '';
-      tileToAppendTo.appendChild(generateCoin());
+      if (thing === 'coin') {
+        return tileToAppendTo.appendChild(generateCoin());
+      }
+    }
+
+    if (className) {
+      return tileToAppendTo.classList.add(className);
     }
   });
 }

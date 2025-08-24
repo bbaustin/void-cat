@@ -8,6 +8,8 @@
 + Turns, and transitioning from game to intermission when turns are done
 
 
-+ Current task:
-  + Add stuff on the grid
-  + Add attacks on the grid
++ Interactions (picking up items from grid)
+
++ Cards burning calories
+
++ Overall UI 
