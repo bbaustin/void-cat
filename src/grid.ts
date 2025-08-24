@@ -72,17 +72,12 @@ export function renderGrid(grid: Grid) {
       tileDiv.dataset.x = x.toString();
       tileDiv.dataset.y = y.toString();
 
-      // tileDiv.classList.add('attack');
-
       gridContainer.appendChild(tileDiv);
     }
   }
 
-  // addThingsToGrid(
-  //   generateThingsInStraightRows(gridColumns, [0, 2, 4], 'column')
-  // );
-
   addThingsToGrid(generateThingsInDiamondShape(5), { thing: 'coin' });
+
   addThingsToGrid(
     generateThingsInStraightRowsOrColumns(gridColumns, [0, 2, 4], 'column'),
     { className: 'attack' }
@@ -116,6 +111,7 @@ function addThingsToGrid(
       // NOTE: Clear out div first
       // You might not want/need to do this
       tileToAppendTo.innerHTML = '';
+
       if (thing === 'coin') {
         return tileToAppendTo.appendChild(generateCoin());
       }
