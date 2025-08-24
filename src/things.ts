@@ -7,19 +7,6 @@ export function generateCoin() {
 
 export type ThingCoordinates = [number, number][];
 
-// NOTE: This is not really needed if you prefer to use functions instead.
-// Leaving as reference for now
-// export const STAGE_2_CRYSTALS: ThingCoordinates = [
-//   [2, 0],
-//   [1, 1],
-//   [3, 1],
-//   [0, 2],
-//   [4, 2],
-//   [1, 3],
-//   [3, 3],
-//   [2, 4],
-// ];
-
 /**
  * This gives the coordinates of things in a "diamond" shape on the grid.
  * You pass in the largest x or y value; either is OK (it's a square),
