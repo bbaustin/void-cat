@@ -4,7 +4,7 @@ import { CURRENT_STAGE, STAGES } from './stage';
 import {
   generateCrystal,
   generateThingsInDiamondShape,
-  generateThingsInStraightRows,
+  generateThingsInStraightRowsOrColumns,
   // STAGE_2_CRYSTALS,
   type ThingCoordinates,
 } from './things';
@@ -93,24 +93,20 @@ export function renderGrid(grid: Grid) {
     }
   }
 
-  addThingToGrid(generateThingsInStraightRows(gridColumns, [0, 2, 4]));
+  // addThingsToGrid(
+  //   generateThingsInStraightRows(gridColumns, [0, 2, 4], 'column')
+  // );
+
+  addThingsToGrid(generateThingsInDiamondShape(5));
 }
 
-function addThingToGrid(crystalLayout: ThingCoordinates) {
-  // console.log(crystalLayout);
+function addThingsToGrid(crystalLayout: ThingCoordinates) {
   crystalLayout.forEach((crystalLocation) => {
     const [x, y] = crystalLocation;
     const tileToAppendTo = getTile(x, y);
-    console.log(tileToAppendTo);
-    console.log(
-      document.querySelector<HTMLElement>(`.tile[data-x="${x}"][data-y="${y}"]`)
-    );
     if (!tileToAppendTo) {
-      // you can just return here
-      // console.log('Missing:', x, y);
+      return;
     } else {
-      // console.log('Apparently not missing:', x, y);
-      // might not want to do, but clear out the grid tile
       tileToAppendTo.innerHTML = '';
       tileToAppendTo.appendChild(generateCrystal());
     }

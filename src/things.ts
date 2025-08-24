@@ -47,21 +47,16 @@ export function generateThingsInDiamondShape(
   return coords;
 }
 
-export function generateThingsInStraightRows(
+export function generateThingsInStraightRowsOrColumns(
   maxCoordinate: number,
-  rowYs: number[]
+  xsOrYs: number[],
+  rowOrColumn: 'row' | 'column'
 ): ThingCoordinates {
   const coords: ThingCoordinates = [];
-  rowYs.forEach((y) => {
+  xsOrYs.forEach((xOrY) => {
     for (let i = 0; i < maxCoordinate; i++) {
-      coords.push([i, y]);
+      coords.push(rowOrColumn === 'row' ? [i, xOrY] : [xOrY, i]);
     }
   });
-  console.log(coords);
   return coords;
 }
-
-export function generateThingsInStraightCols(
-  maxCoordinate: number,
-  colXs: number[]
-) {}
