@@ -1,7 +1,11 @@
 import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
 import { CURRENT_STAGE, STAGES } from './stage';
-import { generateCrystal } from './things';
+import {
+  generateCrystal,
+  STAGE_2_CRYSTALS,
+  type CrystalCoordinates,
+} from './things';
 
 export type Terrain = 'floor' | 'grass' | 'street' | 'space';
 
@@ -67,18 +71,42 @@ export function renderGrid(grid: Grid) {
       tileDiv.dataset.x = x.toString();
       tileDiv.dataset.y = y.toString();
 
-      tileDiv.classList.add('attack');
-
-      tileDiv.appendChild(generateCrystal());
-
       // where you at
       // you probably want this to take an array, unless you're sure it's gonna have nothing
       // and/or have an array of tiles to add stuff to
       // you also need to draw and add the stuff TO the tile
 
+      // written out a little more precisely,
+      // you should create some "elegant" attack patterns
+      // that can also be reused to create things on the grid
+      // (like rows of houses, for example)
+
+      //////
+      tileDiv.classList.add('attack');
+      addCrystalsToGrid(STAGE_2_CRYSTALS);
+      //////
+
       gridContainer.appendChild(tileDiv);
     }
   }
+}
+
+function addCrystalsToGrid(crystalLayout: CrystalCoordinates) {
+  crystalLayout.forEach((crystalLocation) => {
+    const [x, y] = crystalLocation;
+    const tileToAppendTo = getTile(x, y);
+    if (!tileToAppendTo) {
+      console.log('you messed up your coordinates');
+    } else {
+      tileToAppendTo.appendChild(generateCrystal());
+    }
+  });
+}
+
+function getTile(x: number, y: number): HTMLElement | null {
+  return document.querySelector<HTMLElement>(
+    `.tile[data-x="${x}"][data-y="${y}"]`
+  );
 }
 
 export function isOutOfBounds(direction: Direction) {
