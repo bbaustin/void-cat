@@ -3,8 +3,9 @@ import { CAT_OF_TRUTH } from './cat';
 import { CURRENT_STAGE, STAGES } from './stage';
 import {
   generateCrystal,
+  generateThingsInDiamondShape,
   STAGE_2_CRYSTALS,
-  type CrystalCoordinates,
+  type ThingCoordinates,
 } from './things';
 
 export type Terrain = 'floor' | 'grass' | 'street' | 'space';
@@ -83,7 +84,8 @@ export function renderGrid(grid: Grid) {
 
       //////
       tileDiv.classList.add('attack');
-      addCrystalsToGrid(STAGE_2_CRYSTALS);
+      /* Assumes that gridColumns === gridRows */
+      addCrystalsToGrid(generateThingsInDiamondShape(gridColumns));
       //////
 
       gridContainer.appendChild(tileDiv);
@@ -91,12 +93,13 @@ export function renderGrid(grid: Grid) {
   }
 }
 
-function addCrystalsToGrid(crystalLayout: CrystalCoordinates) {
+function addCrystalsToGrid(crystalLayout: ThingCoordinates) {
   crystalLayout.forEach((crystalLocation) => {
     const [x, y] = crystalLocation;
     const tileToAppendTo = getTile(x, y);
     if (!tileToAppendTo) {
-      console.log('you messed up your coordinates');
+      // you can just return here
+      console.log('I wonder why this is happening');
     } else {
       tileToAppendTo.appendChild(generateCrystal());
     }

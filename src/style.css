@@ -34,7 +34,7 @@ GRID
   position: relative;
   /* If you want it to be above cat */
   z-index: 100;
-  position: relative; */
+  position: relative;
 }
 
 .floor {
@@ -63,7 +63,6 @@ GRID
   background: blue;
   border-radius: 100%;
   position: absolute;
-  
 }
 
 /**********************
