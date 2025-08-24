@@ -1,31 +1,44 @@
 import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
 import { CURRENT_STAGE, STAGES } from './stage';
+import {
+  generateCoin,
+  generateThingsInDiamondShape,
+  generateThingsInStraightRowsOrColumns,
+  type ThingCoordinates,
+} from './thing';
 
-type Terrain =
-  | 'floor'
-  | 'street'
-  | 'wall'
+export type Terrain = 'floor' | 'grass' | 'street' | 'space';
+
+export type Thing =
+  | 'coin'
   | 'house'
+  | 'human'
+  | 'dog'
+  | 'tank'
   | 'tree'
-  | 'gunner'
-  | 'space'
   | 'planet';
 
 type Tile = {
   x: number;
   y: number;
   terrain: Terrain;
+  thing?: Thing;
+  incomingAttack?: boolean;
 };
 
 type Grid = Tile[][];
 
-export function createGrid(width: number, height: number): Grid {
+export function createEmptyGrid(
+  width: number,
+  height: number,
+  terrain: Terrain = 'floor'
+): Grid {
   const grid: Grid = [];
   for (let y = 0; y < height; y++) {
     const row: Tile[] = [];
     for (let x = 0; x < width; x++) {
-      row.push({ x, y, terrain: 'floor' });
+      row.push({ x, y, terrain });
     }
     grid.push(row);
   }
@@ -33,37 +46,87 @@ export function createGrid(width: number, height: number): Grid {
 }
 
 export function renderGrid(grid: Grid) {
-  const container = document.getElementById('grid');
-  if (!container) return;
+  const gridContainer = document.getElementById('grid');
+  if (!gridContainer) return;
 
   const gridRows = grid.length;
   const gridColumns = grid[0].length;
 
   const tileSize = 68; // px
 
-  container.style.gridTemplateRows = `repeat(${gridRows}, ${tileSize}px)`;
-  container.style.gridTemplateColumns = `repeat(${gridColumns}, ${tileSize}px)`;
+  gridContainer.style.gridTemplateRows = `repeat(${gridRows}, ${tileSize}px)`;
+  gridContainer.style.gridTemplateColumns = `repeat(${gridColumns}, ${tileSize}px)`;
 
   // The container will now auto-size to fit all tiles
-  container.style.width = `${gridRows * (tileSize + 6)}px`;
-  container.style.height = `${gridColumns * (tileSize + 6)}px`;
+  gridContainer.style.width = `${gridRows * (tileSize + 6)}px`;
+  gridContainer.style.height = `${gridColumns * (tileSize + 6)}px`;
 
-  container.innerHTML = '';
+  gridContainer.innerHTML = '';
 
   // Populate DOM
   for (let y = 0; y < gridColumns; y++) {
     for (let x = 0; x < gridRows; x++) {
-      const tileEl = document.createElement('div');
-      tileEl.className = 'tile';
-      tileEl.dataset.x = x.toString();
-      tileEl.dataset.y = y.toString();
+      const tileDiv = document.createElement('div');
+      tileDiv.className = 'tile';
+      tileDiv.classList.add(grid[y][x].terrain);
+      tileDiv.dataset.x = x.toString();
+      tileDiv.dataset.y = y.toString();
 
-      // Example: set terrain type as a class
-      // tileEl.classList.add(grid[y][x].terrain);
-
-      container.appendChild(tileEl);
+      gridContainer.appendChild(tileDiv);
     }
   }
+
+  addThingsToGrid(generateThingsInDiamondShape(5), { thing: 'coin' });
+
+  addThingsToGrid(
+    generateThingsInStraightRowsOrColumns(gridColumns, [0, 2, 4], 'column'),
+    { className: 'attack' }
+  );
+}
+
+type ThingOrClass =
+  | { thing: Thing; className?: never }
+  | { thing?: never; className: string };
+
+/**
+ * This does the actual appending on stuff to the board.
+ * Stuff refers to either Things (like coins) or CSS classes (like 'attack')
+ * @param coordinates these are [x, y][] coordinates, but most likely come from a function like generateThingsInDiamondShape, which generate these for you
+ * @param thingOrClass you should pass either {className: 'whatever'} OR {thing: 'coin'}, but not both
+ */
+function addThingsToGrid(
+  coordinates: ThingCoordinates,
+  thingOrClass: ThingOrClass
+) {
+  coordinates.forEach((thingLocation) => {
+    const [x, y] = thingLocation;
+    const { thing, className } = thingOrClass;
+
+    const tileToAppendTo = getTile(x, y);
+    if (!tileToAppendTo) {
+      return;
+    }
+
+    if (thing) {
+      // NOTE: Clear out div first
+      // You might not want/need to do this
+      tileToAppendTo.innerHTML = '';
+
+      if (thing === 'coin') {
+        return tileToAppendTo.appendChild(generateCoin());
+      }
+    }
+
+    if (className) {
+      return tileToAppendTo.classList.add(className);
+    }
+  });
+}
+
+function getTile(x: number, y: number): HTMLElement | null {
+  return document.querySelector<HTMLElement>(
+    `.tile[data-x="${x}"][data-y="${y}"]`
+  );
 }
 
 export function isOutOfBounds(direction: Direction) {

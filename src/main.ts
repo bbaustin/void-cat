@@ -5,16 +5,16 @@ import {
   setDeckCards,
 } from './cardDeck';
 import { addDOMCatToGrid, createDOMCat } from './cat';
-import { createGrid, renderGrid } from './grid';
+import { createEmptyGrid, renderGrid } from './grid';
 import { initRotator } from './rotator';
 import { showScreen } from './screen';
 import { STAGES, type Stage } from './stage';
 
 export const DOM_CAT = createDOMCat();
 
-function initGame({ gridSize }: Stage) {
+function initGame({ gridSize, terrain }: Stage) {
   /* Draw game grid */
-  const grid = createGrid(gridSize.x, gridSize.y);
+  const grid = createEmptyGrid(gridSize.x, gridSize.y, terrain);
   renderGrid(grid);
 
   /* Create rotator buttons */

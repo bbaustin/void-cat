@@ -16,10 +16,64 @@ GRID
 
 .tile {
   outline: 1px solid black;
-  background: aliceblue;
   /* aspect-ratio: 1 / 1;
   width: 50px;
   height: 50px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.attack::after {
+  content: '';
+  background: red;
+  opacity: 50%;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1/1;
+  position: relative;
+  /* If you want it to be above cat */
+  z-index: 100;
+  position: relative;
+}
+
+.floor {
+  background: aliceblue;
+}
+
+.grass {
+  background: #bad500;
+}
+
+.street {
+  background: grey;
+}
+
+.wall {
+  background: darkgrey;
+}
+
+.space {
+  background: black;
+  background-image: radial-gradient(white 1px, transparent 1px),
+    radial-gradient(#888 1px, transparent 1px),
+    radial-gradient(#fff 1px, transparent 1px);
+  background-size: 50px 50px, 80px 80px, 120px 120px;
+  background-position: 0 0, 20px 20px, 40px 60px;
+}
+
+.coin {
+  width: 20px;
+  height: 20px;
+  box-shadow: orange -2px 1px;
+  background: gold;
+  color: orangered;
+  border-radius: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
 }
 
 /**********************
@@ -34,6 +88,7 @@ CAT
   background: black;
   zoom: 40%;
   transition: left 0.5s, top 0.5s, transform 0.5s;
+  z-index: 1000000;
 }
 
 .ear {
@@ -140,6 +195,10 @@ CAT
   bottom: 20px;
   right: 40px;
   transform: rotate(10deg);
+}
+
+.glowing {
+  box-shadow: rgb(255, 136, 195);
 }
 
 /**********************
