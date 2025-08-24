@@ -6,11 +6,11 @@ import {
   generateThingsInDiamondShape,
   generateThingsInStraightRowsOrColumns,
   type ThingCoordinates,
-} from './things';
+} from './thing';
 
 export type Terrain = 'floor' | 'grass' | 'street' | 'space';
 
-export type ThingOnBoard =
+export type Thing =
   | 'coin'
   | 'house'
   | 'human'
@@ -23,7 +23,7 @@ type Tile = {
   x: number;
   y: number;
   terrain: Terrain;
-  thing?: ThingOnBoard;
+  thing?: Thing;
   incomingAttack?: boolean;
 };
 
@@ -85,7 +85,7 @@ export function renderGrid(grid: Grid) {
 }
 
 type ThingOrClass =
-  | { thing: ThingOnBoard; className?: never }
+  | { thing: Thing; className?: never }
   | { thing?: never; className: string };
 
 /**
