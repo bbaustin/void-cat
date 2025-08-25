@@ -45,6 +45,10 @@ METERS
   font-weight: 700;
 }
 
+.meter p {
+  margin: 6px 0;
+}
+
 .meter-number {
   display: flex;
   justify-content: center;
@@ -133,8 +137,9 @@ GRID
 }
 
 .coin {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
   box-shadow: var(--orange) -2px 1px;
   background: var(--yellow);
   color: var(--red);
