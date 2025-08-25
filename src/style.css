@@ -1,6 +1,74 @@
+:root {
+  --width-of-grid: 370px;
+  --violet: rgb(255, 136, 195);
+  --purple: #e3c5f8;
+  --teal: #96e4d2;
+  --green: #a2ea5e;
+  --yellow: rgb(248, 248, 71);
+  --orange: rgb(254, 180, 43);
+  --red: rgb(249, 63, 63);
+  --thick-border: black 3px solid;
+}
+
 main {
   height: 100vh;
   font-family: monospace;
+  margin: 0 auto;
+  width: 720px;
+  background: var(--purple);
+}
+
+/**********************
+SCREENS
+**********************/
+#screen-game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/**********************
+METERS
+**********************/
+#meters {
+  display: flex;
+  justify-content: space-between;
+  width: var(--width-of-grid);
+  margin-bottom: 12px;
+}
+
+.meter {
+  text-align: center;
+  min-width: 60px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.meter-number {
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  border: var(--thick-border);
+  border-radius: 10px;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.turn .meter-number {
+  background: var(--teal);
+}
+
+.energy .meter-number {
+  background: var(--green);
+}
+
+.money .meter-number {
+  background: var(--yellow);
+}
+
+.calories .meter-number {
+  background: var(--orange);
 }
 
 /**********************
@@ -10,8 +78,10 @@ GRID
 #grid {
   display: grid;
   gap: 6px;
-  background: pink;
-  margin: 0 auto;
+  padding: 18px 12px 12px 18px;
+  border-radius: 12px;
+  margin: 0 auto 32px;
+  background: #e2e2e2;
 }
 
 .tile {
@@ -65,9 +135,9 @@ GRID
 .coin {
   width: 20px;
   height: 20px;
-  box-shadow: orange -2px 1px;
-  background: gold;
-  color: orangered;
+  box-shadow: var(--orange) -2px 1px;
+  background: var(--yellow);
+  color: var(--red);
   border-radius: 100%;
   position: absolute;
   display: flex;
@@ -157,7 +227,7 @@ CAT
   position: absolute;
   width: 25px;
   height: 12px;
-  border-bottom: 3px solid rgb(255, 136, 195);
+  border-bottom: 3px solid var(--violet);
   border-radius: 0 0 60px 60px;
   top: 68px;
   left: 50%;
@@ -210,14 +280,20 @@ CARD
 }
 
 .card {
-  display: flex;
   align-items: center;
+  background: white;
+  border-radius: 10px;
+  border: 8px solid var(--teal);
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  flex-direction: column;
+  height: 150px;
+  justify-content: space-between;
+  outline: var(--thick-border);
+  padding: 12px;
   text-align: center;
-  padding: 12px 6px;
-  width: 75px;
-  height: 100px;
-  border: 1px solid black;
-  background: lightblue;
+  width: 120px;
 }
 
 .card.level2 {
@@ -226,6 +302,26 @@ CARD
 
 .card.level3 {
   background: lightsalmon;
+}
+
+.stats {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.stats div {
+  background: var(--green);
+  padding: 12px 16px;
+  border-radius: 4px;
+  outline: var(--thick-border);
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.stats div:nth-child(2) {
+  background: var(--orange);
 }
 
 /**********************
