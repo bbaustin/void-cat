@@ -1,6 +1,7 @@
 :root {
   --width-of-grid: 370px;
   --violet: rgb(255, 136, 195);
+  --purple-dark: #b384d4;
   --purple: #e3c5f8;
   --teal: #96e4d2;
   --green: #a2ea5e;
@@ -14,7 +15,7 @@ main {
   height: 100vh;
   font-family: monospace;
   margin: 0 auto;
-  width: 720px;
+  /* width: 720px; */
   background: var(--purple);
 }
 
@@ -85,7 +86,7 @@ GRID
   padding: 18px 12px 12px 18px;
   border-radius: 12px;
   margin: 0 auto 32px;
-  background: #e2e2e2;
+  background: var(--purple-dark);
 }
 
 .tile {
@@ -100,7 +101,7 @@ GRID
 
 .attack::after {
   content: '';
-  background: red;
+  background: var(--red);
   opacity: 50%;
   display: block;
   width: 100%;
@@ -277,14 +278,20 @@ CAT
 }
 
 /**********************
-CARD
+CARD & ROTATE BUTTONS
 **********************/
 #card-holder {
   display: flex;
   gap: 32px;
 }
 
-.card {
+#card-and-rotator-holder {
+  display: flex;
+  gap: 32px;
+}
+
+.card,
+.arrow {
   align-items: center;
   background: white;
   border-radius: 10px;
@@ -299,6 +306,14 @@ CARD
   padding: 12px;
   text-align: center;
   width: 120px;
+}
+
+.arrow {
+  font-size: 100px;
+  line-height: 50px;
+  /* Note: Why do I have to hardcode these? */
+  width: 160px;
+  height: 190px;
 }
 
 .card.level2 {
@@ -332,9 +347,9 @@ CARD
 /**********************
 ROTATOR
 **********************/
-.arrow {
+/* .arrow {
   font-size: 24px;
-}
+} */
 
 /**********************
 VIEW DECK
