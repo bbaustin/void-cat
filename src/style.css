@@ -1,6 +1,15 @@
 :root {
+  /* WIDTHS */
   --width-of-grid: 370px;
-  --violet: rgb(255, 136, 195);
+  --thick-border: var(--black) 3px solid;
+
+  /* COLORS */
+  --black: #000;
+  --grey-dark: #727272;
+  --grey: #b4b4b4;
+  --white: #fff;
+  --pink-hot: rgb(255, 136, 195);
+  --pink: #ffddee;
   --purple-dark: #b384d4;
   --purple: #e3c5f8;
   --teal: #96e4d2;
@@ -8,7 +17,6 @@
   --yellow: rgb(248, 248, 71);
   --orange: rgb(254, 180, 43);
   --red: rgb(249, 63, 63);
-  --thick-border: black 3px solid;
 }
 
 main {
@@ -90,13 +98,14 @@ GRID
 }
 
 .tile {
-  outline: 1px solid black;
+  outline: 1px solid var(--black);
   /* aspect-ratio: 1 / 1;
   width: 50px;
   height: 50px; */
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5px;
 }
 
 .attack::after {
@@ -105,6 +114,7 @@ GRID
   opacity: 50%;
   display: block;
   width: 100%;
+  border-radius: 5px;
   aspect-ratio: 1/1;
   position: relative;
   /* If you want it to be above cat */
@@ -113,26 +123,22 @@ GRID
 }
 
 .floor {
-  background: aliceblue;
+  background: var(--teal);
 }
 
 .grass {
-  background: #bad500;
+  background: var(--green);
 }
 
 .street {
-  background: grey;
-}
-
-.wall {
-  background: darkgrey;
+  background: var(--grey);
 }
 
 .space {
-  background: black;
-  background-image: radial-gradient(white 1px, transparent 1px),
-    radial-gradient(#888 1px, transparent 1px),
-    radial-gradient(#fff 1px, transparent 1px);
+  background: #000;
+  background-image: radial-gradient(var(--white) 1px, transparent 1px),
+    radial-gradient(var(--grey) 1px, transparent 1px),
+    radial-gradient(var(--white) 1px, transparent 1px);
   background-size: 50px 50px, 80px 80px, 120px 120px;
   background-position: 0 0, 20px 20px, 40px 60px;
 }
@@ -161,7 +167,7 @@ CAT
   width: 200px;
   height: 300px;
   border-radius: 50% / 55%;
-  background: black;
+  background: var(--black);
   zoom: 40%;
   transition: left 0.5s, top 0.5s, transform 0.5s;
   z-index: 1000000;
@@ -171,7 +177,7 @@ CAT
   position: absolute;
   width: 40px;
   height: 40px;
-  background: black;
+  background: var(--black);
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   top: -9px;
 }
@@ -195,7 +201,7 @@ CAT
   position: absolute;
   width: 30px;
   height: 16px;
-  background: #bad500;
+  background: var(--green);
   border-radius: 50%;
   top: 45px;
 }
@@ -233,7 +239,7 @@ CAT
   position: absolute;
   width: 25px;
   height: 12px;
-  border-bottom: 3px solid var(--violet);
+  border-bottom: 3px solid var(--pink-hot);
   border-radius: 0 0 60px 60px;
   top: 68px;
   left: 50%;
@@ -246,7 +252,7 @@ CAT
   height: 60px;
   background: black;
   border-radius: 50%;
-  border: 3px solid #727272;
+  border: 3px solid var(--grey-dark);
 }
 
 .paw.front-left {
@@ -274,9 +280,8 @@ CAT
 }
 
 .glowing {
-  box-shadow: rgb(255, 136, 195);
+  box-shadow: var(--pink-hot);
 }
-
 /**********************
 CARD & ROTATE BUTTONS
 **********************/
@@ -293,7 +298,7 @@ CARD & ROTATE BUTTONS
 .card,
 .arrow {
   align-items: center;
-  background: white;
+  background: var(--white);
   border-radius: 10px;
   border: 8px solid var(--teal);
   cursor: pointer;
@@ -316,6 +321,7 @@ CARD & ROTATE BUTTONS
   height: 190px;
 }
 
+/* IDK THESE */
 .card.level2 {
   background: lightyellow;
 }
