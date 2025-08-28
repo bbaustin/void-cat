@@ -42,3 +42,10 @@ function initIntermission() {
 }
 
 initGame(STAGES[2]);
+
+// WHERE YOU AT
+// Finish styling... move rotators to the left and right, i guess?
+// those should have the cost and calories too
+// time to change text of card on click?
+// reallllly want an undo button
+// would be next to a next turn button

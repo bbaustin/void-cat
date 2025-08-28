@@ -20,16 +20,49 @@
     <main>
       <!-- GAME SCREEN! -->
       <section id="screen-game">
-        <div id="card-holder"></div>
-        <div id="discard"></div>
-        <div id="rotator">
-          <button class="arrow left">↻</button>
-          <button class="arrow right">↺</button>
+        <div id="meters">
+          <div class="meter turn">
+            <p>Turn</p>
+            <div class="meter-number">1</div>
+          </div>
+          <div class="meter energy">
+            <p>Energy</p>
+            <div class="meter-number">5/6</div>
+          </div>
+          <div class="meter money">
+            <p>Money</p>
+            <div class="meter-number">13</div>
+          </div>
+          <div class="meter calories">
+            <p>Cals</p>
+            <div class="meter-number">24</div>
+          </div>
         </div>
         <div id="grid">
           <div id="cat"></div>
         </div>
+
+        <div id="card-and-rotator-holder">
+          <button class="card arrow left">
+            <div>↻</div>
+            <div class="stats">
+              <div>1</div>
+              <div>0</div>
+            </div>
+          </button>
+          <div id="card-holder"></div>
+          <!-- <div id="discard"></div> -->
+          <button class="card arrow right">
+            <div>↺</div>
+            <div class="stats">
+              <div>1</div>
+              <div>0</div>
+            </div>
+          </button>
+        </div>
       </section>
+
+      <!-- INTERMISSION SCREEN! -->
       <section id="screen-intermission">
         <div id="view-deck"></div>
       </section>

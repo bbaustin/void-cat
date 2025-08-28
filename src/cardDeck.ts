@@ -68,7 +68,6 @@ export function addXCardsToHand(handSize: number = 3) {
     if (!card) break;
 
     DECK_OF_TRUTH.hand.push(card);
-    console.log(DECK_OF_TRUTH.hand);
 
     addCardToHandVisually(card);
     cardsDrawn++;
@@ -95,7 +94,7 @@ export function addWholeHandVisually() {
 
 export function renderDiscardPile() {
   const discardPileDOM = document.getElementById('discard')!;
-  console.log(discardPileDOM);
+  // console.log(discardPileDOM);
   DECK_OF_TRUTH.discardPile.forEach((card) => {
     const cardToAdd = createDOMCard(card, false);
     discardPileDOM.appendChild(cardToAdd);

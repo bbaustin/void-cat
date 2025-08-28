@@ -13,3 +13,13 @@
 + Cards burning calories
 
 + Overall UI 
+
++ Animating the roll
+
++ Animating when you can't roll or rotate in a certain direction
+
++ Little popups notifications when you've gained something 
+
++ Longcat design
+
++ Curl design 

@@ -22,7 +22,10 @@ export interface Card {
 
 export type Effect = () => void;
 
-type CardAttribute = Extract<keyof Card, 'text' | 'effect'>;
+type CardAttribute = Extract<
+  keyof Card,
+  'text' | 'effect' | 'cost' | 'caloriesBurned'
+>;
 
 /**
  * Takes in a card's data (text, effect, etc...)
@@ -39,12 +42,30 @@ export function createDOMCard(
 ): HTMLDivElement {
   /** Create DOM element */
   const cardToAdd = document.createElement('div');
+  const cardText = document.createElement('div');
+  const cardStats = document.createElement('div');
+  cardStats.classList.add('stats');
+
+  cardToAdd.appendChild(cardText);
+  cardToAdd.appendChild(cardStats);
+
   cardToAdd.classList.add('card');
 
-  /** Use the level to determine the text;
-   * otherwise, if there's no level, use the first element  */
+  /* Append text */
   const textToAppend = getCardAttribute(card, 'text');
-  cardToAdd.innerHTML = textToAppend;
+  cardText.innerText = textToAppend;
+
+  /* Append cost */
+  const costSection = document.createElement('div');
+  const costToAppend = getCardAttribute(card, 'cost');
+  costSection.innerHTML = `${costToAppend}`;
+  cardStats.appendChild(costSection);
+
+  /* Append cals */
+  const calSection = document.createElement('div');
+  const calToAppend = getCardAttribute(card, 'caloriesBurned');
+  calSection.innerHTML = `${calToAppend}`;
+  cardStats.appendChild(calSection);
 
   /** Same as above, but with effect instead of text
    * We might not want to apply the effect if
