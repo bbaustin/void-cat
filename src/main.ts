@@ -12,6 +12,27 @@ import { STAGES, type Stage } from './stage';
 
 export const DOM_CAT = createDOMCat();
 
+type GameStateType = {
+  caloriesBurned: number;
+  money: number;
+  energyCurrent: number;
+  energyMax: number;
+};
+
+export const GAME_STATE_OF_TRUTH: GameStateType = {
+  caloriesBurned: 0,
+  money: 0,
+  energyCurrent: 5,
+  energyMax: 5,
+};
+
+export function setGameState<K extends keyof GameStateType>(
+  key: K,
+  value: GameStateType[K]
+): void {
+  GAME_STATE_OF_TRUTH[key] = value;
+}
+
 function initGame({ gridSize, terrain }: Stage) {
   /* Draw game grid */
   const grid = createEmptyGrid(gridSize.x, gridSize.y, terrain);

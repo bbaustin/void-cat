@@ -3,6 +3,7 @@ import {
   addCardToHandVisually,
   addWholeHandVisually,
 } from './cardDeck';
+import { updateEnergyAndCalMeters } from './interaction';
 import { handleEffectsSequentially } from './utils';
 
 export interface Card {
@@ -79,6 +80,9 @@ export function createDOMCard(
       /* Do the effects */
       handleEffectsSequentially(effectToApply);
 
+      /* Update cals and energy */
+      updateEnergyAndCalMeters(card);
+
       /* Remove the card from your hand,
        * first in state, and then visually  */
       hand.splice(indexOfUsedCard, 1);
@@ -86,8 +90,6 @@ export function createDOMCard(
 
       /* Add to discard pile */
       discardPile.push(card);
-
-      console.log(DECK_OF_TRUTH);
     };
     cardToAdd.addEventListener('click', finalEffectToApply);
   }
@@ -101,7 +103,7 @@ export function createDOMCard(
  * @param card Card
  * @returns type of whatever attribute you're querying for
  */
-function getCardAttribute<K extends CardAttribute>(
+export function getCardAttribute<K extends CardAttribute>(
   card: Card,
   attribute: K
 ): Card[K][number] {
