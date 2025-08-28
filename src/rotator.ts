@@ -1,5 +1,7 @@
+import type { Card } from './card';
 import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
+import { updateEnergyAndCalMeters } from './interaction';
 import { DOM_CAT } from './main';
 import { CURRENT_STAGE, STAGES } from './stage';
 
@@ -88,6 +90,16 @@ export function rotate(rotationDirection: RotationDirection) {
   /* Update state before visible DOM changes */
   CAT_OF_TRUTH.headFacing = newDirection;
   DOM_CAT.dataset.headFacing = CAT_OF_TRUTH.headFacing;
+
+  /* Also update energy game state */
+  /* Create fake card to satisfy type. Yes this is dumb */
+  const fakeCard: Card = {
+    text: [],
+    effect: [],
+    cost: [1],
+    caloriesBurned: [0],
+  };
+  updateEnergyAndCalMeters(fakeCard);
 
   /* Update DOM */
   DOM_CAT.style.transform = `rotate(${angle}deg) translate(${x}px, ${y}px)`;
