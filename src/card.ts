@@ -38,7 +38,7 @@ export function createDOMCard(
   shouldApplyEffect: boolean
 ): HTMLDivElement {
   /** Create DOM element */
-  const cardToAdd = document.createElement('div');
+  const cardToAdd = document.createElement('button'); // This should be a button
   const cardText = document.createElement('div');
   const cardStats = document.createElement('div');
   cardStats.classList.add('stats');

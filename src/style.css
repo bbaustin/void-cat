@@ -32,6 +32,28 @@ main {
   background: var(--purple);
 }
 
+button {
+  font-family: monospace;
+  background: var(--white);
+  border: var(--thick-border);
+  border-radius: 10px;
+  font-size: 24px;
+}
+
+button:focus {
+  outline: 5px solid var(--pink-hot);
+}
+
+#top-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#top-bar div:first-child {
+  width: 33%;
+}
+
 /**********************
 SCREENS
 **********************/
@@ -310,20 +332,21 @@ CARD & ROTATE BUTTONS
   display: flex;
   font-size: 16px;
   flex-direction: column;
-  height: 150px;
+  height: 190px;
   justify-content: space-between;
   outline: var(--thick-border);
   padding: 12px;
   text-align: center;
-  width: 120px;
+  width: 160px;
 }
 
 .arrow {
   font-size: 100px;
   line-height: 50px;
-  /* Note: Why do I have to hardcode these? */
-  width: 160px;
-  height: 190px;
+}
+
+.card:focus {
+  outline-width: 10px;
 }
 
 /* IDK THESE */
