@@ -195,7 +195,6 @@ export function playExplosion1() {
 }
 
 export function playExplosion2() {
-  console.log('i ran');
   zzfx(
     ...[
       0.8,

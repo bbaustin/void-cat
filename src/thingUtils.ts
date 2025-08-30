@@ -1,4 +1,4 @@
-import { CAT_OF_TRUTH, getOccupiedTiles } from './cat';
+import { CAT_OF_TRUTH, getOccupiedTileCoordinates } from './cat';
 import { getTile } from './grid';
 import { updateMoney } from './meterUtils';
 import { playPickup1 } from './sounds';
@@ -47,12 +47,7 @@ export function addThingsToGrid(
  *
  */
 export function absorbThing(spaceToAbsorbFrom?: ThingCoordinates) {
-  const tilesOccupiedByCat = getOccupiedTiles(
-    CAT_OF_TRUTH.headX,
-    CAT_OF_TRUTH.headY,
-    CAT_OF_TRUTH.headFacing,
-    CAT_OF_TRUTH.length
-  );
+  const tilesOccupiedByCat = getOccupiedTileCoordinates();
 
   tilesOccupiedByCat.forEach((occupiedTile) => {
     const tile = getTile(occupiedTile.x, occupiedTile.y);

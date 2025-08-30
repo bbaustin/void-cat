@@ -12,8 +12,9 @@ import { addXCardsToHand } from './cardDeck';
 export function updateEnergyAndCalMetersAfterPlayingCard(card: Card) {
   /* Negative of card cost */
   const energySpent = -getCardAttribute(card, 'cost');
+  const caloriesBurned = getCardAttribute(card, 'caloriesBurned');
   updateEnergy(energySpent);
-  updateCaloriesBurned(card);
+  updateCaloriesBurned(caloriesBurned);
 }
 
 /**
@@ -35,11 +36,9 @@ export function updateEnergy(amountToAdd: number) {
   )!.innerHTML = `${GAME_STATE_OF_TRUTH.energyCurrent}`;
 }
 
-export function updateCaloriesBurned(card: Card) {
+export function updateCaloriesBurned(amount: number) {
   /* Update game state with calorie information */
-  const caloriesBurned = getCardAttribute(card, 'caloriesBurned');
-  const updatedCaloriesBurned =
-    GAME_STATE_OF_TRUTH.caloriesBurned + caloriesBurned;
+  const updatedCaloriesBurned = GAME_STATE_OF_TRUTH.caloriesBurned + amount;
   setGameState('caloriesBurned', updatedCaloriesBurned);
 
   /* Update DOM */

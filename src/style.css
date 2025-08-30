@@ -45,6 +45,10 @@ button:focus {
   outline: 5px solid var(--pink-hot);
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
+
 #top-bar {
   display: flex;
   justify-content: space-between;

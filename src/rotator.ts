@@ -1,6 +1,6 @@
 import type { Card } from './card';
 import type { Direction } from './cardEffects';
-import { CAT_OF_TRUTH, getOccupiedTiles } from './cat';
+import { CAT_OF_TRUTH, getOccupiedTileCoordinates } from './cat';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
 import { DOM_CAT } from './main';
 import { CURRENT_STAGE, STAGES } from './stage';
@@ -135,7 +135,7 @@ function willRotationBeOutOfBounds(
   gridSize: { x: number; y: number }
 ): boolean {
   const newFacing = getRotatedDirection(currentFacing, rotation);
-  const occupied = getOccupiedTiles(headX, headY, newFacing, length);
+  const occupied = getOccupiedTileCoordinates(headX, headY, newFacing, length);
 
   return occupied.some(
     ({ x, y }) => x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y
