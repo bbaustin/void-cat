@@ -2,6 +2,7 @@ import { GAME_STATE_OF_TRUTH, setGameState } from './main';
 import { type Card, getCardAttribute } from './card';
 import { clamp } from './utils';
 import { STAGES } from './stage';
+import { addXCardsToHand } from './cardDeck';
 
 /**
  * Helper helper, to update the two most commonly updated meters.
@@ -70,7 +71,7 @@ export function updateTurn(turn: number) {
   /* In this case, we've reached the end of this stage.
    * Go to the intermission stage. */
   if (turn > currentStageMaxTurns) {
-    // go to next turn
+    // maybe trigger some message, and then go to intermission
     return;
   }
   /* Update state */
@@ -87,6 +88,11 @@ export function updateTurn(turn: number) {
 export function updateTurnViaButton() {
   const newTurnValue = GAME_STATE_OF_TRUTH.currentTurn + 1;
   console.log(newTurnValue);
+  addXCardsToHand();
+
+  // trigger "attack" stage
+
+  // somehow wait for above
 
   updateTurn(newTurnValue);
   updateEnergy(1);

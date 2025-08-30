@@ -1,4 +1,4 @@
-import { DECK_OF_TRUTH, addWholeHandVisually } from './cardDeck';
+import { DECK_OF_TRUTH, addWholeHandVisually, discardCard } from './cardDeck';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
 import { handleEffectsSequentially } from './utils';
 
@@ -70,7 +70,7 @@ export function createDOMCard(
   if (shouldApplyEffect) {
     const effectToApply = getCardAttribute(card, 'effect');
     const finalEffectToApply = () => {
-      const { hand, discardPile } = DECK_OF_TRUTH;
+      const { hand } = DECK_OF_TRUTH;
       const indexOfUsedCard = DECK_OF_TRUTH.hand.indexOf(card);
 
       /* Do the effects */
@@ -85,10 +85,12 @@ export function createDOMCard(
       addWholeHandVisually();
 
       /* Add to discard pile */
-      discardPile.push(card);
+      discardCard(card);
     };
     cardToAdd.addEventListener('click', finalEffectToApply);
   }
+
+  console.log(DECK_OF_TRUTH);
 
   return cardToAdd;
 }

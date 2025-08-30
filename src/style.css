@@ -33,10 +33,11 @@ main {
 }
 
 button {
-  font-family: monospace;
   background: var(--white);
   border: var(--thick-border);
   border-radius: 10px;
+  cursor: pointer;
+  font-family: monospace;
   font-size: 24px;
 }
 

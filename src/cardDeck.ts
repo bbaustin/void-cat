@@ -60,7 +60,17 @@ export function drawCard(): Card | null {
  * This all creates a card in the DOM (in #card-holder)
  * @param handSize Number of cards to draw
  */
-export function addXCardsToHand(handSize: number = 3) {
+export function addXCardsToHand(
+  handSize: number = 3,
+  shouldClearHandBeforeDrawing: boolean = true
+) {
+  /* Clear any remaining cards before drawing new cards
+   * This will set DECK_OF_TRUTH.hand = [],
+   * move those cards into DECK_OF_TRUTH.discard,
+   * and will also visually remove them from the DOM */
+  if (shouldClearHandBeforeDrawing) {
+    clearHand();
+  }
   let cardsDrawn = 0;
   while (cardsDrawn < handSize) {
     /** This removes the card from unusedCards */
@@ -79,29 +89,36 @@ export function addCardToHandVisually(card: Card) {
   document.getElementById('card-holder')?.appendChild(cardToAdd);
 }
 
+function clearHandState() {
+  DECK_OF_TRUTH.hand.forEach((card) => {
+    DECK_OF_TRUTH.discardPile.push(card);
+  });
+  DECK_OF_TRUTH.hand = [];
+  console.log(DECK_OF_TRUTH.discardPile);
+}
+
 function clearHandVisually() {
   document.getElementById('card-holder')!.innerHTML = '';
 }
 
-export function addWholeHandVisually() {
-  // Note: This might not be ideal? But OK for now
+function clearHand() {
+  clearHandState();
   clearHandVisually();
+}
+
+export function addWholeHandVisually() {
   const cardHolder = document.getElementById('card-holder');
+  // clear out first. Feels unwieldy but without, I'm getting doubles
+  clearHandVisually();
   DECK_OF_TRUTH.hand.forEach((card) =>
     cardHolder?.appendChild(createDOMCard(card, true))
   );
 }
 
-export function renderDiscardPile() {
-  const discardPileDOM = document.getElementById('discard')!;
-  // console.log(discardPileDOM);
-  DECK_OF_TRUTH.discardPile.forEach((card) => {
-    const cardToAdd = createDOMCard(card, false);
-    discardPileDOM.appendChild(cardToAdd);
-  });
-}
-
-// Discard a card
+/**
+ * Push a card into DECK_OF_TRUTH.discardPile
+ * @param card Card you are discarding
+ */
 export function discardCard(card: Card) {
   DECK_OF_TRUTH.discardPile.push(card);
 }
@@ -119,5 +136,15 @@ export function renderWholeDeck() {
   allCards.forEach((card) => {
     const cardToDisplay = createDOMCard(card, false);
     viewDeck?.appendChild(cardToDisplay);
+  });
+}
+
+// NOT IN USE
+export function renderDiscardPile() {
+  const discardPileDOM = document.getElementById('discard')!;
+  // console.log(discardPileDOM);
+  DECK_OF_TRUTH.discardPile.forEach((card) => {
+    const cardToAdd = createDOMCard(card, false);
+    discardPileDOM.appendChild(cardToAdd);
   });
 }

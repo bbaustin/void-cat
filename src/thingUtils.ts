@@ -1,6 +1,7 @@
 import { CAT_OF_TRUTH, getOccupiedTiles } from './cat';
 import { getTile } from './grid';
 import { updateMoney } from './meterUtils';
+import { playPickup1 } from './sounds';
 import { generateCoin, type ThingCoordinates, type Thing } from './thing';
 
 type ThingOrClass =
@@ -62,6 +63,7 @@ export function absorbThing(spaceToAbsorbFrom?: ThingCoordinates) {
       // This is always only 1 now; please never put non-numbers in here :>
       updateMoney(Number(coinTile.innerHTML));
       tile?.removeChild(coinTile);
+      playPickup1();
     }
   });
 }

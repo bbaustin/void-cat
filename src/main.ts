@@ -20,6 +20,7 @@ type GameStateType = {
   energyMax: number;
   currentTurn: number;
   currentStage: number;
+  isAttackHappening: boolean;
 };
 
 export const GAME_STATE_OF_TRUTH: GameStateType = {
@@ -29,6 +30,7 @@ export const GAME_STATE_OF_TRUTH: GameStateType = {
   energyMax: 5,
   currentTurn: 1,
   currentStage: 2, //pls change
+  isAttackHappening: false,
 };
 
 export function setGameState<K extends keyof GameStateType>(
