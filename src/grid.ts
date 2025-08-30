@@ -2,22 +2,13 @@ import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
 import { CURRENT_STAGE, STAGES } from './stage';
 import {
-  generateCoin,
   generateThingsInDiamondShape,
   generateThingsInStraightRowsOrColumns,
-  type ThingCoordinates,
+  type Thing,
 } from './thing';
+import { addThingsToGrid } from './thingUtils';
 
 export type Terrain = 'floor' | 'grass' | 'street' | 'space';
-
-export type Thing =
-  | 'coin'
-  | 'house'
-  | 'human'
-  | 'dog'
-  | 'tank'
-  | 'tree'
-  | 'planet';
 
 type Tile = {
   x: number;
@@ -84,46 +75,7 @@ export function renderGrid(grid: Grid) {
   );
 }
 
-type ThingOrClass =
-  | { thing: Thing; className?: never }
-  | { thing?: never; className: string };
-
-/**
- * This does the actual appending on stuff to the board.
- * Stuff refers to either Things (like coins) or CSS classes (like 'attack')
- * @param coordinates these are [x, y][] coordinates, but most likely come from a function like generateThingsInDiamondShape, which generate these for you
- * @param thingOrClass you should pass either {className: 'whatever'} OR {thing: 'coin'}, but not both
- */
-function addThingsToGrid(
-  coordinates: ThingCoordinates,
-  thingOrClass: ThingOrClass
-) {
-  coordinates.forEach((thingLocation) => {
-    const [x, y] = thingLocation;
-    const { thing, className } = thingOrClass;
-
-    const tileToAppendTo = getTile(x, y);
-    if (!tileToAppendTo) {
-      return;
-    }
-
-    if (thing) {
-      // NOTE: Clear out div first
-      // You might not want/need to do this
-      tileToAppendTo.innerHTML = '';
-
-      if (thing === 'coin') {
-        return tileToAppendTo.appendChild(generateCoin());
-      }
-    }
-
-    if (className) {
-      return tileToAppendTo.classList.add(className);
-    }
-  });
-}
-
-function getTile(x: number, y: number): HTMLElement | null {
+export function getTile(x: number, y: number): HTMLElement | null {
   return document.querySelector<HTMLElement>(
     `.tile[data-x="${x}"][data-y="${y}"]`
   );
@@ -132,10 +84,8 @@ function getTile(x: number, y: number): HTMLElement | null {
 export function isOutOfBounds(direction: Direction) {
   const addend = direction === 'right' || direction === 'bottom' ? 1 : -1;
 
-  /**
-   * If the cat's head is facing top or bottom, move headX
-   * If the cat's head is facing left or right, move headY
-   */
+  /** If the cat's head is facing top or bottom, move headX
+   * If the cat's head is facing left or right, move headY */
   const isCatVertical =
     CAT_OF_TRUTH.headFacing === 'top' || CAT_OF_TRUTH.headFacing === 'bottom';
 

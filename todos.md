@@ -7,12 +7,7 @@
 
 + Turns, and transitioning from game to intermission when turns are done
 
-
-+ Interactions (picking up items from grid)
-
 + Cards burning calories
-
-+ Overall UI 
 
 + Animating the roll
 
@@ -23,3 +18,14 @@
 + Longcat design
 
 + Curl design 
+
++ Script
+
+
+
+Current:
+Overall UI 
+(why?) To lead into interactions
++ Interactions 
+  + (picking up items from grid)
+  + updating meters with cards

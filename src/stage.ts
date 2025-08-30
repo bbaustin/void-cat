@@ -19,7 +19,7 @@ export const STAGES: Stage[] = [
   },
   {
     gridSize: { x: 5, y: 5 },
-    terrain: 'space',
+    terrain: 'street',
   },
   {
     gridSize: { x: 10, y: 10 },

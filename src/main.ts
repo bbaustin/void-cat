@@ -6,11 +6,34 @@ import {
 } from './cardDeck';
 import { addDOMCatToGrid, createDOMCat } from './cat';
 import { createEmptyGrid, renderGrid } from './grid';
+import { absorbThing } from './thingUtils';
 import { initRotator } from './rotator';
 import { showScreen } from './screen';
 import { STAGES, type Stage } from './stage';
+import { pickup2, zzfx } from './sounds';
 
 export const DOM_CAT = createDOMCat();
+
+type GameStateType = {
+  caloriesBurned: number;
+  money: number;
+  energyCurrent: number;
+  energyMax: number;
+};
+
+export const GAME_STATE_OF_TRUTH: GameStateType = {
+  caloriesBurned: 0,
+  money: 0,
+  energyCurrent: 5,
+  energyMax: 5,
+};
+
+export function setGameState<K extends keyof GameStateType>(
+  key: K,
+  value: GameStateType[K]
+): void {
+  GAME_STATE_OF_TRUTH[key] = value;
+}
 
 function initGame({ gridSize, terrain }: Stage) {
   /* Draw game grid */
@@ -36,7 +59,7 @@ function initGame({ gridSize, terrain }: Stage) {
   showScreen('screen-game');
 }
 
-function initIntermission() {
+export function initIntermission() {
   renderWholeDeck();
   showScreen('screen-intermission');
 }

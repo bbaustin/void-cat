@@ -1,11 +1,20 @@
+export type Thing =
+  | 'coin'
+  | 'house'
+  | 'human'
+  | 'dog'
+  | 'tank'
+  | 'tree'
+  | 'planet';
+
+export type ThingCoordinates = [number, number][];
+
 export function generateCoin() {
   const coin = document.createElement('div');
   coin.classList.add('coin');
   coin.innerHTML = '1';
   return coin;
 }
-
-export type ThingCoordinates = [number, number][];
 
 /**
  * This gives the coordinates of things in a "diamond" shape on the grid.

@@ -63,6 +63,22 @@ export const CARD_LIBRARY: Card[] = [
     ],
   },
   {
+    text: [
+      'Roll to the left and right one space, ending in your original space',
+    ],
+    cost: [2],
+    caloriesBurned: [3],
+    effect: [
+      () => {
+        handleEffectsSequentially([
+          () => move(1),
+          () => move(2, 'left'),
+          () => move(1),
+        ]);
+      },
+    ],
+  },
+  {
     text: ['Roll 1 space right, then assume defensive nap position'],
     cost: [2],
     caloriesBurned: [1],

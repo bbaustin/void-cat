@@ -81,3 +81,41 @@ export function addDOMCatToGrid(catDiv: HTMLDivElement) {
 export function removeDOMCatFromGrid(catDiv: HTMLDivElement) {
   document.getElementById('grid')?.removeChild(catDiv);
 }
+
+/**
+ * Returns all tiles that the cat is currently occupying,
+ * taking into account its current coordinates,
+ * direction, and length
+ * @param headX x-coordinate of cat head
+ * @param headY y-coordinate of cat head
+ * @param facing which direction cat is facing
+ * @param length current length of cat
+ * @returns array of x and y coordinates
+ */
+export function getOccupiedTiles(
+  headX: number,
+  headY: number,
+  facing: Direction,
+  length: number
+): { x: number; y: number }[] {
+  const tiles = [{ x: headX, y: headY }]; // head always included
+
+  for (let i = 1; i < length; i++) {
+    switch (facing) {
+      case 'top':
+        tiles.push({ x: headX, y: headY + i });
+        break;
+      case 'bottom':
+        tiles.push({ x: headX, y: headY - i });
+        break;
+      case 'left':
+        tiles.push({ x: headX + i, y: headY });
+        break;
+      case 'right':
+        tiles.push({ x: headX - i, y: headY });
+        break;
+    }
+  }
+
+  return tiles;
+}
