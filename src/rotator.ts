@@ -4,6 +4,7 @@ import { CAT_OF_TRUTH, getOccupiedTiles } from './cat';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
 import { DOM_CAT } from './main';
 import { CURRENT_STAGE, STAGES } from './stage';
+import { absorbThing } from './thingUtils';
 
 export function initRotator() {
   const buttonLeft = document.querySelector('.arrow.left');
@@ -104,6 +105,9 @@ export function rotate(rotationDirection: RotationDirection) {
   /* Update DOM */
   DOM_CAT.style.transform = `rotate(${angle}deg) translate(${x}px, ${y}px)`;
   DOM_CAT.style.transformOrigin = 'top'; // keep this fixed
+
+  /* Absorb thing (coin) if applicable */
+  absorbThing();
 }
 
 /**
