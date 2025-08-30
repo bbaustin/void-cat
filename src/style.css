@@ -21,10 +21,12 @@
 
 body {
   margin: 0;
+  height: 100vh;
 }
 
 main {
-  height: 100vh;
+  /* Height minus padding; could just hide overflow too */
+  height: calc(100vh - 24px);
   font-family: monospace;
   margin: 0 auto;
   padding: 12px 0;
@@ -114,6 +116,19 @@ METERS
 
 .calories .meter-number {
   background: var(--orange);
+}
+
+#next-holder {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  text-align: right;
+  margin: 42px 45px;
+}
+
+#next-holder button {
+  padding: 12px;
 }
 
 /**********************
