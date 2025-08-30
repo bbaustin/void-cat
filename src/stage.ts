@@ -8,6 +8,7 @@ export const CURRENT_STAGE = 2;
 export interface Stage {
   gridSize: { x: number; y: number };
   terrain?: Terrain;
+  turns?: number;
 }
 
 export const STAGES: Stage[] = [

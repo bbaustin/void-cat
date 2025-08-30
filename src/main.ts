@@ -6,11 +6,10 @@ import {
 } from './cardDeck';
 import { addDOMCatToGrid, createDOMCat } from './cat';
 import { createEmptyGrid, renderGrid } from './grid';
-import { absorbThing } from './thingUtils';
 import { initRotator } from './rotator';
 import { showScreen } from './screen';
 import { STAGES, type Stage } from './stage';
-import { pickup2, zzfx } from './sounds';
+import { initNextTurnButton } from './stageTurn';
 
 export const DOM_CAT = createDOMCat();
 
@@ -19,6 +18,8 @@ type GameStateType = {
   money: number;
   energyCurrent: number;
   energyMax: number;
+  currentTurn: number;
+  currentStage: number;
 };
 
 export const GAME_STATE_OF_TRUTH: GameStateType = {
@@ -26,6 +27,8 @@ export const GAME_STATE_OF_TRUTH: GameStateType = {
   money: 0,
   energyCurrent: 5,
   energyMax: 5,
+  currentTurn: 1,
+  currentStage: 2, //pls change
 };
 
 export function setGameState<K extends keyof GameStateType>(
@@ -55,6 +58,9 @@ function initGame({ gridSize, terrain }: Stage) {
   /* Add the DOMcat to the grid! */
   addDOMCatToGrid(DOM_CAT);
 
+  /* Init the next turn button */
+  initNextTurnButton();
+
   /* Show the game screen */
   showScreen('screen-game');
 }
@@ -64,11 +70,4 @@ export function initIntermission() {
   showScreen('screen-intermission');
 }
 
-initGame(STAGES[2]);
-
-// WHERE YOU AT
-// Finish styling... move rotators to the left and right, i guess?
-// those should have the cost and calories too
-// time to change text of card on click?
-// reallllly want an undo button
-// would be next to a next turn button
+initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);

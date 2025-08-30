@@ -1,7 +1,6 @@
 import { CAT_OF_TRUTH, getOccupiedTiles } from './cat';
 import { getTile } from './grid';
 import { updateMoney } from './meterUtils';
-import { pickup2, zzfx } from './sounds';
 import { generateCoin, type ThingCoordinates, type Thing } from './thing';
 
 type ThingOrClass =

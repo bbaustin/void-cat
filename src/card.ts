@@ -36,7 +36,7 @@ type CardAttribute = Extract<
 export function createDOMCard(
   card: Card,
   shouldApplyEffect: boolean
-): HTMLDivElement {
+): HTMLButtonElement {
   /** Create DOM element */
   const cardToAdd = document.createElement('button'); // This should be a button
   const cardText = document.createElement('div');
