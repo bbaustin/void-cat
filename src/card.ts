@@ -1,5 +1,6 @@
 import { DECK_OF_TRUTH, addWholeHandVisually, discardCard } from './cardDeck';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
+import { replaceTextBasedOnRotation } from './rotator';
 import { handleEffectsSequentially } from './utils';
 
 export interface Card {
@@ -51,6 +52,7 @@ export function createDOMCard(
   /* Append text */
   const textToAppend = getCardAttribute(card, 'text');
   cardText.innerText = textToAppend;
+  replaceTextBasedOnRotation();
 
   /* Append cost */
   const costSection = document.createElement('div');

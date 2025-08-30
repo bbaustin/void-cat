@@ -106,6 +106,9 @@ export function rotate(rotationDirection: RotationDirection) {
   DOM_CAT.style.transform = `rotate(${angle}deg) translate(${x}px, ${y}px)`;
   DOM_CAT.style.transformOrigin = 'top'; // keep this fixed
 
+  /* Update card text */
+  replaceTextBasedOnRotation();
+
   /* Absorb thing (coin) if applicable */
   absorbThing();
 }
@@ -137,4 +140,19 @@ function willRotationBeOutOfBounds(
   return occupied.some(
     ({ x, y }) => x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y
   );
+}
+
+export function replaceTextBasedOnRotation() {
+  const isVertical =
+    CAT_OF_TRUTH.headFacing === 'bottom' || CAT_OF_TRUTH.headFacing === 'top';
+  const leftOrUp = isVertical ? 'left' : 'up';
+  const rightOrDown = isVertical ? 'right' : 'down';
+
+  const cards = document.getElementsByClassName('card');
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].innerHTML = cards[i].innerHTML.replace('left', leftOrUp);
+    cards[i].innerHTML = cards[i].innerHTML.replace('up', leftOrUp);
+    cards[i].innerHTML = cards[i].innerHTML.replace('right', rightOrDown);
+    cards[i].innerHTML = cards[i].innerHTML.replace('down', rightOrDown);
+  }
 }
