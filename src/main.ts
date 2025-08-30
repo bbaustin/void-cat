@@ -57,7 +57,7 @@ function initGame({ gridSize, terrain }: Stage) {
   showScreen('screen-game');
 }
 
-function initIntermission() {
+export function initIntermission() {
   renderWholeDeck();
   showScreen('screen-intermission');
 }

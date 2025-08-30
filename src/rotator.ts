@@ -1,7 +1,7 @@
 import type { Card } from './card';
 import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
-import { updateEnergyAndCalMeters } from './interaction';
+import { updateEnergyAndCalMetersAfterPlayingCard } from './interaction';
 import { DOM_CAT } from './main';
 import { CURRENT_STAGE, STAGES } from './stage';
 
@@ -99,7 +99,7 @@ export function rotate(rotationDirection: RotationDirection) {
     cost: [1],
     caloriesBurned: [0],
   };
-  updateEnergyAndCalMeters(fakeCard);
+  updateEnergyAndCalMetersAfterPlayingCard(fakeCard);
 
   /* Update DOM */
   DOM_CAT.style.transform = `rotate(${angle}deg) translate(${x}px, ${y}px)`;

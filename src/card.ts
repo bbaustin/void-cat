@@ -1,9 +1,5 @@
-import {
-  DECK_OF_TRUTH,
-  addCardToHandVisually,
-  addWholeHandVisually,
-} from './cardDeck';
-import { updateEnergyAndCalMeters } from './interaction';
+import { DECK_OF_TRUTH, addWholeHandVisually } from './cardDeck';
+import { updateEnergyAndCalMetersAfterPlayingCard } from './interaction';
 import { handleEffectsSequentially } from './utils';
 
 export interface Card {
@@ -81,7 +77,7 @@ export function createDOMCard(
       handleEffectsSequentially(effectToApply);
 
       /* Update cals and energy */
-      updateEnergyAndCalMeters(card);
+      updateEnergyAndCalMetersAfterPlayingCard(card);
 
       /* Remove the card from your hand,
        * first in state, and then visually  */
