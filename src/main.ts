@@ -1,3 +1,4 @@
+import { triggerAttacksVisually } from './attack';
 import {
   addXCardsToHand,
   renderDiscardPile,

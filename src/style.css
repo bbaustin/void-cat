@@ -148,6 +148,11 @@ GRID
   /* If you want it to be above cat */
   z-index: 100;
   position: relative;
+  transition: opacity 0.3s ease;
+}
+
+.attack.attacking::after {
+  opacity: 1;
 }
 
 .floor {

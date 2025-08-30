@@ -84,16 +84,3 @@ export function updateTurn(turn: number) {
 
   return;
 }
-
-export function updateTurnViaButton() {
-  const newTurnValue = GAME_STATE_OF_TRUTH.currentTurn + 1;
-  console.log(newTurnValue);
-  addXCardsToHand();
-
-  // trigger "attack" stage
-
-  // somehow wait for above
-
-  updateTurn(newTurnValue);
-  updateEnergy(1);
-}
