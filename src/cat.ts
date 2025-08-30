@@ -92,11 +92,11 @@ export function removeDOMCatFromGrid(catDiv: HTMLDivElement) {
  * @param length current length of cat
  * @returns array of x and y coordinates
  */
-export function getOccupiedTiles(
-  headX: number,
-  headY: number,
-  facing: Direction,
-  length: number
+export function getOccupiedTileCoordinates(
+  headX: number = CAT_OF_TRUTH.headX,
+  headY: number = CAT_OF_TRUTH.headY,
+  facing: Direction = CAT_OF_TRUTH.headFacing,
+  length: number = CAT_OF_TRUTH.length
 ): { x: number; y: number }[] {
   const tiles = [{ x: headX, y: headY }]; // head always included
 

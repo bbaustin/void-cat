@@ -1,6 +1,6 @@
 import type { Card } from './card';
 import type { Direction } from './cardEffects';
-import { CAT_OF_TRUTH, getOccupiedTiles } from './cat';
+import { CAT_OF_TRUTH, getOccupiedTileCoordinates } from './cat';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
 import { DOM_CAT } from './main';
 import { CURRENT_STAGE, STAGES } from './stage';
@@ -106,6 +106,9 @@ export function rotate(rotationDirection: RotationDirection) {
   DOM_CAT.style.transform = `rotate(${angle}deg) translate(${x}px, ${y}px)`;
   DOM_CAT.style.transformOrigin = 'top'; // keep this fixed
 
+  /* Update card text */
+  replaceTextBasedOnRotation();
+
   /* Absorb thing (coin) if applicable */
   absorbThing();
 }
@@ -132,9 +135,24 @@ function willRotationBeOutOfBounds(
   gridSize: { x: number; y: number }
 ): boolean {
   const newFacing = getRotatedDirection(currentFacing, rotation);
-  const occupied = getOccupiedTiles(headX, headY, newFacing, length);
+  const occupied = getOccupiedTileCoordinates(headX, headY, newFacing, length);
 
   return occupied.some(
     ({ x, y }) => x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y
   );
+}
+
+export function replaceTextBasedOnRotation() {
+  const isVertical =
+    CAT_OF_TRUTH.headFacing === 'bottom' || CAT_OF_TRUTH.headFacing === 'top';
+  const leftOrUp = isVertical ? 'left' : 'up';
+  const rightOrDown = isVertical ? 'right' : 'down';
+
+  const cards = document.getElementsByClassName('card');
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].innerHTML = cards[i].innerHTML.replace('left', leftOrUp);
+    cards[i].innerHTML = cards[i].innerHTML.replace('up', leftOrUp);
+    cards[i].innerHTML = cards[i].innerHTML.replace('right', rightOrDown);
+    cards[i].innerHTML = cards[i].innerHTML.replace('down', rightOrDown);
+  }
 }

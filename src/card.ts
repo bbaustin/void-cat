@@ -1,5 +1,6 @@
-import { DECK_OF_TRUTH, addWholeHandVisually } from './cardDeck';
+import { DECK_OF_TRUTH, addWholeHandVisually, discardCard } from './cardDeck';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
+import { replaceTextBasedOnRotation } from './rotator';
 import { handleEffectsSequentially } from './utils';
 
 export interface Card {
@@ -36,9 +37,9 @@ type CardAttribute = Extract<
 export function createDOMCard(
   card: Card,
   shouldApplyEffect: boolean
-): HTMLDivElement {
+): HTMLButtonElement {
   /** Create DOM element */
-  const cardToAdd = document.createElement('div');
+  const cardToAdd = document.createElement('button'); // This should be a button
   const cardText = document.createElement('div');
   const cardStats = document.createElement('div');
   cardStats.classList.add('stats');
@@ -51,6 +52,7 @@ export function createDOMCard(
   /* Append text */
   const textToAppend = getCardAttribute(card, 'text');
   cardText.innerText = textToAppend;
+  replaceTextBasedOnRotation();
 
   /* Append cost */
   const costSection = document.createElement('div');
@@ -70,7 +72,7 @@ export function createDOMCard(
   if (shouldApplyEffect) {
     const effectToApply = getCardAttribute(card, 'effect');
     const finalEffectToApply = () => {
-      const { hand, discardPile } = DECK_OF_TRUTH;
+      const { hand } = DECK_OF_TRUTH;
       const indexOfUsedCard = DECK_OF_TRUTH.hand.indexOf(card);
 
       /* Do the effects */
@@ -85,10 +87,12 @@ export function createDOMCard(
       addWholeHandVisually();
 
       /* Add to discard pile */
-      discardPile.push(card);
+      discardCard(card);
     };
     cardToAdd.addEventListener('click', finalEffectToApply);
   }
+
+  console.log(DECK_OF_TRUTH);
 
   return cardToAdd;
 }

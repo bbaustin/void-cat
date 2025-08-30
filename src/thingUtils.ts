@@ -1,7 +1,7 @@
-import { CAT_OF_TRUTH, getOccupiedTiles } from './cat';
+import { CAT_OF_TRUTH, getOccupiedTileCoordinates } from './cat';
 import { getTile } from './grid';
 import { updateMoney } from './meterUtils';
-import { pickup2, zzfx } from './sounds';
+import { playPickup1 } from './sounds';
 import { generateCoin, type ThingCoordinates, type Thing } from './thing';
 
 type ThingOrClass =
@@ -47,12 +47,7 @@ export function addThingsToGrid(
  *
  */
 export function absorbThing(spaceToAbsorbFrom?: ThingCoordinates) {
-  const tilesOccupiedByCat = getOccupiedTiles(
-    CAT_OF_TRUTH.headX,
-    CAT_OF_TRUTH.headY,
-    CAT_OF_TRUTH.headFacing,
-    CAT_OF_TRUTH.length
-  );
+  const tilesOccupiedByCat = getOccupiedTileCoordinates();
 
   tilesOccupiedByCat.forEach((occupiedTile) => {
     const tile = getTile(occupiedTile.x, occupiedTile.y);
@@ -63,6 +58,7 @@ export function absorbThing(spaceToAbsorbFrom?: ThingCoordinates) {
       // This is always only 1 now; please never put non-numbers in here :>
       updateMoney(Number(coinTile.innerHTML));
       tile?.removeChild(coinTile);
+      playPickup1();
     }
   });
 }
