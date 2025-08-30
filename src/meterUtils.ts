@@ -2,10 +2,6 @@ import { GAME_STATE_OF_TRUTH, setGameState } from './main';
 import { type Card, getCardAttribute } from './card';
 import { clamp } from './utils';
 
-export function absorbThing() {
-  // Do I want a "THING_OF_TRUTH" global?
-}
-
 /**
  * Helper helper, to update the two most commonly updated meters.
  * Probably used when playing a card.

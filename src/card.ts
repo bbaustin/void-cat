@@ -1,5 +1,5 @@
 import { DECK_OF_TRUTH, addWholeHandVisually } from './cardDeck';
-import { updateEnergyAndCalMetersAfterPlayingCard } from './interaction';
+import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
 import { handleEffectsSequentially } from './utils';
 
 export interface Card {

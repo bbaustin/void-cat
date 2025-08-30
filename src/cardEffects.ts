@@ -2,6 +2,7 @@ import { CAT_OF_TRUTH } from './cat';
 import { DOM_CAT } from './main';
 import { isOutOfBounds } from './grid';
 import { delay } from './utils';
+import { absorbThing } from './thingUtils';
 
 /** Distance in pixels one move left or right should take */
 export const ONE_MOVE_PX_X = 175;
@@ -49,8 +50,11 @@ export function move(
       /** Also update the data-attribute */
       DOM_CAT.dataset[xOrY] = CAT_OF_TRUTH[headDirection].toString();
 
-      /** Finally actually move the cat */
+      /** Move the cat on the DOM */
       DOM_CAT.style[leftOrTop] = `${movementPx + oneMovePx * factor}px`;
+
+      /** Interact with Things on the grid */
+      absorbThing();
     }
 
     delay(250);

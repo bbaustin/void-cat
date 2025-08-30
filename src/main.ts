@@ -6,9 +6,11 @@ import {
 } from './cardDeck';
 import { addDOMCatToGrid, createDOMCat } from './cat';
 import { createEmptyGrid, renderGrid } from './grid';
+import { absorbThing } from './thingUtils';
 import { initRotator } from './rotator';
 import { showScreen } from './screen';
 import { STAGES, type Stage } from './stage';
+import { pickup2, zzfx } from './sounds';
 
 export const DOM_CAT = createDOMCat();
 
