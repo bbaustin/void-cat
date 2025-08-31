@@ -7,19 +7,23 @@ import {
   setGameState,
 } from './main';
 import { updateEnergy, updateTurn } from './meterUtils';
-import { showScreen } from './screen';
 import { STAGES } from './stage';
 import { handleEffectsSequentially } from './utils';
 
 export function initNextTurnButton() {
-  document
-    .getElementById('next')
-    ?.addEventListener('click', () => handleNextButtonClick());
+  const nextButton = document.getElementById('next');
+  if (!nextButton) return;
+  nextButton.removeEventListener('click', () => handleNextButtonClick());
+  nextButton.addEventListener('click', () => handleNextButtonClick());
 }
 
 export function handleNextButtonClick() {
   if (GAME_STATE_OF_TRUTH.currentScreen === 'screen-intermission') {
     setGameState('currentStage', GAME_STATE_OF_TRUTH.currentStage + 1);
+    setGameState('currentScreen', 'screen-game');
+    updateTurn(1);
+    updateEnergy(GAME_STATE_OF_TRUTH.energyMax);
+    updateNextButtonText();
     return initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);
   }
 
@@ -29,6 +33,7 @@ export function handleNextButtonClick() {
 
   if (isLastTurn()) {
     setGameState('currentScreen', 'screen-intermission');
+    document.getElementById('next')!.classList.remove('warning');
     return initIntermission();
   }
 }
@@ -45,13 +50,6 @@ export function updateTurnViaButton() {
   updateTurn(newTurnValue);
   updateEnergy(1);
   updateNextButtonText();
-}
-
-export function updateViaIntermission() {
-  const nextButton = document.getElementById('next');
-  if (!nextButton) return null;
-
-  nextButton.innerHTML = 'Go to next stage';
 }
 
 export function isLastTurn() {
@@ -73,5 +71,15 @@ export function updateNextButtonText() {
       ],
       1200
     );
+  } else {
+    nextButton.classList.remove('warning');
+    nextButton.innerHTML = 'Next turn';
   }
+}
+
+export function updateNextButtonViaGoingToIntermission() {
+  const nextButton = document.getElementById('next');
+  if (!nextButton) return null;
+
+  nextButton.innerHTML = 'Go to next stage';
 }

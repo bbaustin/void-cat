@@ -9,7 +9,10 @@ import { createEmptyGrid, renderGrid } from './grid';
 import { initRotator } from './rotator';
 import { showScreen, type ScreenId } from './screen';
 import { STAGES, type Stage } from './stage';
-import { initNextTurnButton, updateViaIntermission } from './nextButton';
+import {
+  initNextTurnButton,
+  updateNextButtonViaGoingToIntermission,
+} from './nextButton';
 import {
   handleUpgradeCatButtonClick,
   initBuyCardsButton,
@@ -84,7 +87,7 @@ export function initIntermission() {
   /* Initiate with first button clicked */
   /* May get rid of this stuff as deadline draws near */
   handleUpgradeCatButtonClick();
-  updateViaIntermission();
+  updateNextButtonViaGoingToIntermission();
 }
 
 initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);

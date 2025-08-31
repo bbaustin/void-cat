@@ -14,8 +14,6 @@ export function showScreen(screen: AnyScreen) {
   const isMini = miniScreenIds.includes(screen as MiniScreenId);
   const ids = isMini ? miniScreenIds : screenIds;
 
-  console.log(screen);
-
   /* Show the chosen screen */
   const screenToShow = document.getElementById(screen);
   if (!screenToShow) return;

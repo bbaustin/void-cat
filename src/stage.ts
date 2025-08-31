@@ -23,6 +23,6 @@ export const STAGES: Stage[] = [
     terrain: 'street',
   },
   {
-    gridSize: { x: 10, y: 10 },
+    gridSize: { x: 5, y: 5 },
   },
 ];

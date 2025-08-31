@@ -94,7 +94,6 @@ function clearHandState() {
     DECK_OF_TRUTH.discardPile.push(card);
   });
   DECK_OF_TRUTH.hand = [];
-  console.log(DECK_OF_TRUTH.discardPile);
 }
 
 function clearHandVisually() {
