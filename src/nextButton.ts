@@ -37,6 +37,13 @@ export function updateTurnViaButton() {
   updateNextButtonText();
 }
 
+export function updateViaIntermission() {
+  const nextButton = document.getElementById('next');
+  if (!nextButton) return null;
+
+  nextButton.innerHTML = 'Go to next stage';
+}
+
 export function isLastTurn() {
   const { currentTurn, currentStage } = GAME_STATE_OF_TRUTH;
   const totalTurns = STAGES[currentStage].turns || 5;
