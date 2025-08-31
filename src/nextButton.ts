@@ -1,6 +1,11 @@
 import { triggerAttack } from './attack';
 import { addXCardsToHand } from './cardDeck';
-import { GAME_STATE_OF_TRUTH, initIntermission } from './main';
+import {
+  GAME_STATE_OF_TRUTH,
+  initGame,
+  initIntermission,
+  setGameState,
+} from './main';
 import { updateEnergy, updateTurn } from './meterUtils';
 import { showScreen } from './screen';
 import { STAGES } from './stage';
@@ -13,12 +18,17 @@ export function initNextTurnButton() {
 }
 
 export function handleNextButtonClick() {
+  if (GAME_STATE_OF_TRUTH.currentScreen === 'screen-intermission') {
+    setGameState('currentStage', GAME_STATE_OF_TRUTH.currentStage + 1);
+    return initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);
+  }
+
   if (!isLastTurn()) {
     return updateTurnViaButton();
   }
 
   if (isLastTurn()) {
-    // global state
+    setGameState('currentScreen', 'screen-intermission');
     return initIntermission();
   }
 }

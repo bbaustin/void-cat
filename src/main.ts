@@ -48,7 +48,7 @@ export function setGameState<K extends keyof GameStateType>(
   GAME_STATE_OF_TRUTH[key] = value;
 }
 
-function initGame({ gridSize, terrain }: Stage) {
+export function initGame({ gridSize, terrain }: Stage) {
   /* Draw game grid */
   const grid = createEmptyGrid(gridSize.x, gridSize.y, terrain);
   renderGrid(grid);
@@ -63,7 +63,7 @@ function initGame({ gridSize, terrain }: Stage) {
   addXCardsToHand();
 
   // temporary... debugging
-  renderDiscardPile();
+  // renderDiscardPile();
 
   /* Add the DOMcat to the grid! */
   addDOMCatToGrid(DOM_CAT);
