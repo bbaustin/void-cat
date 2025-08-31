@@ -91,9 +91,6 @@ export function createDOMCard(
     };
     cardToAdd.addEventListener('click', finalEffectToApply);
   }
-
-  console.log(DECK_OF_TRUTH);
-
   return cardToAdd;
 }
 

@@ -29,3 +29,7 @@ Overall UI
 + Interactions 
   + (picking up items from grid)
   + updating meters with cards
+
+
+
++ If you need to remove kbs, grab next button once... 

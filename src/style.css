@@ -21,10 +21,12 @@
 
 body {
   margin: 0;
+  height: 100vh;
 }
 
 main {
-  height: 100vh;
+  /* Height minus padding; could just hide overflow too */
+  height: calc(100vh - 24px);
   font-family: monospace;
   margin: 0 auto;
   padding: 12px 0;
@@ -69,6 +71,42 @@ SCREENS
   flex-direction: column;
 }
 
+#screen-intermission {
+  display: flex;
+}
+
+.left-side-button-list {
+  width: 25%;
+  padding: 24px;
+  height: 100%;
+}
+
+.left-side-button-list button {
+  padding: 12px;
+  margin-bottom: 36px;
+  width: 100%;
+  min-height: 86px;
+}
+
+.left-side-button-list button.active {
+  background: var(--green);
+}
+
+#mini-screen {
+  width: 75%;
+  display: flex;
+  padding: 26px 0px 0px 24px;
+}
+
+/**********************
+MINI SCREENS 
+**********************/
+#view-all {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 2 equal-width columns */
+  gap: 24px;
+}
+
 /**********************
 METERS
 **********************/
@@ -76,7 +114,7 @@ METERS
   display: flex;
   justify-content: space-between;
   width: var(--width-of-grid);
-  margin-bottom: 12px;
+  margin: 0 auto 12px;
 }
 
 .meter {
@@ -116,6 +154,32 @@ METERS
   background: var(--orange);
 }
 
+#next-holder {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  text-align: right;
+  margin: 42px 45px;
+}
+
+#next-holder button {
+  padding: 12px;
+}
+
+.warning {
+  animation: warning-keyframes 2s infinite;
+}
+
+@keyframes warning-keyframes {
+  0% {
+    background: var(--white);
+  }
+  50% {
+    background: var(--teal);
+  }
+}
+
 /**********************
 GRID
 **********************/
@@ -131,9 +195,6 @@ GRID
 
 .tile {
   outline: 1.5px solid var(--black);
-  /* aspect-ratio: 1 / 1;
-  width: 50px;
-  height: 50px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -264,7 +325,7 @@ CAT
 
 .nose {
   position: absolute;
-  background: #ffddee;
+  background: var(--pink);
   width: 9px;
   height: 5px;
   top: 63px;
@@ -386,19 +447,4 @@ CARD & ROTATE BUTTONS
 
 .stats div:nth-child(2) {
   background: var(--orange);
-}
-
-/**********************
-ROTATOR
-**********************/
-/* .arrow {
-  font-size: 24px;
-} */
-
-/**********************
-VIEW DECK
-**********************/
-#view-deck {
-  display: flex;
-  justify-content: space-around;
 }

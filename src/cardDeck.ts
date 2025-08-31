@@ -94,7 +94,6 @@ function clearHandState() {
     DECK_OF_TRUTH.discardPile.push(card);
   });
   DECK_OF_TRUTH.hand = [];
-  console.log(DECK_OF_TRUTH.discardPile);
 }
 
 function clearHandVisually() {
@@ -128,15 +127,6 @@ export function reshuffleDiscardIntoDraw() {
   if (DECK_OF_TRUTH.discardPile.length === 0) return;
   DECK_OF_TRUTH.unusedCards = shuffleCards(DECK_OF_TRUTH.discardPile);
   DECK_OF_TRUTH.discardPile = [];
-}
-
-export function renderWholeDeck() {
-  const viewDeck = document.getElementById('view-deck');
-  const allCards = DECK_OF_TRUTH.unusedCards.concat(DECK_OF_TRUTH.discardPile);
-  allCards.forEach((card) => {
-    const cardToDisplay = createDOMCard(card, false);
-    viewDeck?.appendChild(cardToDisplay);
-  });
 }
 
 // NOT IN USE

@@ -1,15 +1,24 @@
 import {
   addXCardsToHand,
   renderDiscardPile,
-  renderWholeDeck,
+  // renderWholeDeck,
   setDeckCards,
 } from './cardDeck';
 import { addDOMCatToGrid, createDOMCat } from './cat';
 import { createEmptyGrid, renderGrid } from './grid';
 import { initRotator } from './rotator';
-import { showScreen } from './screen';
+import { showScreen, type ScreenId } from './screen';
 import { STAGES, type Stage } from './stage';
-import { initNextTurnButton } from './stageTurn';
+import {
+  initNextTurnButton,
+  updateNextButtonViaGoingToIntermission,
+} from './nextButton';
+import {
+  handleUpgradeCatButtonClick,
+  initBuyCardsButton,
+  initUpgradeCardsButton,
+  initUpgradeCatButton,
+} from './stageIntermission';
 
 export const DOM_CAT = createDOMCat();
 
@@ -20,6 +29,7 @@ type GameStateType = {
   energyMax: number;
   currentTurn: number;
   currentStage: number;
+  currentScreen: ScreenId;
   isAttackHappening: boolean;
 };
 
@@ -30,6 +40,7 @@ export const GAME_STATE_OF_TRUTH: GameStateType = {
   energyMax: 5,
   currentTurn: 1,
   currentStage: 2, //pls change
+  currentScreen: 'screen-game',
   isAttackHappening: false,
 };
 
@@ -40,7 +51,7 @@ export function setGameState<K extends keyof GameStateType>(
   GAME_STATE_OF_TRUTH[key] = value;
 }
 
-function initGame({ gridSize, terrain }: Stage) {
+export function initGame({ gridSize, terrain }: Stage) {
   /* Draw game grid */
   const grid = createEmptyGrid(gridSize.x, gridSize.y, terrain);
   renderGrid(grid);
@@ -55,21 +66,28 @@ function initGame({ gridSize, terrain }: Stage) {
   addXCardsToHand();
 
   // temporary... debugging
-  renderDiscardPile();
+  // renderDiscardPile();
 
   /* Add the DOMcat to the grid! */
   addDOMCatToGrid(DOM_CAT);
 
   /* Init the next turn button */
   initNextTurnButton();
+  // TODO: These should be in initIntermission
+  initBuyCardsButton();
+  initUpgradeCardsButton();
+  initUpgradeCatButton();
 
   /* Show the game screen */
   showScreen('screen-game');
 }
 
 export function initIntermission() {
-  renderWholeDeck();
   showScreen('screen-intermission');
+  /* Initiate with first button clicked */
+  /* May get rid of this stuff as deadline draws near */
+  handleUpgradeCatButtonClick();
+  updateNextButtonViaGoingToIntermission();
 }
 
 initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);
