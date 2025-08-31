@@ -71,6 +71,23 @@ SCREENS
   flex-direction: column;
 }
 
+#screen-intermission {
+  display: flex;
+}
+
+.left-side-button-list {
+  width: 25%;
+  margin-top: 24px;
+  height: 100%;
+}
+
+.left-side-button-list button {
+  padding: 12px;
+  margin: 0 0 24px 24px;
+  width: 100%;
+  min-height: 86px;
+}
+
 /**********************
 METERS
 **********************/
@@ -78,7 +95,7 @@ METERS
   display: flex;
   justify-content: space-between;
   width: var(--width-of-grid);
-  margin-bottom: 12px;
+  margin: 0 auto 12px;
 }
 
 .meter {
@@ -129,6 +146,19 @@ METERS
 
 #next-holder button {
   padding: 12px;
+}
+
+.warning {
+  animation: warning-keyframes 2s infinite;
+}
+
+@keyframes warning-keyframes {
+  0% {
+    background: var(--white);
+  }
+  50% {
+    background: var(--teal);
+  }
 }
 
 /**********************
@@ -279,7 +309,7 @@ CAT
 
 .nose {
   position: absolute;
-  background: #ffddee;
+  background: var(--pink);
   width: 9px;
   height: 5px;
   top: 63px;

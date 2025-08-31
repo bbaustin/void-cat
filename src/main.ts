@@ -7,9 +7,9 @@ import {
 import { addDOMCatToGrid, createDOMCat } from './cat';
 import { createEmptyGrid, renderGrid } from './grid';
 import { initRotator } from './rotator';
-import { showScreen } from './screen';
+import { showScreen, type ScreenId } from './screen';
 import { STAGES, type Stage } from './stage';
-import { initNextTurnButton } from './stageTurn';
+import { initNextTurnButton } from './nextButton';
 
 export const DOM_CAT = createDOMCat();
 
@@ -20,6 +20,7 @@ type GameStateType = {
   energyMax: number;
   currentTurn: number;
   currentStage: number;
+  currentScreen: ScreenId;
   isAttackHappening: boolean;
 };
 
@@ -30,6 +31,7 @@ export const GAME_STATE_OF_TRUTH: GameStateType = {
   energyMax: 5,
   currentTurn: 1,
   currentStage: 2, //pls change
+  currentScreen: 'screen-game',
   isAttackHappening: false,
 };
 
@@ -64,7 +66,7 @@ function initGame({ gridSize, terrain }: Stage) {
   initNextTurnButton();
 
   /* Show the game screen */
-  showScreen('screen-game');
+  showScreen('screen-intermission');
 }
 
 export function initIntermission() {

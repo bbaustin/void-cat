@@ -1,6 +1,6 @@
 const screenIds = ['screen-game', 'screen-intermission'] as const;
 
-type ScreenId = (typeof screenIds)[number];
+export type ScreenId = (typeof screenIds)[number];
 
 // Could be improved or thought more about.
 // Show the screen you pass in, then hide the others
@@ -19,3 +19,6 @@ export function showScreen(screen: ScreenId) {
     elementWithID.style.display = 'none';
   });
 }
+
+// we want the top to always be visible.
+// we can re-use the next turn button to be start next level
