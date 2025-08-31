@@ -13,8 +13,8 @@ import { handleEffectsSequentially } from './utils';
 export function initNextTurnButton() {
   const nextButton = document.getElementById('next');
   if (!nextButton) return;
-  nextButton.removeEventListener('click', () => handleNextButtonClick());
-  nextButton.addEventListener('click', () => handleNextButtonClick());
+  nextButton.removeEventListener('click', handleNextButtonClick);
+  nextButton.addEventListener('click', handleNextButtonClick);
 }
 
 export function handleNextButtonClick() {

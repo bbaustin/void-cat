@@ -16,19 +16,19 @@ export type MiniScreenId = (typeof miniScreenIds)[number];
 export function initUpgradeCatButton() {
   document
     .getElementById('upgrade-cat')
-    ?.addEventListener('click', () => handleUpgradeCatButtonClick());
+    ?.addEventListener('click', handleUpgradeCatButtonClick);
 }
 
 export function initBuyCardsButton() {
   document
     .getElementById('buy-cards')
-    ?.addEventListener('click', () => handleBuyCardsButtonClick());
+    ?.addEventListener('click', handleBuyCardsButtonClick);
 }
 
 export function initUpgradeCardsButton() {
   document
     .getElementById('view-cards')
-    ?.addEventListener('click', () => handleUpgradeCardsButtonClick());
+    ?.addEventListener('click', handleUpgradeCardsButtonClick);
 }
 
 /**

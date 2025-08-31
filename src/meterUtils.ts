@@ -38,6 +38,7 @@ export function updateEnergy(amountToAdd: number) {
 
 export function updateCaloriesBurned(amount: number) {
   /* Update game state with calorie information */
+  console.log('wat going on');
   const updatedCaloriesBurned = GAME_STATE_OF_TRUTH.caloriesBurned + amount;
   setGameState('caloriesBurned', updatedCaloriesBurned);
 
