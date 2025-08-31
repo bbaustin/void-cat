@@ -130,15 +130,6 @@ export function reshuffleDiscardIntoDraw() {
   DECK_OF_TRUTH.discardPile = [];
 }
 
-export function renderWholeDeck() {
-  const viewDeck = document.getElementById('view-deck');
-  const allCards = DECK_OF_TRUTH.unusedCards.concat(DECK_OF_TRUTH.discardPile);
-  allCards.forEach((card) => {
-    const cardToDisplay = createDOMCard(card, false);
-    viewDeck?.appendChild(cardToDisplay);
-  });
-}
-
 // NOT IN USE
 export function renderDiscardPile() {
   const discardPileDOM = document.getElementById('discard')!;

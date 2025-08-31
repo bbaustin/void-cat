@@ -42,7 +42,7 @@
       </div>
       <div id="next-holder">
         <button id="next">Next turn</button>
-        <p>You will get a new hand of cards and +1 Energy</p>
+        <!-- <p>You will get a new hand of cards and +1 Energy</p> -->
       </div>
       <!-- GAME SCREEN! -->
       <section id="screen-game">
@@ -73,12 +73,15 @@
       <!-- INTERMISSION SCREEN! -->
       <section id="screen-intermission">
         <div class="left-side-button-list">
-          <button id="buy-cards">Buy new cards</button>
-          <button id="upgrade-cards">Upgrade owned cards</button>
           <button id="upgrade-cat">Upgrade VOID Cat</button>
+          <button id="buy-cards">Buy new cards</button>
+          <button id="view-cards">View and trash owned cards</button>
         </div>
-        <!-- <div id="view-deck"></div> -->
-        <div id="mini-screen"></div>
+        <div id="mini-screen">
+          <div id="upgrade-cat-screen">upgrade cat screen</div>
+          <div id="buy-cards-screen">buy cards</div>
+          <div id="view-cards-screen"><div id="view-all"></div></div>
+        </div>
       </section>
     </main>
     <script

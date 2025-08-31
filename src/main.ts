@@ -1,7 +1,7 @@
 import {
   addXCardsToHand,
   renderDiscardPile,
-  renderWholeDeck,
+  // renderWholeDeck,
   setDeckCards,
 } from './cardDeck';
 import { addDOMCatToGrid, createDOMCat } from './cat';
@@ -10,6 +10,11 @@ import { initRotator } from './rotator';
 import { showScreen, type ScreenId } from './screen';
 import { STAGES, type Stage } from './stage';
 import { initNextTurnButton } from './nextButton';
+import {
+  initBuyCardsButton,
+  initUpgradeCardsButton,
+  initUpgradeCatButton,
+} from './stageIntermission';
 
 export const DOM_CAT = createDOMCat();
 
@@ -64,13 +69,17 @@ function initGame({ gridSize, terrain }: Stage) {
 
   /* Init the next turn button */
   initNextTurnButton();
+  // TODO: These should be in initIntermission
+  initBuyCardsButton();
+  initUpgradeCardsButton();
+  initUpgradeCatButton();
 
   /* Show the game screen */
   showScreen('screen-intermission');
 }
 
 export function initIntermission() {
-  renderWholeDeck();
+  // renderWholeDeck();
   showScreen('screen-intermission');
 }
 

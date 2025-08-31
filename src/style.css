@@ -77,15 +77,34 @@ SCREENS
 
 .left-side-button-list {
   width: 25%;
-  margin-top: 24px;
+  padding: 24px;
   height: 100%;
 }
 
 .left-side-button-list button {
   padding: 12px;
-  margin: 0 0 24px 24px;
+  margin-bottom: 36px;
   width: 100%;
   min-height: 86px;
+}
+
+.left-side-button-list button.active {
+  background: var(--green);
+}
+
+#mini-screen {
+  width: 75%;
+  display: flex;
+  padding: 26px 0px 0px 24px;
+}
+
+/**********************
+MINI SCREENS 
+**********************/
+#view-all {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 2 equal-width columns */
+  gap: 24px;
 }
 
 /**********************
@@ -176,9 +195,6 @@ GRID
 
 .tile {
   outline: 1.5px solid var(--black);
-  /* aspect-ratio: 1 / 1;
-  width: 50px;
-  height: 50px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -431,19 +447,4 @@ CARD & ROTATE BUTTONS
 
 .stats div:nth-child(2) {
   background: var(--orange);
-}
-
-/**********************
-ROTATOR
-**********************/
-/* .arrow {
-  font-size: 24px;
-} */
-
-/**********************
-VIEW DECK
-**********************/
-#view-deck {
-  display: flex;
-  justify-content: space-around;
 }
