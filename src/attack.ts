@@ -46,7 +46,6 @@ export function triggerAttackOnCat() {
 }
 
 export function triggerAttack() {
-  console.log('triigger atack');
   triggerAttackAudiovisually();
   triggerAttackOnCat();
 }
