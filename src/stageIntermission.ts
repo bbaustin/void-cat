@@ -10,6 +10,9 @@ export const miniScreenIds = [
 
 export type MiniScreenId = (typeof miniScreenIds)[number];
 
+/**
+ * INIT BUTTON FUNCTIONS
+ **/
 export function initUpgradeCatButton() {
   document
     .getElementById('upgrade-cat')
@@ -28,25 +31,30 @@ export function initUpgradeCardsButton() {
     ?.addEventListener('click', () => handleUpgradeCardsButtonClick());
 }
 
+/**
+ * HANDLE BUTTON CLICK FUNCTIONS
+ **/
 export function handleUpgradeCatButtonClick() {
-  const id = 'upgrade-cat-screen';
-  showScreen(id);
-  applyButtonClasses(id);
+  showScreenAndApplyButtonClass('upgrade-cat-screen');
 }
 
 export function handleBuyCardsButtonClick() {
-  const id = 'buy-cards-screen';
-  showScreen(id);
-  applyButtonClasses(id);
+  showScreenAndApplyButtonClass('buy-cards-screen');
 }
 
 export function handleUpgradeCardsButtonClick() {
-  const id = 'view-cards-screen';
-  showScreen(id);
-  applyButtonClasses(id);
+  showScreenAndApplyButtonClass('view-cards-screen');
   renderWholeDeck();
 }
 
+function showScreenAndApplyButtonClass(id: MiniScreenId) {
+  showScreen(id);
+  applyButtonClasses(id);
+}
+
+/**
+ * UTILS
+ **/
 function applyButtonClasses(miniScreenId: MiniScreenId) {
   /* Remove active from all buttons */
   document
@@ -56,9 +64,6 @@ function applyButtonClasses(miniScreenId: MiniScreenId) {
   /* Get the className by augmenting the miniScreenId
    * It's a little weird, but it's OK */
   const id = miniScreenId.slice(0, -7);
-
-  console.log(document.querySelector(`button#${id}`));
-
   document.querySelector(`button#${id}`)?.classList.add('active');
 }
 

@@ -11,6 +11,7 @@ import { showScreen, type ScreenId } from './screen';
 import { STAGES, type Stage } from './stage';
 import { initNextTurnButton } from './nextButton';
 import {
+  handleUpgradeCatButtonClick,
   initBuyCardsButton,
   initUpgradeCardsButton,
   initUpgradeCatButton,
@@ -75,12 +76,14 @@ function initGame({ gridSize, terrain }: Stage) {
   initUpgradeCatButton();
 
   /* Show the game screen */
-  showScreen('screen-intermission');
+  showScreen('screen-game');
 }
 
 export function initIntermission() {
-  // renderWholeDeck();
   showScreen('screen-intermission');
+  /* Initiate with first button clicked */
+  /* May get rid of this stuff as deadline draws near */
+  handleUpgradeCatButtonClick();
 }
 
 initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);

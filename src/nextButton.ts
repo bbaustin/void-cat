@@ -1,6 +1,6 @@
 import { triggerAttack } from './attack';
 import { addXCardsToHand } from './cardDeck';
-import { GAME_STATE_OF_TRUTH } from './main';
+import { GAME_STATE_OF_TRUTH, initIntermission } from './main';
 import { updateEnergy, updateTurn } from './meterUtils';
 import { showScreen } from './screen';
 import { STAGES } from './stage';
@@ -19,7 +19,7 @@ export function handleNextButtonClick() {
 
   if (isLastTurn()) {
     // global state
-    return showScreen('screen-intermission');
+    return initIntermission();
   }
 }
 
