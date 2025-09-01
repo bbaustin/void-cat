@@ -290,7 +290,7 @@ CAT
   transform: rotate(-44deg);
 }
 
-.ear.left.longcat {
+#cat.longcat .ear.left {
   left: 21px;
 }
 
@@ -299,7 +299,7 @@ CAT
   transform: rotate(44deg);
 }
 
-.ear.right.longcat {
+#cat.longcat .ear.right {
   right: 21px;
 }
 

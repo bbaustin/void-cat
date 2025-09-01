@@ -63,4 +63,9 @@ export function move(
 
 export function changeStance(stance: Stance) {
   DOM_CAT.dataset.stance = stance;
+
+  // remove all stance classes and add the intended one
+  const stances: Stance[] = ['standard', 'nap', 'longcat'];
+  DOM_CAT.classList.remove(...stances);
+  DOM_CAT.classList.add(stance);
 }
