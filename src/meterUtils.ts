@@ -2,7 +2,7 @@ import { GAME_STATE_OF_TRUTH, setGameState } from './main';
 import { type Card, getCardAttribute } from './card';
 import { clamp } from './utils';
 import { STAGES } from './stage';
-import { addXCardsToHand } from './cardDeck';
+import { CAT_OF_TRUTH } from './cat';
 
 /**
  * Helper helper, to update the two most commonly updated meters.
@@ -37,8 +37,13 @@ export function updateEnergy(amountToAdd: number) {
 }
 
 export function updateCaloriesBurned(amount: number) {
+  /* Burn one more calorie if in longcat position
+   * Might wanna do x2 for this */
+  const longCatAdjustment = CAT_OF_TRUTH.stance === 'longcat' ? 1 : 0;
+
   /* Update game state with calorie information */
-  const updatedCaloriesBurned = GAME_STATE_OF_TRUTH.caloriesBurned + amount;
+  const updatedCaloriesBurned =
+    GAME_STATE_OF_TRUTH.caloriesBurned + amount + longCatAdjustment;
   setGameState('caloriesBurned', updatedCaloriesBurned);
 
   /* Update DOM */
