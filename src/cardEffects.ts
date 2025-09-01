@@ -61,11 +61,23 @@ export function move(
   }
 }
 
+const stanceLengths: Record<Stance, number> = {
+  standard: 2,
+  nap: 1,
+  longcat: 3,
+};
+
 export function changeStance(stance: Stance) {
-  DOM_CAT.dataset.stance = stance;
+  const stances: Stance[] = ['standard', 'nap', 'longcat'];
+  const newLength = stanceLengths[stance];
+
+  CAT_OF_TRUTH.stance = stance;
+  CAT_OF_TRUTH.length = newLength;
 
   // remove all stance classes and add the intended one
-  const stances: Stance[] = ['standard', 'nap', 'longcat'];
+  // also change the dataset... still not sure if you're really using this but useful for debuggin
   DOM_CAT.classList.remove(...stances);
   DOM_CAT.classList.add(stance);
+  DOM_CAT.dataset.stance = stance;
+  DOM_CAT.dataset.length = `${newLength}`;
 }
