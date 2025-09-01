@@ -266,9 +266,14 @@ CAT
   height: 300px;
   border-radius: 50% / 55%;
   background: var(--black);
+  /* This is a little weird, but oh well */
   zoom: 40%;
   transition: left 0.5s, top 0.5s, transform 0.5s;
   z-index: 1000000;
+}
+
+#cat.longcat {
+  height: 475px;
 }
 
 .ear {
@@ -285,9 +290,17 @@ CAT
   transform: rotate(-44deg);
 }
 
+.ear.left.longcat {
+  left: 21px;
+}
+
 .ear.right {
   right: 10px;
   transform: rotate(44deg);
+}
+
+.ear.right.longcat {
+  right: 21px;
 }
 
 .face {
