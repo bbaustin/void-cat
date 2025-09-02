@@ -10,11 +10,20 @@ import { CAT_OF_TRUTH } from './cat';
  * @param card the card played
  */
 export function updateEnergyAndCalMetersAfterPlayingCard(card: Card) {
-  /* Negative of card cost */
+  /** Get card costs */
+  // Negative of card cost
   const energySpent = -getCardAttribute(card, 'cost');
   const caloriesBurned = getCardAttribute(card, 'caloriesBurned');
-  updateEnergy(energySpent);
-  updateCaloriesBurned(caloriesBurned);
+
+  /** Burn one more calorie if in longcat position
+   * AND the amount is positive (i.e., not getting attacked)
+   * Might wanna do x2 for this */
+  const napAdjustment = CAT_OF_TRUTH.stance === 'nap' ? -1 : 0;
+  const longCatAdjustment =
+    CAT_OF_TRUTH.stance === 'longcat' && caloriesBurned > 0 ? 1 : 0;
+
+  updateEnergy(energySpent + napAdjustment);
+  updateCaloriesBurned(caloriesBurned + longCatAdjustment);
 }
 
 /**
@@ -37,15 +46,8 @@ export function updateEnergy(amountToAdd: number) {
 }
 
 export function updateCaloriesBurned(amount: number) {
-  /** Burn one more calorie if in longcat position
-   * AND the amount is positive (i.e., not getting attacked)
-   * Might wanna do x2 for this */
-  const longCatAdjustment =
-    CAT_OF_TRUTH.stance === 'longcat' && amount > 0 ? 1 : 0;
-
   /* Update game state with calorie information */
-  const updatedCaloriesBurned =
-    GAME_STATE_OF_TRUTH.caloriesBurned + amount + longCatAdjustment;
+  const updatedCaloriesBurned = GAME_STATE_OF_TRUTH.caloriesBurned + amount;
   setGameState('caloriesBurned', updatedCaloriesBurned);
 
   /* Update DOM */

@@ -53,17 +53,17 @@ export function createDOMCard(
   const textToAppend = getCardAttribute(card, 'text');
   cardText.innerText = textToAppend;
 
-  /* Append cost */
-  const costSection = document.createElement('div');
-  const costToAppend = getCardAttribute(card, 'cost');
-  costSection.innerHTML = `${costToAppend}`;
-  cardStats.appendChild(costSection);
-
   /* Append cals */
   const calSection = document.createElement('div');
   const calToAppend = getCardAttribute(card, 'caloriesBurned');
   calSection.innerHTML = `${calToAppend}`;
   cardStats.appendChild(calSection);
+
+  /* Append cost */
+  const costSection = document.createElement('div');
+  const costToAppend = getCardAttribute(card, 'cost');
+  costSection.innerHTML = `${costToAppend}`;
+  cardStats.appendChild(costSection);
 
   /** Same as above, but with effect instead of text
    * We might not want to apply the effect if
