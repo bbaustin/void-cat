@@ -80,4 +80,7 @@ export function changeStance(stance: Stance) {
   DOM_CAT.classList.add(stance);
   DOM_CAT.dataset.stance = stance;
   DOM_CAT.dataset.length = `${newLength}`;
+
+  // attempt to absorb from your new location
+  absorbThing();
 }
