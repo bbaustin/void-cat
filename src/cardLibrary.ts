@@ -22,7 +22,7 @@ export const CARD_LIBRARY: Card[] = [
   {
     text: ['Assume defensive nap position'],
     effect: [() => changeStance('nap')],
-    cost: [1],
+    cost: [0],
     caloriesBurned: [0],
     description:
       'Curl into a ball. You only take up one tile (where your head is). You cannot move or burn calories. Once you are hit, you will enter standard position.',
@@ -30,7 +30,7 @@ export const CARD_LIBRARY: Card[] = [
   {
     text: ['Assume longcat position'],
     effect: [() => changeStance('longcat')],
-    cost: [1],
+    cost: [0],
     caloriesBurned: [0],
     description:
       'Stretch out, taking up three tiles. You burn double calories while in longcat position.',
@@ -38,7 +38,7 @@ export const CARD_LIBRARY: Card[] = [
   {
     text: ['Assume standard position'],
     effect: [() => changeStance('standard')],
-    cost: [1],
+    cost: [0],
     caloriesBurned: [0],
     description: 'Take the default position. You take up two tiles.',
   },

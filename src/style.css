@@ -268,12 +268,16 @@ CAT
   background: var(--black);
   /* This is a little weird, but oh well */
   zoom: 40%;
-  transition: left 0.5s, top 0.5s, transform 0.5s;
+  transition: left 0.5s, top 0.5s, transform 0.5s, height 0.5s;
   z-index: 1000000;
 }
 
 #cat.longcat {
   height: 475px;
+}
+
+#cat.nap {
+  height: 160px;
 }
 
 .ear {
@@ -288,6 +292,7 @@ CAT
 .ear.left {
   left: 10px;
   transform: rotate(-44deg);
+  transition: left 0.5s;
 }
 
 #cat.longcat .ear.left {
@@ -297,6 +302,7 @@ CAT
 .ear.right {
   right: 10px;
   transform: rotate(44deg);
+  transition: right 0.5s;
 }
 
 #cat.longcat .ear.right {
@@ -450,7 +456,7 @@ CARD & ROTATE BUTTONS
 }
 
 .stats div {
-  background: var(--green);
+  background: var(--orange);
   padding: 12px 16px;
   border-radius: 4px;
   outline: var(--thick-border);
@@ -459,5 +465,5 @@ CARD & ROTATE BUTTONS
 }
 
 .stats div:nth-child(2) {
-  background: var(--orange);
+  background: var(--green);
 }
