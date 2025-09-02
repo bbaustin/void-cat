@@ -11,19 +11,13 @@
 
 + Popup explanations 
 
-+ Longcat design and function
-+ Curl design and function
-
 + Script
 
-+ Make fun (game design etc.)
++ Make fun (level design etc.)
 
 + If you need to remove kbs, grab next button once... 
 
 + Card buying / deleting 
   + Most likely pare down the intermission to not have upgrades
 
-
-+ Up next...
-  + Maybe longcat and curl?
-  + (That can come before "make fun")
++ Make energy actually stop you from doing stuff 
