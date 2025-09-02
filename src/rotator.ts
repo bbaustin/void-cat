@@ -150,9 +150,10 @@ export function replaceTextBasedOnRotation() {
 
   const cards = document.getElementsByClassName('card');
   for (let i = 0; i < cards.length; i++) {
-    cards[i].innerHTML = cards[i].innerHTML.replace('left', leftOrUp);
-    cards[i].innerHTML = cards[i].innerHTML.replace('up', leftOrUp);
-    cards[i].innerHTML = cards[i].innerHTML.replace('right', rightOrDown);
-    cards[i].innerHTML = cards[i].innerHTML.replace('down', rightOrDown);
+    cards[i].innerHTML = cards[i].innerHTML
+      .replace(/left/g, leftOrUp)
+      .replace(/up/g, leftOrUp)
+      .replace(/right/g, rightOrDown)
+      .replace(/down/g, rightOrDown);
   }
 }

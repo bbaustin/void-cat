@@ -1,5 +1,7 @@
 import { createDOMCard, type Card } from './card';
 import { CARD_LIBRARY } from './cardLibrary';
+import { CAT_OF_TRUTH } from './cat';
+import { replaceTextBasedOnRotation } from './rotator';
 
 type DeckOfTruthType = {
   unusedCards: Card[];
@@ -86,6 +88,8 @@ export function addXCardsToHand(
     addCardToHandVisually(card);
     cardsDrawn++;
   }
+
+  replaceTextBasedOnRotation();
 }
 
 export function addCardToHandVisually(card: Card) {
@@ -109,6 +113,7 @@ function clearHand() {
   clearHandVisually();
 }
 
+// is this different than addXCardsToHand
 export function addWholeHandVisually() {
   const cardHolder = document.getElementById('card-holder');
   // clear out first. Feels unwieldy but without, I'm getting doubles
@@ -116,6 +121,8 @@ export function addWholeHandVisually() {
   DECK_OF_TRUTH.hand.forEach((card) =>
     cardHolder?.appendChild(createDOMCard(card, true))
   );
+
+  replaceTextBasedOnRotation();
 }
 
 /**

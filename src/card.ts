@@ -52,7 +52,6 @@ export function createDOMCard(
   /* Append text */
   const textToAppend = getCardAttribute(card, 'text');
   cardText.innerText = textToAppend;
-  replaceTextBasedOnRotation();
 
   /* Append cost */
   const costSection = document.createElement('div');
@@ -91,6 +90,7 @@ export function createDOMCard(
     };
     cardToAdd.addEventListener('click', finalEffectToApply);
   }
+
   return cardToAdd;
 }
 
