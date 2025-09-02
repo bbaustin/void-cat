@@ -8,7 +8,9 @@ import {
 } from './main';
 import { updateEnergy, updateTurn } from './meterUtils';
 import { STAGES } from './stage';
-import { handleEffectsSequentially } from './utils';
+import { generateThingCoordinatesInDiamondShape } from './thing';
+import { addThingsToGrid, removeClassNamesFromGrid } from './thingUtils';
+import { delay, handleEffectsSequentially } from './utils';
 
 export function initNextTurnButton() {
   const nextButton = document.getElementById('next');
@@ -38,18 +40,32 @@ export function handleNextButtonClick() {
   }
 }
 
-export function updateTurnViaButton() {
+export async function updateTurnViaButton() {
   const newTurnValue = GAME_STATE_OF_TRUTH.currentTurn + 1;
   addXCardsToHand();
 
   // trigger "attack" stage
-  triggerAttack();
+  await handleEffectsSequentially([
+    () => triggerAttack(),
 
-  // somehow wait for above
+    // update meters
+    () => updateTurn(newTurnValue),
+    () => updateEnergy(1),
+    () => updateNextButtonText(),
 
-  updateTurn(newTurnValue);
-  updateEnergy(1);
-  updateNextButtonText();
+    // update grid
+    () => removeClassNamesFromGrid('attack'),
+    () =>
+      addThingsToGrid(
+        // generateThingCoordinatesInDiamondShape(
+        //   STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize.x
+        // ),
+        STAGES[GAME_STATE_OF_TRUTH.currentStage].attackCoordinates[
+          GAME_STATE_OF_TRUTH.currentTurn
+        ],
+        { className: 'attack' }
+      ),
+  ]);
 }
 
 export function isLastTurn() {

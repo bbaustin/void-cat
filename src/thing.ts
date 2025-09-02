@@ -23,12 +23,13 @@ export function generateCoin() {
  * @param maxCoordinate the largest x or y value (assuming a square grid)
  * @returns an array of all of the coordinates of the diamonds to append
  */
-export function generateThingsInDiamondShape(
+export function generateThingCoordinatesInDiamondShape(
   maxCoordinate: number
 ): ThingCoordinates {
-  if (maxCoordinate % 2 === 0) {
-    throw new Error('Grid size must be odd to have a center.');
-  }
+  // if (maxCoordinate % 2 === 0) {
+  //   return;
+  //   // throw new Error('Grid size must be odd to have a center.');
+  // }
 
   const center = Math.floor(maxCoordinate / 2);
   const coords: ThingCoordinates = [];
@@ -44,7 +45,7 @@ export function generateThingsInDiamondShape(
   return coords;
 }
 
-export function generateThingsInStraightRowsOrColumns(
+export function generateThingCoordinatesInStraightRowsOrColumns(
   maxCoordinate: number,
   xsOrYs: number[],
   rowOrColumn: 'row' | 'column'

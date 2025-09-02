@@ -56,6 +56,8 @@ export function initGame({ gridSize, terrain }: Stage) {
   const grid = createEmptyGrid(gridSize.x, gridSize.y, terrain);
   renderGrid(grid);
 
+  console.log('yo');
+
   /* Create rotator buttons */
   initRotator();
 

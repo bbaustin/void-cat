@@ -2,8 +2,8 @@ import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
 import { CURRENT_STAGE, STAGES } from './stage';
 import {
-  generateThingsInDiamondShape,
-  generateThingsInStraightRowsOrColumns,
+  generateThingCoordinatesInDiamondShape,
+  generateThingCoordinatesInStraightRowsOrColumns,
   type Thing,
 } from './thing';
 import { addThingsToGrid } from './thingUtils';
@@ -67,12 +67,16 @@ export function renderGrid(grid: Grid) {
     }
   }
 
-  addThingsToGrid(generateThingsInDiamondShape(5), { thing: 'coin' });
-
-  addThingsToGrid(
-    generateThingsInStraightRowsOrColumns(gridColumns, [0, 2, 4], 'column'),
-    { className: 'attack' }
-  );
+  //   addThingsToGrid(generateThingCoordinatesInDiamondShape(5), { thing: 'coin' });
+  //
+  //   addThingsToGrid(
+  //     generateThingCoordinatesInStraightRowsOrColumns(
+  //       gridColumns,
+  //       [0, 2, 4],
+  //       'column'
+  //     ),
+  //     { className: 'attack' }
+  //   );
 }
 
 export function getTile(x: number, y: number): HTMLElement | null {
