@@ -39,7 +39,7 @@ export const GAME_STATE_OF_TRUTH: GameStateType = {
   energyCurrent: 5,
   energyMax: 5,
   currentTurn: 1,
-  currentStage: 2, //pls change
+  currentStage: 0,
   currentScreen: 'screen-game',
   isAttackHappening: false,
 };
@@ -55,8 +55,6 @@ export function initGame({ gridSize, terrain }: Stage) {
   /* Draw game grid */
   const grid = createEmptyGrid(gridSize.x, gridSize.y, terrain);
   renderGrid(grid);
-
-  console.log('yo');
 
   /* Create rotator buttons */
   initRotator();

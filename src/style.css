@@ -17,6 +17,10 @@
   --yellow: rgb(248, 248, 71);
   --orange: rgb(254, 180, 43);
   --red: rgb(249, 63, 63);
+
+  /* Z-INDICES */
+  --cat-z: 100000;
+  --atk-z: 100001;
 }
 
 body {
@@ -211,7 +215,7 @@ GRID
   aspect-ratio: 1/1;
   position: relative;
   /* If you want it to be above cat */
-  z-index: 100;
+  z-index: var(--atk-z);
   position: relative;
   transition: opacity 0.3s ease;
 }
@@ -269,7 +273,7 @@ CAT
   /* This is a little weird, but oh well */
   zoom: 40%;
   transition: left 0.5s, top 0.5s, transform 0.5s, height 0.5s;
-  z-index: 1000000;
+  z-index: var(--cat-z);
 }
 
 #cat.longcat {

@@ -1,3 +1,6 @@
+import { GAME_STATE_OF_TRUTH } from './main';
+import { STAGES } from './stage';
+
 export type Thing =
   | 'coin'
   | 'house'
@@ -45,6 +48,13 @@ export function generateThingCoordinatesInDiamondShape(
   return coords;
 }
 
+/**
+ *
+ * @param maxCoordinate The largest coordinate of the grid.
+ * @param xsOrYs Depending on row or column, the number of the rows or columns that you want to add Things to (in an array)
+ * @param rowOrColumn If you're making rows or columns
+ * @returns
+ */
 export function generateThingCoordinatesInStraightRowsOrColumns(
   maxCoordinate: number,
   xsOrYs: number[],
