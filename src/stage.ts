@@ -64,11 +64,11 @@ export const STAGES: Stage[] = [
   },
   /* Trees */
   {
-    gridSize: { x: 3, y: 3 },
+    gridSize: { x: 5, y: 5 },
     attackCoordinates: [undefined, [[0, 0]], [[0, 1]], [[1, 0]], undefined],
     drama: [
       [
-        `Nice job yesterday! VOID Cat already burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories 🏅!`,
+        // `Nice job yesterday! VOID Cat already burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories 🏅!`,
         "(Hopefully that number was positive, or else that last line won't have made sense!)",
         "Let's exercise!",
       ],
@@ -106,7 +106,7 @@ export const STAGES: Stage[] = [
     drama: [
       [
         'Hey, thanks for sticking around!',
-        `VOID Cat has burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories!`,
+        // `VOID Cat has burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories!`,
         "VOID Cat needs to be in shape for what's to come!",
         "Let's exercise!",
       ],
@@ -178,12 +178,13 @@ export const STAGES: Stage[] = [
   },
   /* Space */
   {
-    gridSize: { x: 13, y: 13 },
+    gridSize: { x: 15, y: 15 },
     attackCoordinates: [undefined, undefined, undefined, undefined, undefined],
     drama: [
       [
-        'I guess this is it.',
-        "It's just us floating around in space now.",
+        'Woah, this last stage looks kind of weird.',
+        "It doesn't even fit in the screen correctly.",
+        'I guess things tend to fall apart as you get closer to THE GREAT UNBECOMING.',
         "The collectibles in this level are planets, if you couldn't tell.",
         "They're all uninhabited, though. No one left to attack us.",
         "So let's just roll around and have fun burning some more calories!",
@@ -192,10 +193,10 @@ export const STAGES: Stage[] = [
         'Actually, I guess keeping track of the burned calories was a little pointless.',
         "Like, it was really nice of you to help, don't get me wrong!",
         'But, OK, let me do some quick calculating...',
-        `VOID Cat burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories. That's cool!`,
+        // `VOID Cat burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories. That's cool!`,
         'To lose one kilogram, you need to burn about 7700 calories.',
         `So that means with your help, VOID Cat lost ~${
-          Math.floor((GAME_STATE_OF_TRUTH.caloriesBurned / 7700) * 10000) /
+          // Math.floor((GAME_STATE_OF_TRUTH.caloriesBurned / 7700) * 10000) /
           10000
         } kg!`,
         'However, on the other hand, VOID Cat is well on its way to absorbing the entire mass-energy of the universe.',
