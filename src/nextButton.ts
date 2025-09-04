@@ -1,4 +1,4 @@
-import { triggerAttack } from './attack';
+import { disableAllButtons, enableAllButtons, triggerAttack } from './attack';
 import { addXCardsToHand } from './cardDeck';
 import {
   GAME_STATE_OF_TRUTH,
@@ -46,6 +46,11 @@ export async function updateTurnViaButton() {
 
   // trigger "attack" stage
   await handleEffectsSequentially([
+    // make everything unclickable
+    () => disableAllButtons(),
+
+    // if there's an attack square, trigger it audiovisually
+    // also calculate how many tiles were struck with the attack
     () => triggerAttack(),
 
     // update meters
@@ -65,6 +70,9 @@ export async function updateTurnViaButton() {
         ],
         { className: 'attack' }
       ),
+
+    // make everything clickable again
+    () => enableAllButtons(),
   ]);
 }
 
