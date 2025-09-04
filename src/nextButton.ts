@@ -45,35 +45,38 @@ export async function updateTurnViaButton() {
   addXCardsToHand();
 
   // trigger "attack" stage
-  await handleEffectsSequentially([
-    // make everything unclickable
-    () => disableAllButtons(),
+  await handleEffectsSequentially(
+    [
+      // make everything unclickable
+      () => disableAllButtons(),
 
-    // if there's an attack square, trigger it audiovisually
-    // also calculate how many tiles were struck with the attack
-    () => triggerAttack(),
+      // if there's an attack square, trigger it audiovisually
+      // also calculate how many tiles were struck with the attack
+      () => triggerAttack(),
 
-    // update meters
-    () => updateTurn(newTurnValue),
-    () => updateEnergy(1),
-    () => updateNextButtonText(),
+      // update meters
+      () => updateTurn(newTurnValue),
+      () => updateEnergy(1),
+      () => updateNextButtonText(),
 
-    // update grid
-    () => removeClassNamesFromGrid('attack'),
-    () =>
-      addThingsToGrid(
-        // generateThingCoordinatesInDiamondShape(
-        //   STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize.x
-        // ),
-        STAGES[GAME_STATE_OF_TRUTH.currentStage].attackCoordinates[
-          GAME_STATE_OF_TRUTH.currentTurn
-        ],
-        { className: 'attack' }
-      ),
+      // update grid
+      () => removeClassNamesFromGrid('attack'),
+      () =>
+        addThingsToGrid(
+          // generateThingCoordinatesInDiamondShape(
+          //   STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize.x
+          // ),
+          STAGES[GAME_STATE_OF_TRUTH.currentStage].attackCoordinates[
+            GAME_STATE_OF_TRUTH.currentTurn
+          ],
+          { className: 'attack' }
+        ),
 
-    // make everything clickable again
-    () => enableAllButtons(),
-  ]);
+      // make everything clickable again
+      () => enableAllButtons(),
+    ],
+    300
+  );
 }
 
 export function isLastTurn() {

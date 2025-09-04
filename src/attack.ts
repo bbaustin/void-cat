@@ -26,6 +26,8 @@ export async function triggerAttack() {
     ?.getElementsByClassName('attack');
 
   if (attackTiles && attackTiles.length > 0) {
+    playExplosion2();
+
     // Animate all attack tiles in parallel
     await Promise.all(
       Array.from(attackTiles).map((tile) =>
@@ -46,11 +48,5 @@ export async function triggerAttack() {
     });
 
     // Play sound after a small delay, once
-    await handleEffectsSequentially([() => delay(300), () => playExplosion2()]);
   }
 }
-
-// WHERE YOU AT:
-// Fix this triggerAttack/triggerAttackOnCat/triggerAttackAudioVisually.
-// They're all messed up... seems random if buttons get disabled or not.
-// Then, add your attack patterns.
