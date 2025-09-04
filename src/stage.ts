@@ -1,5 +1,5 @@
 import type { Terrain } from './grid';
-import { GAME_STATE_OF_TRUTH } from './main';
+import { GAME_STATE_OF_TRUTH } from './gameState';
 import {
   generateThingCoordinatesInDiamondShape,
   generateThingCoordinatesInStraightRowsOrColumns,
@@ -28,7 +28,7 @@ export const STAGES: Stage[] = [
       [[0, 0]],
       [[0, 1]],
       [[1, 0]],
-      generateThingCoordinatesInStraightRowsOrColumns(3, [0], 'row'),
+      generateThingCoordinatesInStraightRowsOrColumns(5, [0], 'row'),
     ],
     drama: [
       [
@@ -106,7 +106,7 @@ export const STAGES: Stage[] = [
     drama: [
       [
         'Hey, thanks for sticking around!',
-        // `VOID Cat has burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories!`,
+        `VOID Cat has burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories!`,
         "VOID Cat needs to be in shape for what's to come!",
         "Let's exercise!",
       ],

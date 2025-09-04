@@ -1,4 +1,4 @@
-import { GAME_STATE_OF_TRUTH, setGameState } from './main';
+import { GAME_STATE_OF_TRUTH, setGameState } from './gameState';
 import { type Card, getCardAttribute } from './card';
 import { clamp } from './utils';
 import { STAGES } from './stage';

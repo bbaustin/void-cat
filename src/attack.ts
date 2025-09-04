@@ -2,10 +2,9 @@ import { getOccupiedTileCoordinates } from './cat';
 import { getTile } from './grid';
 import { updateCaloriesBurned } from './meterUtils';
 import { playExplosion2 } from './sounds';
-import { delay, handleEffectsSequentially } from './utils';
+import { handleEffectsSequentially } from './utils';
 
 export function disableAllButtons() {
-  console.log('yo?');
   const buttons = document.getElementsByTagName('button');
   Array.from(buttons ?? []).forEach((button) => {
     button.disabled = true;
@@ -13,7 +12,6 @@ export function disableAllButtons() {
 }
 
 export function enableAllButtons() {
-  console.log('enabled?');
   const buttons = document.getElementsByTagName('button');
   Array.from(buttons ?? []).forEach((button) => {
     button.disabled = false;

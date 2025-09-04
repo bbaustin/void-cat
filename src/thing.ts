@@ -1,6 +1,3 @@
-import { GAME_STATE_OF_TRUTH } from './main';
-import { STAGES } from './stage';
-
 export type Thing =
   | 'coin'
   | 'house'
