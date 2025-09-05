@@ -56,7 +56,13 @@ export function updateCaloriesBurned(amount: number) {
     '.calories .meter-number'
   )!.innerHTML = `${GAME_STATE_OF_TRUTH.caloriesBurned}`;
 
-  amount > 0 && playBurnCals();
+  if (amount > 0) {
+    playBurnCals();
+    const calorieMeter = document.querySelector('.meter.calories');
+    calorieMeter?.classList.remove('slight-attention');
+    void (calorieMeter as HTMLElement).offsetWidth;
+    calorieMeter?.classList.add('slight-attention');
+  }
 }
 
 /**
