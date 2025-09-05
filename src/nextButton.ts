@@ -1,13 +1,11 @@
-import { triggerAttack } from './attack';
+import { disableAllButtons, enableAllButtons, triggerAttack } from './attack';
 import { addXCardsToHand } from './cardDeck';
-import {
-  GAME_STATE_OF_TRUTH,
-  initGame,
-  initIntermission,
-  setGameState,
-} from './main';
+
+import { GAME_STATE_OF_TRUTH, setGameState } from './gameState';
+import { DOM_CAT, initGame, initIntermission } from './main';
 import { updateEnergy, updateTurn } from './meterUtils';
 import { STAGES } from './stage';
+import { addThingsToGrid, removeClassNamesFromGrid } from './thingUtils';
 import { handleEffectsSequentially } from './utils';
 
 export function initNextTurnButton() {
@@ -38,18 +36,43 @@ export function handleNextButtonClick() {
   }
 }
 
-export function updateTurnViaButton() {
+export async function updateTurnViaButton() {
   const newTurnValue = GAME_STATE_OF_TRUTH.currentTurn + 1;
   addXCardsToHand();
 
   // trigger "attack" stage
-  triggerAttack();
+  await handleEffectsSequentially(
+    [
+      // make everything unclickable
+      () => disableAllButtons(),
 
-  // somehow wait for above
+      // if there's an attack square, trigger it audiovisually
+      // also calculate how many tiles were struck with the attack
+      () => triggerAttack(),
 
-  updateTurn(newTurnValue);
-  updateEnergy(1);
-  updateNextButtonText();
+      // update meters
+      () => updateTurn(newTurnValue),
+      () => updateEnergy(1),
+      () => updateNextButtonText(),
+
+      // update grid
+      () => removeClassNamesFromGrid('attack'),
+      () =>
+        addThingsToGrid(
+          // generateThingCoordinatesInDiamondShape(
+          //   STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize.x
+          // ),
+          STAGES[GAME_STATE_OF_TRUTH.currentStage].attackCoordinates[
+            GAME_STATE_OF_TRUTH.currentTurn
+          ],
+          { className: 'attack' }
+        ),
+
+      // make everything clickable again
+      () => enableAllButtons(),
+    ],
+    300
+  );
 }
 
 export function isLastTurn() {

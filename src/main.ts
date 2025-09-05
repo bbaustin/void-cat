@@ -4,7 +4,12 @@ import {
   // renderWholeDeck,
   setDeckCards,
 } from './cardDeck';
-import { addDOMCatToGrid, createDOMCat } from './cat';
+import {
+  addDOMCatToGrid,
+  CAT_OF_TRUTH,
+  createDOMCat,
+  removeDOMCatFromGrid,
+} from './cat';
 import { createEmptyGrid, renderGrid } from './grid';
 import { initRotator } from './rotator';
 import { showScreen, type ScreenId } from './screen';
@@ -19,57 +24,44 @@ import {
   initUpgradeCardsButton,
   initUpgradeCatButton,
 } from './stageIntermission';
+import { GAME_STATE_OF_TRUTH } from './gameState';
 
-export const DOM_CAT = createDOMCat();
-
-type GameStateType = {
-  caloriesBurned: number;
-  money: number;
-  energyCurrent: number;
-  energyMax: number;
-  currentTurn: number;
-  currentStage: number;
-  currentScreen: ScreenId;
-  isAttackHappening: boolean;
-};
-
-export const GAME_STATE_OF_TRUTH: GameStateType = {
-  caloriesBurned: 0,
-  money: 0,
-  energyCurrent: 5,
-  energyMax: 5,
-  currentTurn: 1,
-  currentStage: 2, //pls change
-  currentScreen: 'screen-game',
-  isAttackHappening: false,
-};
-
-export function setGameState<K extends keyof GameStateType>(
-  key: K,
-  value: GameStateType[K]
-): void {
-  GAME_STATE_OF_TRUTH[key] = value;
-}
+export let DOM_CAT = createDOMCat();
 
 export function initGame({ gridSize, terrain }: Stage) {
   /* Draw game grid */
   const grid = createEmptyGrid(gridSize.x, gridSize.y, terrain);
   renderGrid(grid);
 
-  /* Create rotator buttons */
-  initRotator();
+  /* Add the DOMcat to the grid! */
+  DOM_CAT = createDOMCat();
+  addDOMCatToGrid(DOM_CAT);
 
-  /* Put all cards into the "unusued" pile */
+  //where you at
+  // on stages after 0 cat of truth positions etc
+  //are NOT being reset
+  CAT_OF_TRUTH.headX = 0;
+  CAT_OF_TRUTH.headY = 0;
+  CAT_OF_TRUTH.headFacing = 'top';
+  CAT_OF_TRUTH.length = 2;
+  CAT_OF_TRUTH.stance = 'standard';
+
+  DOM_CAT.dataset.x = `${CAT_OF_TRUTH.headX}`;
+  DOM_CAT.dataset.y = `${CAT_OF_TRUTH.headY}`;
+  DOM_CAT.dataset.length = `${CAT_OF_TRUTH.length}`;
+  DOM_CAT.dataset.headFacing = CAT_OF_TRUTH.headFacing;
+  DOM_CAT.dataset.stance = CAT_OF_TRUTH.stance;
+
+  /* Put all cards into the "unused" pile
+   * Do this after setting up the cat so the cards are correct */
   setDeckCards();
 
   /* Add cards to your hand (default: 3) */
   addXCardsToHand();
 
-  // temporary... debugging
-  // renderDiscardPile();
-
-  /* Add the DOMcat to the grid! */
-  addDOMCatToGrid(DOM_CAT);
+  /* Create rotator buttons
+   * Also do this after CAT so rotator angles are right... */
+  initRotator();
 
   /* Init the next turn button */
   initNextTurnButton();

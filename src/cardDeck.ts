@@ -11,10 +11,10 @@ type DeckOfTruthType = {
 
 export let DECK_OF_TRUTH: DeckOfTruthType = {
   unusedCards: [
-    CARD_LIBRARY[3],
-    CARD_LIBRARY[3],
-    CARD_LIBRARY[3],
-    CARD_LIBRARY[3],
+    CARD_LIBRARY[0],
+    CARD_LIBRARY[0],
+    CARD_LIBRARY[0],
+    CARD_LIBRARY[0],
     CARD_LIBRARY[0],
     CARD_LIBRARY[1],
     CARD_LIBRARY[2],

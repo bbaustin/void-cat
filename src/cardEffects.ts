@@ -5,9 +5,9 @@ import { delay } from './utils';
 import { absorbThing } from './thingUtils';
 
 /** Distance in pixels one move left or right should take */
-export const ONE_MOVE_PX_X = 175;
+export const ONE_MOVE_PX_X = 182;
 // TODO: If this ends up being the same, obviously remove
-export const ONE_MOVE_PX_Y = 175;
+export const ONE_MOVE_PX_Y = 182;
 
 export type Direction = 'left' | 'right' | 'top' | 'bottom';
 export type Stance = 'standard' | 'nap' | 'longcat';

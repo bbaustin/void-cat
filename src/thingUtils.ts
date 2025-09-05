@@ -15,9 +15,10 @@ type ThingOrClass =
  * @param thingOrClass you should pass either {className: 'whatever'} OR {thing: 'coin'}, but not both
  */
 export function addThingsToGrid(
-  coordinates: ThingCoordinates,
-  thingOrClass: ThingOrClass
+  coordinates?: ThingCoordinates,
+  thingOrClass?: ThingOrClass
 ) {
+  if (!coordinates || !thingOrClass) return null;
   coordinates.forEach((thingLocation) => {
     const [x, y] = thingLocation;
     const { thing, className } = thingOrClass;
@@ -41,6 +42,17 @@ export function addThingsToGrid(
       return tileToAppendTo.classList.add(className);
     }
   });
+}
+
+/**
+ * Removes all of a certain classname from the board
+ * @param className; just a string
+ */
+export function removeClassNamesFromGrid(className: string) {
+  const gridTiles = document.getElementsByClassName('tile');
+  Array.from(gridTiles ?? []).forEach((gridTile) =>
+    gridTile.classList.remove(className)
+  );
 }
 
 /**

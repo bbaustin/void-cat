@@ -2,7 +2,7 @@ import { getOccupiedTileCoordinates } from './cat';
 import { getTile } from './grid';
 import { updateCaloriesBurned } from './meterUtils';
 import { playExplosion2 } from './sounds';
-import { delay, handleEffectsSequentially } from './utils';
+import { handleEffectsSequentially } from './utils';
 
 export function disableAllButtons() {
   const buttons = document.getElementsByTagName('button');
@@ -18,34 +18,33 @@ export function enableAllButtons() {
   });
 }
 
-export function triggerAttackAudiovisually() {
+export async function triggerAttack() {
   const attackTiles = document
     .getElementById('grid')
     ?.getElementsByClassName('attack');
 
-  Array.from(attackTiles ?? []).forEach((tile) => {
-    handleEffectsSequentially([
-      () => disableAllButtons(),
-      () => tile.classList.add('attacking'),
-      () => tile.classList.remove('attacking'),
-      () => enableAllButtons(),
-    ]);
-  });
-  /* Only play sound once, in time with opacity change */
-  handleEffectsSequentially([() => delay(300), () => playExplosion2()]);
-}
+  if (attackTiles && attackTiles.length > 0) {
+    playExplosion2();
 
-export function triggerAttackOnCat() {
-  getOccupiedTileCoordinates().forEach(({ x, y }) => {
-    const tile = getTile(x, y);
-    if (tile?.classList.contains('attack')) {
-      updateCaloriesBurned(-1);
-      // play some sound
-    }
-  });
-}
+    // Animate all attack tiles in parallel
+    await Promise.all(
+      Array.from(attackTiles).map((tile) =>
+        handleEffectsSequentially([
+          () => tile.classList.add('attacking'),
+          () => tile.classList.remove('attacking'),
+        ])
+      )
+    );
 
-export function triggerAttack() {
-  triggerAttackAudiovisually();
-  triggerAttackOnCat();
+    // Do cat damage logic
+    getOccupiedTileCoordinates().forEach(({ x, y }) => {
+      const tile = getTile(x, y);
+      if (tile?.classList.contains('attack')) {
+        updateCaloriesBurned(-1);
+        // maybe another sound here if you want per-hit feedback
+      }
+    });
+
+    // Play sound after a small delay, once
+  }
 }
