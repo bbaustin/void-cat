@@ -52,7 +52,7 @@ export async function updateTurnViaButton() {
 
       // update meters
       () => updateTurn(newTurnValue),
-      () => updateEnergy(1),
+      () => updateEnergy(GAME_STATE_OF_TRUTH.energyMax),
       () => updateNextButtonText(),
 
       // update grid
