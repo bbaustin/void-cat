@@ -42,11 +42,6 @@ export async function triggerAttack() {
       if (tile?.classList.contains('attack')) {
         updateCaloriesBurned(-1);
         playWasAttacked();
-
-        const calsMeter = document.querySelector('.meter.calories');
-        calsMeter?.classList.remove('attention');
-        void (calsMeter as HTMLElement).offsetWidth;
-        calsMeter?.classList.add('attention');
       }
     });
   }

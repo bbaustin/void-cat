@@ -59,9 +59,18 @@ export function updateCaloriesBurned(amount: number) {
   if (amount > 0) {
     playBurnCals();
     const calorieMeter = document.querySelector('.meter.calories');
+    calorieMeter?.classList.remove('attention'); // remove the other one
     calorieMeter?.classList.remove('slight-attention');
     void (calorieMeter as HTMLElement).offsetWidth;
     calorieMeter?.classList.add('slight-attention');
+  }
+
+  if (amount < 0) {
+    const calsMeter = document.querySelector('.meter.calories');
+    calsMeter?.classList.remove('slight-attention'); // remove the other one
+    calsMeter?.classList.remove('attention');
+    void (calsMeter as HTMLElement).offsetWidth;
+    calsMeter?.classList.add('attention');
   }
 }
 
