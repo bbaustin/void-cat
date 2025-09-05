@@ -83,10 +83,15 @@ export function updateMoney(amount: number) {
   const updatedMoney = GAME_STATE_OF_TRUTH.money + amount;
   setGameState('money', updatedMoney);
 
+  const moneyMeter = document.querySelector('.money .meter-number');
+
   /* Update DOM */
-  document.querySelector(
-    '.money .meter-number'
-  )!.innerHTML = `${GAME_STATE_OF_TRUTH.money}`;
+  moneyMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.money}`;
+
+  /* Animate */
+  moneyMeter?.classList.remove('slight-attention');
+  void (moneyMeter as HTMLElement).offsetWidth;
+  moneyMeter?.classList.add('slight-attention');
 }
 
 // TODO: Might wanna be able to apply a turn here

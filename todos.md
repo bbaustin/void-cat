@@ -22,7 +22,7 @@ SHOULD DO
 
 
 
-+ More sounds
++ More sounds DONEISH
 
 + Rotation looks crazy because it can go from 0 --> 270 (rather than 0 ---> -90). Try and fix that DONE KINDA
 
