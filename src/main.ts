@@ -33,9 +33,6 @@ export function initGame({ gridSize, terrain }: Stage) {
   const grid = createEmptyGrid(gridSize.x, gridSize.y, terrain);
   renderGrid(grid);
 
-  /* Create rotator buttons */
-  initRotator();
-
   /* Add the DOMcat to the grid! */
   DOM_CAT = createDOMCat();
   addDOMCatToGrid(DOM_CAT);
@@ -61,6 +58,10 @@ export function initGame({ gridSize, terrain }: Stage) {
 
   /* Add cards to your hand (default: 3) */
   addXCardsToHand();
+
+  /* Create rotator buttons
+   * Also do this after CAT so rotator angles are right... */
+  initRotator();
 
   /* Init the next turn button */
   initNextTurnButton();

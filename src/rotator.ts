@@ -10,8 +10,11 @@ export function initRotator() {
   const buttonLeft = document.querySelector('.arrow.left');
   const buttonRight = document.querySelector('.arrow.right');
 
-  buttonLeft?.addEventListener('click', () => rotate('clockwise'));
-  buttonRight?.addEventListener('click', () => rotate('counterClockwise'));
+  buttonLeft?.removeEventListener('click', handleClockwiseRotation);
+  buttonRight?.removeEventListener('click', handleCounterClockwiseRotation);
+
+  buttonLeft?.addEventListener('click', handleClockwiseRotation);
+  buttonRight?.addEventListener('click', handleCounterClockwiseRotation);
 }
 
 export const ORDER_OF_DIRECTIONS: Direction[] = [
@@ -64,6 +67,8 @@ export function getRotatedDirection(
  * @param rotationDirection 'clockwise' or 'counterClockwise', depending on which button pressed
  */
 export function rotate(rotationDirection: RotationDirection) {
+  console.log(CAT_OF_TRUTH.headFacing);
+
   if (
     willRotationBeOutOfBounds(
       CAT_OF_TRUTH.headX,
@@ -84,6 +89,8 @@ export function rotate(rotationDirection: RotationDirection) {
     CAT_OF_TRUTH.headFacing,
     rotationDirection
   );
+
+  console.log(newDirection);
 
   /* Get new translate offsets and angle */
   const { x, y, angle } = DIRECTION_OFFSETS[newDirection];
@@ -111,6 +118,14 @@ export function rotate(rotationDirection: RotationDirection) {
 
   /* Absorb thing (coin) if applicable */
   absorbThing();
+}
+
+function handleClockwiseRotation() {
+  rotate('clockwise');
+}
+
+function handleCounterClockwiseRotation() {
+  rotate('counterClockwise');
 }
 
 /**
