@@ -1,7 +1,8 @@
 import { disableAllButtons, enableAllButtons, triggerAttack } from './attack';
 import { addXCardsToHand } from './cardDeck';
+
 import { GAME_STATE_OF_TRUTH, setGameState } from './gameState';
-import { initGame, initIntermission } from './main';
+import { DOM_CAT, initGame, initIntermission } from './main';
 import { updateEnergy, updateTurn } from './meterUtils';
 import { STAGES } from './stage';
 import { addThingsToGrid, removeClassNamesFromGrid } from './thingUtils';
