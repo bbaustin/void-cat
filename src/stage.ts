@@ -233,14 +233,16 @@ export const STAGES: Stage[] = [
         "It doesn't even fit in the screen correctly.",
         'I guess things tend to fall apart as you get closer to THE GREAT UNBECOMING.',
         "The collectibles in this level are planets, if you couldn't tell.",
-        "They're all uninhabited, though. No one left to attack us.",
+        'To be honest, I lied about the collectibles, too...',
+        'I just needed you to direct VOID Cat to start absorbing things to increase its mass.',
+        "You can't actually buy anything... I mean... there's nothing left to buy, anyway...",
         "So let's just roll around and have fun burning some more calories!",
       ],
       [
         'Actually, I guess keeping track of the burned calories was a little pointless.',
         "Like, it was really nice of you to help, don't get me wrong!",
         'But, OK, let me do some quick calculating...',
-        // `VOID Cat burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories. That's cool!`,
+        `VOID Cat burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories. That's cool!`,
         'To lose one kilogram, you need to burn about 7700 calories.',
         `So that means with your help, VOID Cat lost ~${
           Math.floor((GAME_STATE_OF_TRUTH.caloriesBurned / 7700) * 10000) /

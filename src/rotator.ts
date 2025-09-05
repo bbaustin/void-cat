@@ -67,8 +67,6 @@ export function getRotatedDirection(
  * @param rotationDirection 'clockwise' or 'counterClockwise', depending on which button pressed
  */
 export function rotate(rotationDirection: RotationDirection) {
-  console.log(CAT_OF_TRUTH.headFacing);
-
   if (
     willRotationBeOutOfBounds(
       CAT_OF_TRUTH.headX,
@@ -89,8 +87,6 @@ export function rotate(rotationDirection: RotationDirection) {
     CAT_OF_TRUTH.headFacing,
     rotationDirection
   );
-
-  console.log(newDirection);
 
   /* Get new translate offsets and angle */
   const { x, y, angle } = DIRECTION_OFFSETS[newDirection];

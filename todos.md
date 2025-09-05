@@ -6,6 +6,10 @@ MUST DO
 
 + Remove intermission stuff 
 
++ Make other "Things"
+
++ Find use for money lol 
+  + Or reference in script 
 
 SHOULD DO
 
