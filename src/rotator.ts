@@ -6,6 +6,7 @@ import { DOM_CAT } from './main';
 import { CURRENT_STAGE, STAGES } from './stage';
 import { absorbThing } from './thingUtils';
 import { GAME_STATE_OF_TRUTH } from './gameState';
+import { playSmallSound } from './sounds';
 
 export function initRotator() {
   const buttonLeft = document.querySelector('.arrow.left');
@@ -119,6 +120,9 @@ export function rotate(rotationDirection: RotationDirection) {
 
   /* Absorb thing (coin) if applicable */
   absorbThing();
+
+  /* Play sound */
+  playSmallSound();
 }
 
 function handleClockwiseRotation() {

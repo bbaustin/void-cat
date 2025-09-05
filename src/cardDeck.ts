@@ -1,6 +1,5 @@
 import { createDOMCard, type Card } from './card';
 import { CARD_LIBRARY } from './cardLibrary';
-import { CAT_OF_TRUTH } from './cat';
 import { replaceTextBasedOnRotation } from './rotator';
 
 type DeckOfTruthType = {

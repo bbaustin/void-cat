@@ -1,7 +1,8 @@
 import { DECK_OF_TRUTH, addWholeHandVisually, discardCard } from './cardDeck';
+import { CAT_OF_TRUTH } from './cat';
 import { GAME_STATE_OF_TRUTH } from './gameState';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
-import { replaceTextBasedOnRotation } from './rotator';
+import { playDisappointment } from './sounds';
 import { handleEffectsSequentially } from './utils';
 
 export interface Card {
@@ -77,7 +78,12 @@ export function createDOMCard(
       const { hand } = DECK_OF_TRUTH;
       const indexOfUsedCard = DECK_OF_TRUTH.hand.indexOf(card);
 
-      if (energyCost > GAME_STATE_OF_TRUTH.energyCurrent) {
+      if (
+        CAT_OF_TRUTH.stance === 'nap' &&
+        energyCost + 1 > GAME_STATE_OF_TRUTH.energyCurrent
+      ) {
+        signifyNotEnoughEnergy();
+      } else if (energyCost > GAME_STATE_OF_TRUTH.energyCurrent) {
         signifyNotEnoughEnergy();
       } else {
         /* Do the effects */
@@ -108,7 +114,7 @@ export function signifyNotEnoughEnergy() {
   void (energyMeter as HTMLElement).offsetWidth;
   energyMeter?.classList.add('attention');
 
-  /* Play disappointing sound */
+  playDisappointment();
 }
 
 /**

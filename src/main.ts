@@ -1,18 +1,8 @@
-import {
-  addXCardsToHand,
-  renderDiscardPile,
-  // renderWholeDeck,
-  setDeckCards,
-} from './cardDeck';
-import {
-  addDOMCatToGrid,
-  CAT_OF_TRUTH,
-  createDOMCat,
-  removeDOMCatFromGrid,
-} from './cat';
+import { addXCardsToHand, setDeckCards } from './cardDeck';
+import { addDOMCatToGrid, CAT_OF_TRUTH, createDOMCat } from './cat';
 import { createEmptyGrid, renderGrid } from './grid';
 import { initRotator } from './rotator';
-import { showScreen, type ScreenId } from './screen';
+import { showScreen } from './screen';
 import { STAGES, type Stage } from './stage';
 import {
   initNextTurnButton,

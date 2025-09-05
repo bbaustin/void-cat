@@ -2,22 +2,25 @@ MUST DO
 
 
 + Implement script
+  + How does this fit into the game? Think about it
 
-+ Remove intermission stuff 
++ Intermission stuff
+  + Remove, pretty much. But also:
+    + Beginning / ending
+    + This can use intermission page 
+    + 5 days left...
+    + 4 days left... 
 
 + Make other "Things"
   + emoji is ok i guess
   + Put things on board
 
-+ Find use for money lol 
-  + Or reference in script 
+
++ Assemble fun deck
 
 SHOULD DO
 
-+ Beginning / ending
-  + This can use intermission page 
-  + 5 days left...
-  + 4 days left... 
+
 
 + More sounds
 

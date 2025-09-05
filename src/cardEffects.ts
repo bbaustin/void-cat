@@ -3,6 +3,7 @@ import { DOM_CAT } from './main';
 import { isOutOfBounds } from './grid';
 import { delay } from './utils';
 import { absorbThing } from './thingUtils';
+import { playLongcatSound, playNapSound, playSmallSound } from './sounds';
 
 /** Distance in pixels one move left or right should take */
 export const ONE_MOVE_PX_X = 182;
@@ -55,6 +56,9 @@ export function move(
 
       /** Interact with Things on the grid */
       absorbThing();
+
+      /* Make sound */
+      playSmallSound();
     }
 
     delay(250);
@@ -83,4 +87,12 @@ export function changeStance(stance: Stance) {
 
   // attempt to absorb from your new location
   absorbThing();
+
+  if (stance === 'longcat') {
+    playLongcatSound();
+  } else if (stance === 'nap') {
+    playNapSound();
+  } else {
+    playSmallSound();
+  }
 }

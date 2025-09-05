@@ -3,6 +3,7 @@ import { type Card, getCardAttribute } from './card';
 import { clamp } from './utils';
 import { STAGES } from './stage';
 import { CAT_OF_TRUTH } from './cat';
+import { playBurnCals } from './sounds';
 
 /**
  * Helper helper, to update the two most commonly updated meters.
@@ -54,6 +55,8 @@ export function updateCaloriesBurned(amount: number) {
   document.querySelector(
     '.calories .meter-number'
   )!.innerHTML = `${GAME_STATE_OF_TRUTH.caloriesBurned}`;
+
+  amount > 0 && playBurnCals();
 }
 
 /**

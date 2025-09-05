@@ -1,12 +1,7 @@
 import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
 import { CURRENT_STAGE, STAGES } from './stage';
-import {
-  generateThingCoordinatesInDiamondShape,
-  generateThingCoordinatesInStraightRowsOrColumns,
-  type Thing,
-} from './thing';
-import { addThingsToGrid } from './thingUtils';
+import { type Thing } from './thing';
 
 export type Terrain = 'floor' | 'grass' | 'street' | 'space';
 
