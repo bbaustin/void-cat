@@ -18,36 +18,46 @@
   </head>
   <body>
     <main>
-      <div id="meters">
-        <div class="meter calories">
-          <p>Cals</p>
-          <div class="meter-number">0</div>
-        </div>
-        <div class="meter money">
-          <p>Money</p>
-          <div class="meter-number">0</div>
-        </div>
-        <div class="meter energy">
-          <p>Energy</p>
-          <div class="meter-number">
-            <span class="numerator">5</span>/<span class="denominator">5</span>
-          </div>
-        </div>
-        <div class="meter turn">
-          <p>Turn</p>
-          <div class="meter-number">
-            <span class="numerator">1</span>/<span class="denominator">5</span>
-          </div>
-        </div>
-      </div>
-      <div id="next-holder">
-        <button id="next">Next turn</button>
-        <!-- <p>You will get a new hand of cards and +1 Energy</p> -->
-      </div>
       <!-- GAME SCREEN! -->
       <section id="screen-game">
-        <div id="grid">
-          <div id="cat"></div>
+        <div class="top">
+          <div class="placeholder"></div>
+          <div id="meters">
+            <div class="meter calories">
+              <p>Cals</p>
+              <div class="meter-number">0</div>
+            </div>
+            <div class="meter money">
+              <p>Money</p>
+              <div class="meter-number">0</div>
+            </div>
+            <div class="meter energy">
+              <p>Energy</p>
+              <div class="meter-number">
+                <span class="numerator">5</span>/<span class="denominator"
+                  >5</span
+                >
+              </div>
+            </div>
+            <div class="meter turn">
+              <p>Turn</p>
+              <div class="meter-number">
+                <span class="numerator">1</span>/<span class="denominator"
+                  >5</span
+                >
+              </div>
+            </div>
+          </div>
+          <div id="next-holder">
+            <button id="next">Next turn</button>
+          </div>
+        </div>
+        <div class="middle">
+          <div class="placeholder"></div>
+          <div id="grid">
+            <div id="cat"></div>
+          </div>
+          <div class="drama"></div>
         </div>
 
         <div id="card-and-rotator-holder">
@@ -59,7 +69,6 @@
             </div>
           </button>
           <div id="card-holder"></div>
-          <!-- <div id="discard"></div> -->
           <button class="card arrow right">
             <div>↺</div>
             <div class="stats">

@@ -1,12 +1,13 @@
 MUST DO
 
-+ Make energy actually stop you from doing stuff 
 
 + Implement script
 
 + Remove intermission stuff 
 
 + Make other "Things"
+  + emoji is ok i guess
+  + Put things on board
 
 + Find use for money lol 
   + Or reference in script 
@@ -14,6 +15,9 @@ MUST DO
 SHOULD DO
 
 + Beginning / ending
+  + This can use intermission page 
+  + 5 days left...
+  + 4 days left... 
 
 + More sounds
 

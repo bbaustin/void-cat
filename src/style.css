@@ -55,14 +55,33 @@ button:disabled {
   cursor: not-allowed;
 }
 
-#top-bar {
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.top .placeholder {
+  width: 160px;
+}
+
+.middle {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-#top-bar div:first-child {
-  width: 33%;
+.middle .placeholder,
+.drama {
+  width: 240px;
+  margin: 4px 12px 36px 0;
+}
+
+.drama {
+  outline: var(--thick-border);
+  border-radius: 10px;
+  background: var(--white);
 }
 
 /**********************
@@ -159,12 +178,8 @@ METERS
 }
 
 #next-holder {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 200px;
   text-align: right;
-  margin: 42px 45px;
+  margin: 0px 12px 12px 0px;
 }
 
 #next-holder button {
