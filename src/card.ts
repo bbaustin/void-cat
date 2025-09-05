@@ -78,12 +78,7 @@ export function createDOMCard(
       const indexOfUsedCard = DECK_OF_TRUTH.hand.indexOf(card);
 
       if (energyCost > GAME_STATE_OF_TRUTH.energyCurrent) {
-        console.log('cannot');
-        const energyMeter = document.querySelector('.meter.energy');
-        energyMeter?.classList.remove('attention');
-        void (energyMeter as HTMLElement).offsetWidth;
-        energyMeter?.classList.add('attention');
-        // do something to siginify you're out of energy
+        signifyNotEnoughEnergy();
       } else {
         /* Do the effects */
         handleEffectsSequentially(effectToApply);
@@ -104,6 +99,16 @@ export function createDOMCard(
   }
 
   return cardToAdd;
+}
+
+export function signifyNotEnoughEnergy() {
+  /* Do little animation */
+  const energyMeter = document.querySelector('.meter.energy');
+  energyMeter?.classList.remove('attention');
+  void (energyMeter as HTMLElement).offsetWidth;
+  energyMeter?.classList.add('attention');
+
+  /* Play disappointing sound */
 }
 
 /**

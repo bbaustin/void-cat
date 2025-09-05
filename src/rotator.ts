@@ -1,10 +1,11 @@
-import type { Card } from './card';
+import { signifyNotEnoughEnergy, type Card } from './card';
 import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH, getOccupiedTileCoordinates } from './cat';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
 import { DOM_CAT } from './main';
 import { CURRENT_STAGE, STAGES } from './stage';
 import { absorbThing } from './thingUtils';
+import { GAME_STATE_OF_TRUTH } from './gameState';
 
 export function initRotator() {
   const buttonLeft = document.querySelector('.arrow.left');
@@ -80,6 +81,10 @@ export function rotate(rotationDirection: RotationDirection) {
     // TODO: Ideally do some half-animation and communicate that it'll be out of bounds.
     // Or, you could grey out the button when this is the case. Not sure how hard that would be
     return;
+  }
+
+  if (GAME_STATE_OF_TRUTH.energyCurrent === 0) {
+    return signifyNotEnoughEnergy();
   }
 
   /* Determine what the next direction is */
