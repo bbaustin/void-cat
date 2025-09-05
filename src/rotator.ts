@@ -1,10 +1,11 @@
-import type { Card } from './card';
+import { signifyNotEnoughEnergy, type Card } from './card';
 import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH, getOccupiedTileCoordinates } from './cat';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
 import { DOM_CAT } from './main';
 import { CURRENT_STAGE, STAGES } from './stage';
 import { absorbThing } from './thingUtils';
+import { GAME_STATE_OF_TRUTH } from './gameState';
 
 export function initRotator() {
   const buttonLeft = document.querySelector('.arrow.left');
@@ -67,8 +68,6 @@ export function getRotatedDirection(
  * @param rotationDirection 'clockwise' or 'counterClockwise', depending on which button pressed
  */
 export function rotate(rotationDirection: RotationDirection) {
-  console.log(CAT_OF_TRUTH.headFacing);
-
   if (
     willRotationBeOutOfBounds(
       CAT_OF_TRUTH.headX,
@@ -84,13 +83,15 @@ export function rotate(rotationDirection: RotationDirection) {
     return;
   }
 
+  if (GAME_STATE_OF_TRUTH.energyCurrent === 0) {
+    return signifyNotEnoughEnergy();
+  }
+
   /* Determine what the next direction is */
   const newDirection = getRotatedDirection(
     CAT_OF_TRUTH.headFacing,
     rotationDirection
   );
-
-  console.log(newDirection);
 
   /* Get new translate offsets and angle */
   const { x, y, angle } = DIRECTION_OFFSETS[newDirection];

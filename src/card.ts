@@ -1,4 +1,5 @@
 import { DECK_OF_TRUTH, addWholeHandVisually, discardCard } from './cardDeck';
+import { GAME_STATE_OF_TRUTH } from './gameState';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
 import { replaceTextBasedOnRotation } from './rotator';
 import { handleEffectsSequentially } from './utils';
@@ -68,30 +69,46 @@ export function createDOMCard(
   /** Same as above, but with effect instead of text
    * We might not want to apply the effect if
    * viewing all cards during intermission, for example */
+  // UPDATE: We probably won't ever not apply effect. Can remove this if needed
   if (shouldApplyEffect) {
     const effectToApply = getCardAttribute(card, 'effect');
+    const energyCost = getCardAttribute(card, 'cost');
     const finalEffectToApply = () => {
       const { hand } = DECK_OF_TRUTH;
       const indexOfUsedCard = DECK_OF_TRUTH.hand.indexOf(card);
 
-      /* Do the effects */
-      handleEffectsSequentially(effectToApply);
+      if (energyCost > GAME_STATE_OF_TRUTH.energyCurrent) {
+        signifyNotEnoughEnergy();
+      } else {
+        /* Do the effects */
+        handleEffectsSequentially(effectToApply);
 
-      /* Update cals and energy */
-      updateEnergyAndCalMetersAfterPlayingCard(card);
+        /* Update cals and energy */
+        updateEnergyAndCalMetersAfterPlayingCard(card);
 
-      /* Remove the card from your hand,
-       * first in state, and then visually  */
-      hand.splice(indexOfUsedCard, 1);
-      addWholeHandVisually();
+        /* Remove the card from your hand,
+         * first in state, and then visually  */
+        hand.splice(indexOfUsedCard, 1);
+        addWholeHandVisually();
 
-      /* Add to discard pile */
-      discardCard(card);
+        /* Add to discard pile */
+        discardCard(card);
+      }
     };
     cardToAdd.addEventListener('click', finalEffectToApply);
   }
 
   return cardToAdd;
+}
+
+export function signifyNotEnoughEnergy() {
+  /* Do little animation */
+  const energyMeter = document.querySelector('.meter.energy');
+  energyMeter?.classList.remove('attention');
+  void (energyMeter as HTMLElement).offsetWidth;
+  energyMeter?.classList.add('attention');
+
+  /* Play disappointing sound */
 }
 
 /**
