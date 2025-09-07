@@ -103,8 +103,8 @@ export const STAGES: Stage[] = [
     drama: [
       [
         `Nice job yesterday! VOID Cat already burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories 🏅!`,
-        "(Hopefully that number was positive, or else my last statement won't have made sense!)",
-        "Let's exercise!",
+        "(Hopefully that number was positive, or else my last statement won't have made any sense!)",
+        "Let's exercise! Start using some workout cards!!",
       ],
       [
         'There are more advanced attack 🟥 patterns this level! Be careful 🙀 !',

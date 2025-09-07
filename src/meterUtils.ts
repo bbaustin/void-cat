@@ -41,9 +41,15 @@ export function updateEnergy(amountToAdd: number) {
   setGameState('energyCurrent', updatedEnergy);
 
   /* Update the DOM */
-  document.querySelector(
+  const energyMeter = document.querySelector(
     '.energy .meter-number .numerator'
-  )!.innerHTML = `${GAME_STATE_OF_TRUTH.energyCurrent}`;
+  );
+
+  energyMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.energyCurrent}`;
+
+  energyMeter!.classList.remove('slight-attention');
+  void (energyMeter as HTMLElement).offsetWidth;
+  energyMeter!.classList.add('slight-attention');
 }
 
 export function updateCaloriesBurned(amount: number) {
@@ -109,9 +115,13 @@ export function updateTurn(turn: number) {
   setGameState('currentTurn', turn);
 
   /* Update DOM */
-  document.querySelector(
-    '.turn .meter-number .numerator'
-  )!.innerHTML = `${GAME_STATE_OF_TRUTH.currentTurn}`;
+  const turnMeter = document.querySelector('.turn .meter-number .numerator');
+
+  turnMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.currentTurn}`;
+
+  turnMeter!.classList.remove('slight-attention');
+  void (turnMeter as HTMLElement).offsetWidth;
+  turnMeter!.classList.add('slight-attention');
 
   return;
 }
