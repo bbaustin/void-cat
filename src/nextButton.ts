@@ -9,15 +9,18 @@ import { addThingsToGrid, removeClassNamesFromGrid } from './thingUtils';
 import { handleEffectsSequentially } from './utils';
 
 export function initNextTurnButton() {
-  const nextButton = document.getElementById('next');
+  const nextButton = document.querySelectorAll('.next');
   if (!nextButton) return;
-  nextButton.removeEventListener('click', handleNextButtonClick);
-  nextButton.addEventListener('click', handleNextButtonClick);
+  nextButton.forEach((btn) => {
+    btn.removeEventListener('click', handleNextButtonClick);
+    btn.addEventListener('click', handleNextButtonClick);
+    console.log(nextButton);
+  });
 }
 
 export function handleNextButtonClick() {
   if (GAME_STATE_OF_TRUTH.currentScreen === 'screen-intermission') {
-    setGameState('currentStage', GAME_STATE_OF_TRUTH.currentStage + 1);
+    console.log('hey');
     setGameState('currentScreen', 'screen-game');
     updateTurn(1);
     updateEnergy(GAME_STATE_OF_TRUTH.energyMax);
@@ -29,10 +32,13 @@ export function handleNextButtonClick() {
     return updateTurnViaButton();
   }
 
+  /** Add 1 to the stage
+   * Switch the screen */
   if (isLastTurn()) {
+    setGameState('currentStage', GAME_STATE_OF_TRUTH.currentStage + 1);
     setGameState('currentScreen', 'screen-intermission');
-    document.getElementById('next')!.classList.remove('warning');
-    return initIntermission();
+    document.querySelector('.next')!.classList.remove('warning');
+    return initIntermission(GAME_STATE_OF_TRUTH.currentStage);
   }
 }
 
@@ -80,7 +86,7 @@ export function isLastTurn() {
 }
 
 export function updateNextButtonText() {
-  const nextButton = document.getElementById('next');
+  const nextButton = document.querySelector('.next');
   if (!nextButton) return null;
 
   if (isLastTurn()) {
@@ -98,7 +104,7 @@ export function updateNextButtonText() {
 }
 
 export function updateNextButtonViaGoingToIntermission() {
-  const nextButton = document.getElementById('next');
+  const nextButton = document.querySelector('.next');
   if (!nextButton) return null;
 
   nextButton.innerHTML = 'Go to next stage';

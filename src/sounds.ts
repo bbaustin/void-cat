@@ -287,3 +287,31 @@ export function playWasAttacked() {
     ]
   ); // Powerup 482
 }
+
+export function playCannot() {
+  zzfx(
+    ...[
+      1.3,
+      ,
+      296,
+      ,
+      0.04,
+      0.02,
+      1,
+      2.5,
+      ,
+      -3,
+      ,
+      ,
+      ,
+      1.1,
+      ,
+      0.1,
+      0.03,
+      0.63,
+      0.03,
+      ,
+      1509,
+    ]
+  ); // Hit 527
+}

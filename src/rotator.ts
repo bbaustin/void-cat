@@ -6,7 +6,7 @@ import { DOM_CAT } from './main';
 import { STAGES } from './stage';
 import { absorbThing } from './thingUtils';
 import { GAME_STATE_OF_TRUTH } from './gameState';
-import { playDisappointment, playSmallSound } from './sounds';
+import { playCannot, playSmallSound } from './sounds';
 
 export function initRotator() {
   const buttonLeft = document.querySelector('.arrow.left');
@@ -79,10 +79,12 @@ export function rotate(rotationDirection: RotationDirection) {
       STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize
     )
   ) {
-    return playDisappointment();
+    return playCannot();
   }
 
-  if (GAME_STATE_OF_TRUTH.energyCurrent === 0) {
+  const energy = GAME_STATE_OF_TRUTH.energyCurrent;
+
+  if (energy === 0 || (CAT_OF_TRUTH.stance === 'nap' && energy <= 1)) {
     return signifyNotEnoughEnergy();
   }
 

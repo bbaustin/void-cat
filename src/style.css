@@ -102,7 +102,8 @@ SCREENS
 }
 
 #intermission-text {
-  font-size: 84px;
+  font-size: 124px;
+  margin-top: 64px;
 }
 
 #intermission-button {

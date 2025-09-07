@@ -56,6 +56,9 @@ export function initGame({ gridSize, terrain }: Stage) {
 }
 
 export function initIntermission(currentStage: number) {
+  /* Init the next turn button */
+  initNextTurnButton();
+
   showScreen('screen-intermission');
 
   updateTextAndButtonText(currentStage);
