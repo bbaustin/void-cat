@@ -10,6 +10,8 @@ import {
 } from './nextButton';
 import { GAME_STATE_OF_TRUTH } from './gameState';
 import { updateTextAndButtonText } from './stageIntermission';
+import { handleEffectsSequentially } from './utils';
+import { handleScriptEventsSequentially } from './drama';
 
 export let DOM_CAT = createDOMCat();
 
@@ -53,6 +55,10 @@ export function initGame({ gridSize, terrain }: Stage) {
 
   /* Show the game screen */
   showScreen('screen-game');
+
+  handleScriptEventsSequentially(
+    STAGES[GAME_STATE_OF_TRUTH.currentStage].drama[0]
+  );
 }
 
 export function initIntermission(currentStage: number) {

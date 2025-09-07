@@ -14,8 +14,7 @@ MUST DO
 + Assemble fun deck
   + Add cards per level 
 
-
-
++ Make turns and energy animate 
 
 
 SHOULD DO

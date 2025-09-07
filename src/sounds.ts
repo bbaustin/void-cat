@@ -291,7 +291,7 @@ export function playWasAttacked() {
 export function playCannot() {
   zzfx(
     ...[
-      1.3,
+      1,
       ,
       296,
       ,
@@ -314,4 +314,31 @@ export function playCannot() {
       1509,
     ]
   ); // Hit 527
+}
+
+export function playBoop() {
+  zzfx(
+    ...[
+      1.1,
+      ,
+      64,
+      0.01,
+      0.01,
+      0.03,
+      4,
+      2.9,
+      4,
+      -12,
+      ,
+      ,
+      ,
+      ,
+      143,
+      0.1,
+      0.34,
+      ,
+      0.02,
+      0.2,
+    ]
+  ); // Blip 592
 }
