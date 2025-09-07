@@ -1,5 +1,6 @@
 import { disableAllButtons, enableAllButtons, triggerAttack } from './attack';
 import { addXCardsToHand } from './cardDeck';
+import { stopScriptEvents } from './drama';
 
 import { GAME_STATE_OF_TRUTH, setGameState } from './gameState';
 import { initGame, initIntermission } from './main';
@@ -20,7 +21,6 @@ export function initNextTurnButton() {
 
 export function handleNextButtonClick() {
   if (GAME_STATE_OF_TRUTH.currentScreen === 'screen-intermission') {
-    console.log('hey');
     setGameState('currentScreen', 'screen-game');
     updateTurn(1);
     updateEnergy(GAME_STATE_OF_TRUTH.energyMax);
@@ -45,6 +45,8 @@ export function handleNextButtonClick() {
 export async function updateTurnViaButton() {
   const newTurnValue = GAME_STATE_OF_TRUTH.currentTurn + 1;
   addXCardsToHand();
+
+  stopScriptEvents();
 
   // trigger "attack" stage
   await handleEffectsSequentially(

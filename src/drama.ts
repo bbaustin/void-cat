@@ -11,6 +11,7 @@ async function renderEachLetter(text: string) {
   dramaBox.prepend(newTextContainer);
   let temp = '';
   for (const character of text) {
+    if (STOP_REQUESTED) return; // <- bail out if stop requested
     playBoop();
     temp += character;
     newTextContainer.innerHTML = temp;
@@ -24,13 +25,31 @@ async function renderEachLetter(text: string) {
  * render the next one based on the total time it takes to render the previous one
  */
 export async function handleScriptEventsSequentially(lines: string[]) {
+  STOP_REQUESTED = false; // reset before starting
+
   /* Calculate delay based on message length */
   const baseDelay = 600; // Base delay in ms for short messages
   const lengthFactor = 25; // Additional ms per character in the message
 
   for (const line of lines) {
+    if (STOP_REQUESTED) return; // <- bail out between lines
     await renderEachLetter(line);
+    // const messageDelay = baseDelay + line.length * lengthFactor;
+    // await delay(messageDelay);
     const messageDelay = baseDelay + line.length * lengthFactor;
-    await delay(messageDelay);
+    let elapsed = 0;
+    while (elapsed < messageDelay) {
+      if (STOP_REQUESTED) return; // <- bail out during waiting
+      await delay(50);
+      elapsed += 50;
+    }
   }
+}
+
+/** This is a flag that will allow us to bail out of
+ * the async handleScriptEventsSequentially function. */
+let STOP_REQUESTED = false;
+
+export function stopScriptEvents() {
+  STOP_REQUESTED = true;
 }
