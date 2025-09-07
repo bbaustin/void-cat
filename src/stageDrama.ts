@@ -24,7 +24,9 @@ async function renderEachLetter(text: string) {
  * look at the number of characters in the previous one, and
  * render the next one based on the total time it takes to render the previous one
  */
-export async function handleScriptEventsSequentially(lines: string[]) {
+export async function handleDramaEventsSequentially(
+  lines: (string | (() => string))[]
+) {
   STOP_REQUESTED = false; // reset before starting
 
   /* Calculate delay based on message length */
@@ -33,7 +35,8 @@ export async function handleScriptEventsSequentially(lines: string[]) {
 
   for (const line of lines) {
     if (STOP_REQUESTED) return; // <- bail out between lines
-    await renderEachLetter(line);
+    const actualLine = typeof line === 'function' ? line() : line;
+    await renderEachLetter(actualLine);
     // const messageDelay = baseDelay + line.length * lengthFactor;
     // await delay(messageDelay);
     const messageDelay = baseDelay + line.length * lengthFactor;
@@ -50,6 +53,9 @@ export async function handleScriptEventsSequentially(lines: string[]) {
  * the async handleScriptEventsSequentially function. */
 let STOP_REQUESTED = false;
 
-export function stopScriptEvents() {
+export function stopDramaEvents() {
   STOP_REQUESTED = true;
 }
+
+export const LAST_LINE =
+  'TURN TRANSMISSION COMPLETED. CONTINUE WITH WORKOUT 🃏🃏🃏🃏🃏';

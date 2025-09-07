@@ -1,6 +1,10 @@
 import { disableAllButtons, enableAllButtons, triggerAttack } from './attack';
 import { addXCardsToHand } from './cardDeck';
-import { stopScriptEvents } from './drama';
+import {
+  handleDramaEventsSequentially,
+  LAST_LINE,
+  stopDramaEvents,
+} from './stageDrama';
 
 import { GAME_STATE_OF_TRUTH, setGameState } from './gameState';
 import { initGame, initIntermission } from './main';
@@ -15,7 +19,6 @@ export function initNextTurnButton() {
   nextButton.forEach((btn) => {
     btn.removeEventListener('click', handleNextButtonClick);
     btn.addEventListener('click', handleNextButtonClick);
-    console.log(nextButton);
   });
 }
 
@@ -46,7 +49,7 @@ export async function updateTurnViaButton() {
   const newTurnValue = GAME_STATE_OF_TRUTH.currentTurn + 1;
   addXCardsToHand();
 
-  stopScriptEvents();
+  stopDramaEvents();
 
   // trigger "attack" stage
   await handleEffectsSequentially(
@@ -68,13 +71,20 @@ export async function updateTurnViaButton() {
       () =>
         addThingsToGrid(
           STAGES[GAME_STATE_OF_TRUTH.currentStage].attackCoordinates[
-            GAME_STATE_OF_TRUTH.currentTurn
+            newTurnValue
           ],
           { className: 'attack' }
         ),
 
       // make everything clickable again
       () => enableAllButtons(),
+
+      // start next turn's text
+      () =>
+        handleDramaEventsSequentially([
+          ...STAGES[GAME_STATE_OF_TRUTH.currentStage].drama[newTurnValue],
+          LAST_LINE,
+        ]),
     ],
     300
   );

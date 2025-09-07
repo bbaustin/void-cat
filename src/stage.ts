@@ -6,6 +6,7 @@ import {
   type Thing,
   type ThingCoordinates,
 } from './thing';
+import { getCalorieCount } from './meterUtils';
 
 // TODO: If you have a map of terrains, you might not need gridSize, only array row/col
 export interface Stage {
@@ -22,7 +23,7 @@ export interface Stage {
   thingType: Thing;
   terrain?: Terrain;
   turns?: number;
-  drama: string[][];
+  drama: (string | (() => string))[][];
 }
 
 export const STAGES: Stage[] = [
@@ -70,10 +71,11 @@ export const STAGES: Stage[] = [
       ],
       [
         'By the way, VOID Cat is actually an acronym!',
-        'It stands for Voluminous Ovoid Immobile Dieting Cat!',
+        'It stands for...',
+        'Voluminous Ovoid Immobile Dieting Cat!',
         'But I just say VOID Cat for short!',
-        `Ovoid means "shaped like an oval," if you didn't know 📖 !', 
-        'I had to look it up 🧠 !`,
+        `Ovoid means "shaped like an oval," if you didn't know 📖 !`,
+        'I had to look it up 🧠 !',
       ],
       [
         "Every stage has five turns 🖐️ . So this is the last one!! Let's make it a good one 🙌!",
@@ -102,7 +104,8 @@ export const STAGES: Stage[] = [
     thingType: 'tree',
     drama: [
       [
-        `Nice job yesterday! VOID Cat already burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories 🏅!`,
+        () =>
+          `Nice job yesterday! VOID Cat already burned ${getCalorieCount()} calories 🏅!`,
         "(Hopefully that number was positive, or else my last statement won't have made any sense!)",
         "Let's exercise! Start using some workout cards!!",
       ],
@@ -174,7 +177,7 @@ export const STAGES: Stage[] = [
     drama: [
       [
         'Hey, thanks for sticking around to day 3! You rule 🎸 !',
-        `VOID Cat has burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories so far!`,
+        () => `VOID Cat has burned ${getCalorieCount()} calories so far!`,
         "VOID Cat needs to be in shape for what's to come!",
         "Let's exercise!",
       ],
@@ -235,6 +238,7 @@ export const STAGES: Stage[] = [
         'Hey, so...',
         "You don't remember me... 🥺 do you 🥹 ?",
         "I'm the narrator from the 🏆 award-winning (well, 👕 t-shirt winning) game, 💖 PicoBuddy 💖 !!",
+        'You played it in js13kGames 2024... right?????',
       ],
       [
         'In that game, a really nice person 🧍, not unlike yourself 🧍🧍, helped me bring about ⬛️ THE GREAT UNBECOMING ⬛️ !',
@@ -302,12 +306,13 @@ export const STAGES: Stage[] = [
         'Actually, I guess keeping track of the burned calories was a little pointless, too...',
         "Like, it was really nice of you to help 😻 , don't get me wrong!",
         'But, OK, let me do some quick calculating 🧐 ...',
-        `VOID Cat burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories. That's cool!`,
+        () => `VOID Cat burned ${getCalorieCount()} calories. That's cool!`,
         'To lose one kilogram, you need to burn about 7700 calories (even for a cat 🙀 ! I think!).',
-        `So that means with your help, VOID Cat lost ~${
-          Math.floor((GAME_STATE_OF_TRUTH.caloriesBurned / 7700) * 10000) /
-          10000
-        } kg!`,
+        () =>
+          `So that means with your help, VOID Cat lost ~${
+            Math.floor((GAME_STATE_OF_TRUTH.caloriesBurned / 7700) * 10000) /
+            10000
+          } kg!`,
         'However, on the other hand, VOID Cat is well on its way to absorbing the entire mass-energy of the universe.',
         'That comes out to 3x10^54 kg.',
         "Written out, it's 3,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000 kg",

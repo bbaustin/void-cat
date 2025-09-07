@@ -15,8 +15,8 @@ export const GAME_STATE_OF_TRUTH: GameStateType = {
   money: 0,
   energyCurrent: 5,
   energyMax: 5,
-  currentTurn: 1,
-  currentStage: 0,
+  currentTurn: 0,
+  currentStage: 3,
   currentScreen: 'screen-intermission',
 };
 

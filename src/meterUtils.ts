@@ -125,3 +125,7 @@ export function updateTurn(turn: number) {
 
   return;
 }
+
+export function getCalorieCount() {
+  return document.querySelector('.calories .meter-number')!.innerHTML;
+}
