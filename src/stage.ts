@@ -259,7 +259,7 @@ export const STAGES: Stage[] = [
         'It really means for... Voracious Omnivorous Indestructible Death Cat!!',
       ],
       [
-        "Also... those red attack squares 🟥 are actually coordinates of missile strikes! That's why they were making exploding 🤯 noises, you know!",
+        "Also... those red attack squares 🟥 are actually coordinates of missile strikes 🚀 ! That's why they were making exploding 🤯 noises, you know!",
         'Your planet is trying to stop the inevitable 🥹 !!',
         'But VOID Cat is growing 📈 at an superexponential rate.',
         "After you finish helping it absorb this city 🏙️ , its mass will start to surpass Earth's.",
@@ -270,29 +270,20 @@ export const STAGES: Stage[] = [
   },
   /* 4 - DAY 5 */
   {
-    gridSize: { x: 13, y: 13 },
+    gridSize: { x: 5, y: 5 },
     attackCoordinates: [undefined, undefined, undefined, undefined, undefined],
     thingCoordinates: [
       [0, 1],
-      [2, 6],
-      [3, 8],
-      [4, 5],
-      [4, 12],
-      [7, 7],
-      [7, 0],
-      [9, 5],
-      [9, 9],
-      [10, 7],
-      [11, 10],
-      [12, 3],
-      [12, 6],
+      [4, 4],
+      [2, 3],
+      [1, 0],
     ],
     thingType: 'planet',
     drama: [
       [
-        'Woah, this last stage looks kind of messed up.',
-        "It doesn't even fit in the screen correctly on my monitor 🖥️ ! Bad design 🔥 !",
-        'I guess things tend to fall apart as you get closer to ⬛️ THE GREAT UNBECOMING ⬛️ .',
+        "Hey! I'm glad you're still here!",
+        "Earth is gone now 🚀, so we're just floating around in space 👽 .",
+        "Let's do some zero-g exercise 🧑‍🚀 !!",
       ],
       [
         "The collectibles in this level are planets 🪐, if you couldn't tell.",
@@ -307,21 +298,30 @@ export const STAGES: Stage[] = [
         "Like, it was really nice of you to help 😻 , don't get me wrong!",
         'But, OK, let me do some quick calculating 🧐 ...',
         () => `VOID Cat burned ${getCalorieCount()} calories. That's cool!`,
-        'To lose one kilogram, you need to burn about 7700 calories (even for a cat 🙀 ! I think!).',
+        'To lose one kilogram, you need to burn about 7700 calories (even for a cat 🙀 ! I think..!).',
         () =>
           `So that means with your help, VOID Cat lost ~${
             Math.floor((GAME_STATE_OF_TRUTH.caloriesBurned / 7700) * 10000) /
             10000
           } kg!`,
+        '🎉',
         'However, on the other hand, VOID Cat is well on its way to absorbing the entire mass-energy of the universe.',
         'That comes out to 3x10^54 kg.',
         "Written out, it's 3,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000 kg",
         'So, overall... I think you did a really good job 👍 !',
       ],
-      ['Anyway...'],
-      ["I guess it's almost the end..."],
       [
-        'Thanks for your making it to the end!',
+        "Anyway, I guess it's almost the end...",
+        "I hope you didn't feel like you wasted your time with this whole weight-loss thing...",
+      ],
+      [
+        'But look at this way... when everything is nothingness, nothing matters!',
+        "So it doesn't matter if you feel like you wasted your time with this whole weight-loss thing!",
+        'Do you know what I mean?',
+      ],
+      [
+        'Alright, well this is the last turn!',
+        'Thanks for making it to the very end!',
         'And see you in another 72.4 billion years! ',
       ],
     ],
