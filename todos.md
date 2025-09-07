@@ -11,20 +11,16 @@ MUST DO
     + 5 days left...
     + 4 days left... 
 
-+ Make other "Things"
-  + emoji is ok i guess
-  + Put things on board
-
-
 + Assemble fun deck
+  + Add cards per level 
+
+
+
+
 
 SHOULD DO
 
-
-
-+ More sounds DONEISH
-
-+ Rotation looks crazy because it can go from 0 --> 270 (rather than 0 ---> -90). Try and fix that DONE KINDA
++ More sounds DONEISH? Anything missing?
 
 + Animating when you can't roll or rotate in a certain direction
 

@@ -8,12 +8,6 @@ import {
   initNextTurnButton,
   updateNextButtonViaGoingToIntermission,
 } from './nextButton';
-import {
-  handleUpgradeCatButtonClick,
-  initBuyCardsButton,
-  initUpgradeCardsButton,
-  initUpgradeCatButton,
-} from './stageIntermission';
 import { GAME_STATE_OF_TRUTH } from './gameState';
 
 export let DOM_CAT = createDOMCat();
@@ -55,10 +49,6 @@ export function initGame({ gridSize, terrain }: Stage) {
 
   /* Init the next turn button */
   initNextTurnButton();
-  // TODO: Remove these :> But add initNextTurn button in intermission i guess
-  initBuyCardsButton();
-  initUpgradeCardsButton();
-  initUpgradeCatButton();
 
   /* Show the game screen */
   showScreen('screen-game');
@@ -66,9 +56,6 @@ export function initGame({ gridSize, terrain }: Stage) {
 
 export function initIntermission() {
   showScreen('screen-intermission');
-  /* Initiate with first button clicked */
-  /* May get rid of this stuff as deadline draws near */
-  handleUpgradeCatButtonClick();
   updateNextButtonViaGoingToIntermission();
 }
 
