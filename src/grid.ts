@@ -1,7 +1,7 @@
 import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
 import { GAME_STATE_OF_TRUTH } from './gameState';
-import { CURRENT_STAGE, STAGES } from './stage';
+import { STAGES } from './stage';
 import { type Thing } from './thing';
 import { addThingsToGrid } from './thingUtils';
 
@@ -89,6 +89,7 @@ export function isOutOfBounds(direction: Direction) {
 
   return (
     CAT_OF_TRUTH[headXOrHeadY] + addend < 0 ||
-    CAT_OF_TRUTH[headXOrHeadY] + addend >= STAGES[CURRENT_STAGE].gridSize[xOrY]
+    CAT_OF_TRUTH[headXOrHeadY] + addend >=
+      STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize[xOrY]
   );
 }

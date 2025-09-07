@@ -13,11 +13,12 @@ export type ThingCoordinates = [number, number][];
 /**
  * Create the div which contains a Thing.
  * Do NOT add it to the DOM, just generate it
- * @param thingType of type Thing. Default is "coin"
+ * @param thingType of type Thing.
  * @returns
  */
-export function generateDOMThing(thingType: Thing = 'coin') {
+export function generateDOMThing(thingType: Thing) {
   const thing = document.createElement('div');
+  thing.classList.add('thing');
   if (thingType === 'coin') {
     thing.classList.add('coin');
     thing.innerHTML = '1';
@@ -26,7 +27,7 @@ export function generateDOMThing(thingType: Thing = 'coin') {
   } else if (thingType === 'house') {
     thing.innerHTML = getRandom(['🏡', '🏠', '🏘️']);
   } else if (thingType === 'building') {
-    thing.innerHTML = getRandom(['🏢', '🏭', '🏦']);
+    thing.innerHTML = getRandom(['🏙️', '🌃', '🌆', '🌇']);
   } else {
     thing.classList.add('planet');
     thing.classList.add(getRandom(['planet-1', 'planet-2', 'planet-3']));

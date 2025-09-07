@@ -3,7 +3,7 @@ import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH, getOccupiedTileCoordinates } from './cat';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
 import { DOM_CAT } from './main';
-import { CURRENT_STAGE, STAGES } from './stage';
+import { STAGES } from './stage';
 import { absorbThing } from './thingUtils';
 import { GAME_STATE_OF_TRUTH } from './gameState';
 import { playSmallSound } from './sounds';
@@ -76,7 +76,7 @@ export function rotate(rotationDirection: RotationDirection) {
       CAT_OF_TRUTH.headFacing,
       rotationDirection,
       CAT_OF_TRUTH.length,
-      STAGES[CURRENT_STAGE].gridSize
+      STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize
     )
   ) {
     // TODO: Ideally do some half-animation and communicate that it'll be out of bounds.

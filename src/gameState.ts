@@ -17,7 +17,7 @@ export const GAME_STATE_OF_TRUTH: GameStateType = {
   energyCurrent: 5,
   energyMax: 5,
   currentTurn: 1,
-  currentStage: 0,
+  currentStage: 3,
   currentScreen: 'screen-game',
   isAttackHappening: false,
 };

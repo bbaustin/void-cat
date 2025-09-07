@@ -1,7 +1,9 @@
 import { getOccupiedTileCoordinates } from './cat';
+import { GAME_STATE_OF_TRUTH } from './gameState';
 import { getTile } from './grid';
 import { updateMoney } from './meterUtils';
 import { playPickup1 } from './sounds';
+import { STAGES } from './stage';
 import {
   generateDOMThing,
   type ThingCoordinates,
@@ -39,7 +41,9 @@ export function addThingsToGrid(
       tileToAppendTo.innerHTML = '';
 
       if (isThing(thing)) {
-        return tileToAppendTo.appendChild(generateDOMThing());
+        return tileToAppendTo.appendChild(
+          generateDOMThing(STAGES[GAME_STATE_OF_TRUTH.currentStage].thingType)
+        );
       }
     }
 
@@ -70,10 +74,9 @@ export function absorbThing() {
     const tile = getTile(occupiedTile.x, occupiedTile.y);
     if (!tile) return;
     // NOTE: Right now only absorbing coin of course
-    const coinTile = tile?.querySelector('.coin');
+    const coinTile = tile?.querySelector('.thing');
     if (coinTile) {
-      // This is always only 1 now; please never put non-numbers in here :>
-      updateMoney(Number(coinTile.innerHTML));
+      updateMoney(1);
       tile?.removeChild(coinTile);
       playPickup1();
     }

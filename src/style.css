@@ -276,6 +276,7 @@ GRID
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  font-size: 48px;
 }
 
 .attack::after {
@@ -289,7 +290,6 @@ GRID
   position: relative;
   /* If you want it to be above cat */
   z-index: var(--atk-z);
-  position: relative;
   transition: opacity 0.3s ease;
 }
 
@@ -318,6 +318,13 @@ GRID
   background-position: 0 0, 20px 20px, 40px 60px;
 }
 
+.thing {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .coin {
   width: 30px;
   height: 30px;
@@ -326,28 +333,26 @@ GRID
   background: var(--yellow);
   color: var(--red);
   border-radius: 100%;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-weight: 700;
 }
 
 .planet {
   width: 50px;
   height: 50px;
+  border-radius: 100%;
+  box-shadow: inset -8px -5px 15px var(--black);
 }
 
 .planet-1 {
-  background: 'radial-gradient(#ecdeb2, #ea9123)';
+  background: linear-gradient(to bottom right, var(--orange), var(--red));
 }
 
 .planet-2 {
-  background: 'linear-gradient(to bottom right, #bfb892, #2a80a1)';
+  background: linear-gradient(to bottom right, var(--pink), var(--purple-dark));
 }
 
 .planet-3 {
-  background: '#bad500';
+  background: var(--green);
 }
 
 /**********************
