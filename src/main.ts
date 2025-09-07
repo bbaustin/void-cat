@@ -55,7 +55,7 @@ export function initGame({ gridSize, terrain }: Stage) {
 
   /* Init the next turn button */
   initNextTurnButton();
-  // TODO: These should be in initIntermission
+  // TODO: Remove these :> But add initNextTurn button in intermission i guess
   initBuyCardsButton();
   initUpgradeCardsButton();
   initUpgradeCatButton();

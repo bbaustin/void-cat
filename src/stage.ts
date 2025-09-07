@@ -3,6 +3,7 @@ import { GAME_STATE_OF_TRUTH } from './gameState';
 import {
   generateThingCoordinatesInDiamondShape,
   generateThingCoordinatesInStraightRowsOrColumns,
+  type Thing,
   type ThingCoordinates,
 } from './thing';
 
@@ -13,14 +14,23 @@ export const CURRENT_STAGE = 2;
 // TODO: If you have a map of terrains, you might not need gridSize, only array row/col
 export interface Stage {
   gridSize: { x: number; y: number };
+  /** Attack coordinates (red square positions).
+   * Array of coordinates because they change every turn.
+   * Can take undefined in the case that there are no attacks that turn.
+   **/
   attackCoordinates: (ThingCoordinates | undefined)[];
+  /** Coordinates of collectibles on grid.
+   * Not an array, because they stay constant throughout the level
+   * And don't respawn or anything. */
+  thingCoordinates: ThingCoordinates;
+  thingType: Thing;
   terrain?: Terrain;
   turns?: number;
   drama: string[][];
 }
 
 export const STAGES: Stage[] = [
-  /* Vague */
+  /* 0 - DAY 1 */
   {
     gridSize: { x: 5, y: 5 },
     attackCoordinates: [
@@ -30,6 +40,8 @@ export const STAGES: Stage[] = [
       [[1, 0]],
       generateThingCoordinatesInStraightRowsOrColumns(5, [0], 'row'),
     ],
+    thingCoordinates: generateThingCoordinatesInDiamondShape(5),
+    thingType: 'coin',
     drama: [
       [
         'Hey 👋 !',
@@ -63,7 +75,7 @@ export const STAGES: Stage[] = [
       ],
     ],
   },
-  /* Trees */
+  /* 1 - DAY 2 */
   {
     gridSize: { x: 5, y: 5 },
     attackCoordinates: [
@@ -79,6 +91,10 @@ export const STAGES: Stage[] = [
       generateThingCoordinatesInDiamondShape(5),
       generateThingCoordinatesInStraightRowsOrColumns(5, [0, 2, 4], 'column'),
     ],
+    thingCoordinates: [
+      ...generateThingCoordinatesInStraightRowsOrColumns(5, [1, 3], 'row'),
+    ],
+    thingType: 'tree',
     drama: [
       [
         `Nice job yesterday! VOID Cat already burned ${GAME_STATE_OF_TRUTH.caloriesBurned} calories 🏅!`,
@@ -107,7 +123,7 @@ export const STAGES: Stage[] = [
       ["Last turn! Let's do this!"],
     ],
   },
-  /* Houses */
+  /* 2 - DAY 3 */
   {
     gridSize: { x: 5, y: 5 },
     terrain: 'street',
@@ -144,6 +160,12 @@ export const STAGES: Stage[] = [
         [4, 4],
       ],
     ],
+    thingCoordinates: generateThingCoordinatesInStraightRowsOrColumns(
+      5,
+      [0, 2, 4],
+      'column'
+    ),
+    thingType: 'house',
     drama: [
       [
         'Hey, thanks for sticking around to day 3! You rule 🎸 !',
@@ -186,7 +208,7 @@ export const STAGES: Stage[] = [
       ["Alright! Last turn! Let's do this 💪 !!"],
     ],
   },
-  /* Buildings */
+  /* 3 - DAY 4 */
   {
     gridSize: { x: 5, y: 5 },
     terrain: 'street',
@@ -197,6 +219,12 @@ export const STAGES: Stage[] = [
       generateThingCoordinatesInStraightRowsOrColumns(5, [0, 2, 4], 'column'),
       generateThingCoordinatesInStraightRowsOrColumns(5, [1, 2, 3], 'row'),
     ],
+    thingCoordinates: generateThingCoordinatesInStraightRowsOrColumns(
+      5,
+      [0, 1, 2, 3, 4],
+      'row'
+    ),
+    thingType: 'building',
     drama: [
       [
         'Hey, so...',
@@ -231,10 +259,26 @@ export const STAGES: Stage[] = [
       ],
     ],
   },
-  /* Space */
+  /* 4 - DAY 5 */
   {
     gridSize: { x: 13, y: 13 },
     attackCoordinates: [undefined, undefined, undefined, undefined, undefined],
+    thingCoordinates: [
+      [0, 1],
+      [2, 6],
+      [3, 8],
+      [4, 5],
+      [4, 12],
+      [7, 7],
+      [7, 0],
+      [9, 5],
+      [9, 9],
+      [10, 7],
+      [11, 10],
+      [12, 3],
+      [12, 6],
+    ],
+    thingType: 'planet',
     drama: [
       [
         'Woah, this last stage looks kind of messed up.',

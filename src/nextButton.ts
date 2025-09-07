@@ -59,9 +59,6 @@ export async function updateTurnViaButton() {
       () => removeClassNamesFromGrid('attack'),
       () =>
         addThingsToGrid(
-          // generateThingCoordinatesInDiamondShape(
-          //   STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize.x
-          // ),
           STAGES[GAME_STATE_OF_TRUTH.currentStage].attackCoordinates[
             GAME_STATE_OF_TRUTH.currentTurn
           ],
