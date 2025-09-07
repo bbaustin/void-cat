@@ -6,11 +6,12 @@ import { showScreen } from './screen';
 import { STAGES, type Stage } from './stage';
 import {
   initNextTurnButton,
-  updateNextButtonViaGoingToIntermission,
+  updateNextButtonBeforeGoingToIntermission,
 } from './nextButton';
 import { GAME_STATE_OF_TRUTH } from './gameState';
 import { updateTextAndButtonText } from './stageIntermission';
 import { handleDramaEventsSequentially, LAST_LINE } from './stageDrama';
+import { addThingsToGrid } from './thingUtils';
 
 export let DOM_CAT = createDOMCat();
 
@@ -18,6 +19,12 @@ export function initGame({ gridSize, terrain }: Stage) {
   /* Draw game grid */
   const grid = createEmptyGrid(gridSize.x, gridSize.y, terrain);
   renderGrid(grid);
+
+  /* Add the attacks to the grid */
+  addThingsToGrid(
+    STAGES[GAME_STATE_OF_TRUTH.currentStage].attackCoordinates[0],
+    { className: 'attack' }
+  );
 
   /* Add the DOMcat to the grid! */
   DOM_CAT = createDOMCat();
@@ -70,7 +77,7 @@ export function initIntermission(currentStage: number) {
   updateTextAndButtonText(currentStage);
 
   // TODO: Might not want this?
-  updateNextButtonViaGoingToIntermission();
+  updateNextButtonBeforeGoingToIntermission();
 }
 
 // initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);

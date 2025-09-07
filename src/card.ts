@@ -80,7 +80,8 @@ export function createDOMCard(
 
       if (
         CAT_OF_TRUTH.stance === 'nap' &&
-        energyCost + 1 > GAME_STATE_OF_TRUTH.energyCurrent
+        energyCost + 1 > GAME_STATE_OF_TRUTH.energyCurrent &&
+        getCardAttribute(card, 'cost') > 0
       ) {
         signifyNotEnoughEnergy();
       } else if (energyCost > GAME_STATE_OF_TRUTH.energyCurrent) {

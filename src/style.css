@@ -113,7 +113,7 @@ SCREENS
 
 #intermission-text {
   font-size: 124px;
-  margin-top: 64px;
+  margin: 32px 0;
 }
 
 #intermission-button {

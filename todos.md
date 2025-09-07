@@ -1,8 +1,6 @@
 MUST DO
 
 
-+ Implement script
-  + How does this fit into the game? Think about it
 
 + Intermission stuff
   + Remove, pretty much. But also:
@@ -14,17 +12,14 @@ MUST DO
 + Assemble fun deck
   + Add cards per level 
 
-+ Make turns and energy animate 
++ If you can't play a card, don't discard it 
+  + Could be cheat-fixed by removing cards that ONLY apply position. It's a good idea.
 
 
 SHOULD DO
 
 + More sounds DONEISH? Anything missing?
 
-+ Animating when you can't roll or rotate in a certain direction
-
-+ If you can't play a card, don't discard it 
-  + Could be cheat-fixed by removing cards that ONLY apply position. It's a good idea.
 
 WONT DO
 + Popup explanations 
@@ -38,3 +33,5 @@ WONT DO
   + Figure out mathematically how to do this? Could be based on percentage..!
 
 + Animating the roll
+
++ Animating when you can't roll or rotate in a certain direction

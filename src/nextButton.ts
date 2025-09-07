@@ -25,7 +25,7 @@ export function initNextTurnButton() {
 export function handleNextButtonClick() {
   if (GAME_STATE_OF_TRUTH.currentScreen === 'screen-intermission') {
     setGameState('currentScreen', 'screen-game');
-    updateTurn(1);
+    updateTurn(0);
     updateEnergy(GAME_STATE_OF_TRUTH.energyMax);
     updateNextButtonText();
     return initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);
@@ -115,7 +115,7 @@ export function updateNextButtonText() {
   }
 }
 
-export function updateNextButtonViaGoingToIntermission() {
+export function updateNextButtonBeforeGoingToIntermission() {
   const nextButton = document.querySelector('.next');
   if (!nextButton) return null;
 
