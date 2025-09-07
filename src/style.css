@@ -87,7 +87,8 @@ button:disabled {
 /**********************
 SCREENS
 **********************/
-#screen-game {
+#screen-game,
+#screen-intermission {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,39 +96,17 @@ SCREENS
 }
 
 #screen-intermission {
-  display: flex;
+  text-align: center;
+  margin: 0;
+  padding: 36px 48px;
 }
 
-.left-side-button-list {
-  width: 25%;
+#intermission-text {
+  font-size: 84px;
+}
+
+#intermission-button {
   padding: 24px;
-  height: 100%;
-}
-
-.left-side-button-list button {
-  padding: 12px;
-  margin-bottom: 36px;
-  width: 100%;
-  min-height: 86px;
-}
-
-.left-side-button-list button.active {
-  background: var(--green);
-}
-
-#mini-screen {
-  width: 75%;
-  display: flex;
-  padding: 26px 0px 0px 24px;
-}
-
-/**********************
-MINI SCREENS 
-**********************/
-#view-all {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* 2 equal-width columns */
-  gap: 24px;
 }
 
 /**********************
@@ -306,7 +285,7 @@ GRID
 }
 
 .street {
-  background: var(--grey);
+  background: var(--grey-dark);
 }
 
 .space {
@@ -536,15 +515,6 @@ CARD & ROTATE BUTTONS
 
 .card:focus {
   outline-width: 10px;
-}
-
-/* IDK THESE */
-.card.level2 {
-  background: lightyellow;
-}
-
-.card.level3 {
-  background: lightsalmon;
 }
 
 .stats {

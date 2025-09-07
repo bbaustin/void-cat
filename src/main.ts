@@ -9,6 +9,7 @@ import {
   updateNextButtonViaGoingToIntermission,
 } from './nextButton';
 import { GAME_STATE_OF_TRUTH } from './gameState';
+import { updateTextAndButtonText } from './stageIntermission';
 
 export let DOM_CAT = createDOMCat();
 
@@ -54,9 +55,15 @@ export function initGame({ gridSize, terrain }: Stage) {
   showScreen('screen-game');
 }
 
-export function initIntermission() {
+export function initIntermission(currentStage: number) {
   showScreen('screen-intermission');
+
+  updateTextAndButtonText(currentStage);
+
+  // TODO: Might not want this?
   updateNextButtonViaGoingToIntermission();
 }
 
-initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);
+// initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);
+
+initIntermission(GAME_STATE_OF_TRUTH.currentStage);
