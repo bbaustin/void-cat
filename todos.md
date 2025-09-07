@@ -24,7 +24,8 @@ SHOULD DO
 
 + Animating when you can't roll or rotate in a certain direction
 
-
++ If you can't play a card, don't discard it 
+  + Could be cheat-fixed by removing cards that ONLY apply position. It's a good idea.
 
 WONT DO
 + Popup explanations 

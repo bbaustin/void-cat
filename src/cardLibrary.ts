@@ -100,9 +100,7 @@ export const CARD_LIBRARY: Card[] = [
     ],
   },
   {
-    text: [
-      'Assume longcat position, roll 1 space right, then assume defensive nap position',
-    ],
+    text: ['Longcat, then roll 1 space right, then nap'],
     caloriesBurned: [1],
     cost: [2],
     effect: [
