@@ -1,19 +1,37 @@
-export type Thing =
-  | 'coin'
-  | 'house'
-  | 'human'
-  | 'dog'
-  | 'tank'
-  | 'tree'
-  | 'planet';
+import { getRandom } from './utils';
+
+const validThings = ['coin', 'tree', 'house', 'building', 'planet'] as const;
+
+export type Thing = (typeof validThings)[number];
+
+export function isThing(value: string): value is Thing {
+  return (validThings as readonly string[]).includes(value);
+}
 
 export type ThingCoordinates = [number, number][];
 
-export function generateCoin() {
-  const coin = document.createElement('div');
-  coin.classList.add('coin');
-  coin.innerHTML = '1';
-  return coin;
+/**
+ * Create the div which contains a Thing.
+ * Do NOT add it to the DOM, just generate it
+ * @param thingType of type Thing. Default is "coin"
+ * @returns
+ */
+export function generateDOMThing(thingType: Thing = 'coin') {
+  const thing = document.createElement('div');
+  if (thingType === 'coin') {
+    thing.classList.add('coin');
+    thing.innerHTML = '1';
+  } else if (thingType === 'tree') {
+    thing.innerHTML = getRandom(['🌲', '🌳', '🪾']);
+  } else if (thingType === 'house') {
+    thing.innerHTML = getRandom(['🏡', '🏠', '🏘️']);
+  } else if (thingType === 'building') {
+    thing.innerHTML = getRandom(['🏢', '🏭', '🏦']);
+  } else {
+    thing.classList.add('planet');
+    thing.classList.add(getRandom(['planet-1', 'planet-2', 'planet-3']));
+  }
+  return thing;
 }
 
 /**

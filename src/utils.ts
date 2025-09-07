@@ -28,3 +28,7 @@ export async function handleEffectsSequentially(
 export function clamp(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
 }
+
+export function getRandom(items: any[]) {
+  return items[Math.floor(Math.random() * items.length)];
+}

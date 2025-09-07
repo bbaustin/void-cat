@@ -2,7 +2,12 @@ import { getOccupiedTileCoordinates } from './cat';
 import { getTile } from './grid';
 import { updateMoney } from './meterUtils';
 import { playPickup1 } from './sounds';
-import { generateCoin, type ThingCoordinates, type Thing } from './thing';
+import {
+  generateDOMThing,
+  type ThingCoordinates,
+  type Thing,
+  isThing,
+} from './thing';
 
 type ThingOrClass =
   | { thing: Thing; className?: never }
@@ -33,8 +38,9 @@ export function addThingsToGrid(
       // You might not want/need to do this
       tileToAppendTo.innerHTML = '';
 
-      if (thing === 'coin') {
-        return tileToAppendTo.appendChild(generateCoin());
+      // TODO: Make this typeof Thing instead
+      if (isThing(thing)) {
+        return tileToAppendTo.appendChild(generateDOMThing());
       }
     }
 
