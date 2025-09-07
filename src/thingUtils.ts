@@ -38,7 +38,6 @@ export function addThingsToGrid(
       // You might not want/need to do this
       tileToAppendTo.innerHTML = '';
 
-      // TODO: Make this typeof Thing instead
       if (isThing(thing)) {
         return tileToAppendTo.appendChild(generateDOMThing());
       }
