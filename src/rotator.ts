@@ -6,7 +6,7 @@ import { DOM_CAT } from './main';
 import { STAGES } from './stage';
 import { absorbThing } from './thingUtils';
 import { GAME_STATE_OF_TRUTH } from './gameState';
-import { playSmallSound } from './sounds';
+import { playDisappointment, playSmallSound } from './sounds';
 
 export function initRotator() {
   const buttonLeft = document.querySelector('.arrow.left');
@@ -79,9 +79,7 @@ export function rotate(rotationDirection: RotationDirection) {
       STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize
     )
   ) {
-    // TODO: Ideally do some half-animation and communicate that it'll be out of bounds.
-    // Or, you could grey out the button when this is the case. Not sure how hard that would be
-    return;
+    return playDisappointment();
   }
 
   if (GAME_STATE_OF_TRUTH.energyCurrent === 0) {
