@@ -1,5 +1,3 @@
-import { disableAllButtons } from './attack';
-
 type Intermission = {
   text: string;
   buttonText: string;
