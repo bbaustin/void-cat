@@ -25,6 +25,11 @@ export function initGame({ gridSize, terrain }: Stage) {
 
   /* Add the DOMcat to the grid! */
   DOM_CAT = createDOMCat();
+
+  /* Add glow to cat on space stages */
+  STAGES[GAME_STATE_OF_TRUTH.currentStage].terrain === 'space' &&
+    DOM_CAT.classList.add('glowing');
+
   addDOMCatToGrid(DOM_CAT);
 
   //where you at
@@ -58,10 +63,6 @@ export function initGame({ gridSize, terrain }: Stage) {
 
   /* Init the next turn button */
   initNextTurnButton();
-
-  /* Add glow */
-  STAGES[GAME_STATE_OF_TRUTH.currentStage].terrain === 'space' &&
-    DOM_CAT.classList.add('glowing');
 
   /* Show the game screen */
   showScreen('screen-game');

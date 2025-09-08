@@ -1,8 +1,9 @@
+import { disableAllButtons } from './attack';
+
 type Intermission = {
   text: string;
   buttonText: string;
   isButtonDisabled?: boolean;
-  isGlitchy?: boolean;
 };
 
 // Last turn of NextButton should +1 the stage and switch screens
@@ -12,7 +13,6 @@ export const STAGE_INTERMISSION: Intermission[] = [
   {
     text: 'VOID Cat',
     buttonText: 'Start',
-    isGlitchy: true,
   },
   {
     text: 'Nice job!',
@@ -25,18 +25,15 @@ export const STAGE_INTERMISSION: Intermission[] = [
   {
     text: '...vast endless void...',
     buttonText: 'Continue to Day 4',
-    isGlitchy: true,
   },
   {
     text: 'soon...',
     buttonText: 'Continue to last day',
-    isGlitchy: true,
   },
   {
     text: 'END',
     buttonText: 'thank you for playing',
     isButtonDisabled: true,
-    isGlitchy: true,
   },
 ];
 
@@ -52,6 +49,10 @@ export function updateTextAndButtonText(currentStage: number) {
     STAGE_INTERMISSION[currentStage];
 
   p.innerHTML = text;
-  button.innerHTML = buttonText;
-  button.disabled = !!isButtonDisabled;
+
+  if (isButtonDisabled) {
+    button.remove();
+  } else {
+    button.innerHTML = buttonText;
+  }
 }

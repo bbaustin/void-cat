@@ -96,7 +96,7 @@ export const CARD_LIBRARY: Card[] = [
   },
   // 4
   {
-    text: ['Roll 1 space right, then assume defensive nap position'],
+    text: ['Roll 1 space right, then defensive nap position'],
     cost: [2],
     caloriesBurned: [1],
     effect: [
@@ -108,9 +108,9 @@ export const CARD_LIBRARY: Card[] = [
   //5
   {
     text: [
-      'Roll 1 space right, then assume longcat position',
-      'Roll 2 spaces right, then assume longcat position',
-      'Roll 3 spaces right, then assume longcat position',
+      'Roll 1 space right, then longcat position',
+      'Roll 2 spaces right, then longcat position',
+      'Roll 3 spaces right, then longcat position',
     ],
     cost: [2, 2, 2],
     caloriesBurned: [1, 2, 3],
@@ -167,7 +167,7 @@ export const CARD_LIBRARY: Card[] = [
   },
   // 7
   {
-    text: ['Roll 1 space left, then assume defensive nap position'],
+    text: ['Roll 1 space left, then defensive nap position'],
     cost: [2],
     caloriesBurned: [1],
     effect: [
@@ -182,9 +182,9 @@ export const CARD_LIBRARY: Card[] = [
   // 8
   {
     text: [
-      'Roll 1 space left, then assume longcat position',
-      'Roll 2 spaces left, then assume longcat position',
-      'Roll 3 spaces left, then assume longcat position',
+      'Roll 1 space left, then longcat position',
+      'Roll 2 spaces left, then longcat position',
+      'Roll 3 spaces left, then longcat position',
     ],
     cost: [2, 2, 2],
     caloriesBurned: [1, 2, 3],

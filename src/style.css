@@ -105,6 +105,10 @@ SCREENS
   flex-direction: column;
 }
 
+#screen-game {
+  display: none;
+}
+
 #screen-intermission {
   text-align: center;
   margin: 0;
@@ -301,12 +305,22 @@ GRID
 }
 
 .space {
-  background: #000;
+  background: var(--black);
   background-image: radial-gradient(var(--white) 1px, transparent 1px),
     radial-gradient(var(--grey) 1px, transparent 1px),
-    radial-gradient(var(--white) 1px, transparent 1px);
-  background-size: 50px 50px, 80px 80px, 120px 120px;
+    radial-gradient(var(--pink) 1px, transparent 1px);
+  background-size: 80px 50px, 80px 80px, 120px 40px;
   background-position: 0 0, 20px 20px, 40px 60px;
+  animation: starfield 90s linear infinite;
+}
+
+@keyframes starfield {
+  0% {
+    background-position: 0 0, 20px 20px, 40px 60px;
+  }
+  100% {
+    background-position: 500px 0, 200px 20px, 300px 60px;
+  }
 }
 
 .thing {
@@ -386,7 +400,7 @@ CAT
 }
 
 #cat.longcat .ear.left {
-  left: 21px;
+  left: 23px;
 }
 
 .ear.right {
@@ -396,7 +410,7 @@ CAT
 }
 
 #cat.longcat .ear.right {
-  right: 21px;
+  right: 23px;
 }
 
 .face {
@@ -487,7 +501,7 @@ CAT
 }
 
 .glowing {
-  box-shadow: var(--pink-hot);
+  box-shadow: 0px 0px 66px 16px var(--pink-hot);
 }
 /**********************
 CARD & ROTATE BUTTONS

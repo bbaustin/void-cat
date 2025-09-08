@@ -367,7 +367,7 @@ export const STAGES: Stage[] = [
             Math.floor((GAME_STATE_OF_TRUTH.caloriesBurned / 7700) * 10000) /
             10000
           } kg!`,
-        '🎉',
+        '🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉',
         'However, on the other hand, VOID Cat is well on its way to absorbing the entire mass-energy of the universe.',
         'That comes out to 3x10^54 kg.',
         "Written out, it's 3,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000 kg",
@@ -376,8 +376,6 @@ export const STAGES: Stage[] = [
       [
         "Anyway, I guess it's almost the end... 🎬",
         "I hope you didn't feel like you wasted your time 🗑️ 🕰️ with this whole weight-loss thing...",
-      ],
-      [
         'But look at this way 👀 ... when everything is nothingness, nothing matters!',
         "So it doesn't matter if you feel like you wasted your time with this whole weight-loss thing!",
         'Do you know what I mean 🧠 ??',
