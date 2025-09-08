@@ -1,4 +1,4 @@
-import { addXCardsToHand, setDeckCards } from './cardDeck';
+import { addCardsToDeck, addXCardsToHand, setDeckCards } from './cardDeck';
 import { addDOMCatToGrid, CAT_OF_TRUTH, createDOMCat } from './cat';
 import { createEmptyGrid, renderGrid } from './grid';
 import { initRotator } from './rotator';
@@ -42,6 +42,9 @@ export function initGame({ gridSize, terrain }: Stage) {
   DOM_CAT.dataset.headFacing = CAT_OF_TRUTH.headFacing;
   DOM_CAT.dataset.stance = CAT_OF_TRUTH.stance;
 
+  /* Add this stage's new cards */
+  addCardsToDeck(STAGES[GAME_STATE_OF_TRUTH.currentStage].cardsAdded);
+
   /* Put all cards into the "unused" pile
    * Do this after setting up the cat so the cards are correct */
   setDeckCards();
@@ -55,6 +58,10 @@ export function initGame({ gridSize, terrain }: Stage) {
 
   /* Init the next turn button */
   initNextTurnButton();
+
+  /* Add glow */
+  STAGES[GAME_STATE_OF_TRUTH.currentStage].terrain === 'space' &&
+    DOM_CAT.classList.add('glowing');
 
   /* Show the game screen */
   showScreen('screen-game');

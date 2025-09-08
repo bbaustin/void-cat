@@ -1,20 +1,12 @@
 MUST DO
 
-
-
-+ Intermission stuff
-  + Remove, pretty much. But also:
-    + Beginning / ending
-    + This can use intermission page 
-    + 5 days left...
-    + 4 days left... 
-
 + Assemble fun deck
   + Add cards per level 
 
 + If you can't play a card, don't discard it 
   + Could be cheat-fixed by removing cards that ONLY apply position. It's a good idea.
 
++ Readme
 
 SHOULD DO
 

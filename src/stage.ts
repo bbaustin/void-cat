@@ -7,6 +7,8 @@ import {
   type ThingCoordinates,
 } from './thing';
 import { getCalorieCount } from './meterUtils';
+import type { Card } from './card';
+import { CARD_LIBRARY } from './cardLibrary';
 
 // TODO: If you have a map of terrains, you might not need gridSize, only array row/col
 export interface Stage {
@@ -23,6 +25,7 @@ export interface Stage {
   thingType: Thing;
   terrain?: Terrain;
   turns?: number;
+  cardsAdded: Card[];
   drama: (string | (() => string))[][];
 }
 
@@ -39,6 +42,7 @@ export const STAGES: Stage[] = [
     ],
     thingCoordinates: generateThingCoordinatesInDiamondShape(5),
     thingType: 'coin',
+    terrain: 'floor',
     drama: [
       [
         'Hey 👋 !',
@@ -47,17 +51,18 @@ export const STAGES: Stage[] = [
         "And... congratulations 🥳 ! You got the job to be VOID Cat's personal trainer 🏋️‍♀️ !!",
         'This is gonna be so much fun!',
         "I'll explain 🎓 how to do your job in this first stage!",
-        'There will be a lot of text 😴 but you can skip it if you want by clicking the button above 👆',
+        'There will be a lot of text 😴 but you can ignore it and just start playing cards 🎴 below if you want 👇',
+        'But I would listen if I were you 😤 ! So anyway, here are the rules!',
         'So basically, VOID Cat will burn calories 🥵 whenever you click one of the workout routines cards 💪 on the bottom of the screen 👇.',
         'The three cards in the middle change every turn.',
         'The two cards on the edges rotate 🔄 VOID Cat and are available every turn.',
         'The orange number 🟧 on the card is the number of calories burned.',
-        '(You can remember this like Garfield 🐈, the orange cat, eats a lot of high-cal lasagna 🥧 !)',
+        '(You can remember this like Garfield 🐈, the orange cat, eats a lot of high-calorie lasagna 🥧 !)',
         "You want to burn as many calories as possible 🏃💨 ! OK?? That's like your score 🕹️ !",
         'The green number 🟩 is the amount of energy the workout uses.',
         "If you use all your energy, you can't do any more workouts this turn 😰 !",
         "But don't worry 😉 !! You'll recover your energy at the beginning of the next turn!",
-        'The colors on the cards 🟧 🟩 match the colors of the meters 🟧 🟩 at the top of the screen ↖️',
+        'The colors on the cards 🟧 🟩 match the colors of the meters 🟧 🟩 at the top of the screen ↖️ .',
         "It's really good design!!",
         'OK, now try doing some workouts 🤸‍♀️ !!',
       ],
@@ -81,6 +86,12 @@ export const STAGES: Stage[] = [
         "Every stage has five turns 🖐️ . So this is the last one!! Let's make it a good one 🙌!",
       ],
     ],
+    cardsAdded: [
+      { ...CARD_LIBRARY[0], level: 1 },
+      { ...CARD_LIBRARY[0], level: 1 },
+      { ...CARD_LIBRARY[1], level: 1 },
+      { ...CARD_LIBRARY[1], level: 1 },
+    ],
   },
   /* 1 - DAY 2 */
   {
@@ -102,6 +113,7 @@ export const STAGES: Stage[] = [
       ...generateThingCoordinatesInStraightRowsOrColumns(5, [1, 3], 'row'),
     ],
     thingType: 'tree',
+    terrain: 'grass',
     drama: [
       [
         () =>
@@ -129,6 +141,18 @@ export const STAGES: Stage[] = [
         "I actually can't see what you're doing, but I bet you're doing a great job!",
       ],
       ["Last turn! Let's do this!"],
+    ],
+    cardsAdded: [
+      CARD_LIBRARY[4],
+      CARD_LIBRARY[5],
+      CARD_LIBRARY[6],
+      CARD_LIBRARY[7],
+      CARD_LIBRARY[8],
+      CARD_LIBRARY[9],
+      { ...CARD_LIBRARY[6], level: 1 },
+      { ...CARD_LIBRARY[9], level: 1 },
+      CARD_LIBRARY[10],
+      CARD_LIBRARY[11],
     ],
   },
   /* 2 - DAY 3 */
@@ -224,11 +248,21 @@ export const STAGES: Stage[] = [
       ],
       ["Alright! Last turn! Let's do this 💪 !!"],
     ],
+    cardsAdded: [
+      { ...CARD_LIBRARY[5], level: 2 },
+      { ...CARD_LIBRARY[6], level: 2 },
+      { ...CARD_LIBRARY[8], level: 2 },
+      { ...CARD_LIBRARY[9], level: 2 },
+      { ...CARD_LIBRARY[0], level: 3 },
+      { ...CARD_LIBRARY[1], level: 3 },
+      { ...CARD_LIBRARY[1], level: 3 },
+      { ...CARD_LIBRARY[3], level: 1 },
+    ],
   },
   /* 3 - DAY 4 */
   {
     gridSize: { x: 5, y: 5 },
-    terrain: 'street',
+    terrain: 'floor',
     attackCoordinates: [
       generateThingCoordinatesInStraightRowsOrColumns(5, [0], 'row'),
       generateThingCoordinatesInStraightRowsOrColumns(5, [1, 3], 'column'),
@@ -252,7 +286,7 @@ export const STAGES: Stage[] = [
         'You played it in js13kGames 2024... right?????',
       ],
       [
-        'In that game, a really nice person 🧍, not unlike yourself 🧍🧍, helped me bring about ⬛️ THE GREAT UNBECOMING ⬛️ !',
+        'In that game, a really nice person 🧍, not unlike yourself 🧍, helped me bring about ⬛️ THE GREAT UNBECOMING ⬛️ !',
         'It was really awesome!',
         'Everything 🌌 turned into nothingness ⬛️ !',
         'You might not believe this, but that was actually 72.4 billion years ago ⏳ ⌛️ !!',
@@ -261,7 +295,7 @@ export const STAGES: Stage[] = [
       [
         'Even though we achieved nothingness ⬛️, something always seems to wriggle 🪱 its way back into existence 🎇 !!',
         "It's super annoying 😡 !",
-        'Another weird thing is that each time the universe resets 🔂 , things end up really similar 👯 to how they used to be.',
+        'Another weird thing is that each time the universe resets 🔂 , things end up really similar 👯 to how they used to be!',
         "Like, this time around, there's an Earth again 🌍, it's still filled with human people 🕴, they all have their routines...",
         "There's probably a parallel to draw here with the repetitive nature of working out 🤔!",
         "I'll let you work out (no pun intended) a deeper meaning here!!",
@@ -279,8 +313,17 @@ export const STAGES: Stage[] = [
         'But VOID Cat is growing 📈 at an superexponential rate.',
         "After you finish helping it absorb this city 🏙️ , its mass will start to surpass that of Earth's.",
         'So tomorrow VOID Cat can absorb the entire world!',
-        'Exciting 😸 !! ',
+        'Super exciting 😸 !! ',
       ],
+    ],
+    cardsAdded: [
+      { ...CARD_LIBRARY[3], level: 2 },
+      { ...CARD_LIBRARY[0], level: 4 },
+      { ...CARD_LIBRARY[1], level: 4 },
+      { ...CARD_LIBRARY[5], level: 2 },
+      { ...CARD_LIBRARY[6], level: 2 },
+      { ...CARD_LIBRARY[8], level: 2 },
+      { ...CARD_LIBRARY[9], level: 2 },
     ],
   },
   /* 4 - DAY 5 */
@@ -297,6 +340,7 @@ export const STAGES: Stage[] = [
       [4, 4],
     ],
     thingType: 'planet',
+    terrain: 'space',
     drama: [
       [
         "Hey! I'm glad you're still here!",
@@ -344,5 +388,6 @@ export const STAGES: Stage[] = [
         'And see you in another 72.4 billion years! ',
       ],
     ],
+    cardsAdded: [],
   },
 ];

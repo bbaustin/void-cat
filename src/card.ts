@@ -11,10 +11,6 @@ export interface Card {
   cost: number[];
   caloriesBurned: number[];
   level?: number;
-  /** Description of stuff that might not make sense immediately.
-   * Note that (for now) this is NOT an array.
-   * As of yet, level-based "text" is self-explanatory. */
-  description?: string;
   /** We might want to have some cards that can't show up
    * until later in the game for narrative or power purposes */
   minimumStage?: number;
