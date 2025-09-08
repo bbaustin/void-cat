@@ -36,8 +36,6 @@ export function addThingsToGrid(
     }
 
     if (thing) {
-      // NOTE: Clear out div first
-      // You might not want/need to do this
       tileToAppendTo.innerHTML = '';
 
       if (isThing(thing)) {
@@ -64,16 +62,12 @@ export function removeClassNamesFromGrid(className: string) {
   );
 }
 
-/**
- * // spaceToAbsorbFrom?: ThingCoordinates
- */
 export function absorbThing() {
   const tilesOccupiedByCat = getOccupiedTileCoordinates();
 
   tilesOccupiedByCat.forEach((occupiedTile) => {
     const tile = getTile(occupiedTile.x, occupiedTile.y);
     if (!tile) return;
-    // NOTE: Right now only absorbing coin of course
     const coinTile = tile?.querySelector('.thing');
     if (coinTile) {
       updateMoney(1);

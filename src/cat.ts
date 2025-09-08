@@ -65,7 +65,7 @@ export function createDOMCat(
   domCat.dataset.stance = stance;
 
   /** Add initial position */
-  // This is temporary and shoudl be handled better later...
+  // This is temporary and shoudl be handled better later... (later: it was not handled better)
   domCat.style.marginTop = '-890px';
   domCat.style.marginLeft = '-16px';
   domCat.style.top = '0px';
@@ -76,10 +76,6 @@ export function createDOMCat(
 
 export function addDOMCatToGrid(catDiv: HTMLDivElement) {
   document.querySelector('#grid')?.appendChild(catDiv);
-}
-
-export function removeDOMCatFromGrid(catDiv: HTMLDivElement) {
-  document.querySelector('#grid')?.removeChild(catDiv);
 }
 
 /**

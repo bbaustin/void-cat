@@ -79,7 +79,7 @@ export const STAGES: Stage[] = [
         'It stands for...',
         'Voluminous Ovoid Immobile Dieting Cat!',
         'But I just say VOID Cat for short!',
-        `Ovoid means "shaped like an oval," if you didn't know 📖 !`,
+        `Ovoid means "shaped like an egg," 🥚 if you didn't know 📖 !`,
         'I had to look it up 🧠 !',
       ],
       [

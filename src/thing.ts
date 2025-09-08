@@ -45,11 +45,6 @@ export function generateDOMThing(thingType: Thing) {
 export function generateThingCoordinatesInDiamondShape(
   maxCoordinate: number
 ): ThingCoordinates {
-  // if (maxCoordinate % 2 === 0) {
-  //   return;
-  //   // throw new Error('Grid size must be odd to have a center.');
-  // }
-
   const center = Math.floor(maxCoordinate / 2);
   const coords: ThingCoordinates = [];
 

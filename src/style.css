@@ -145,7 +145,7 @@ METERS
   margin: 6px 0;
 }
 
-.meter-number {
+.mn {
   display: flex;
   justify-content: center;
   padding: 12px;
@@ -155,19 +155,19 @@ METERS
   font-weight: 400;
 }
 
-.turn .meter-number {
+.turn .mn {
   background: var(--teal);
 }
 
-.energy .meter-number {
+.energy .mn {
   background: var(--green);
 }
 
-.money .meter-number {
+.money .mn {
   background: var(--yellow);
 }
 
-.calories .meter-number {
+.calories .mn {
   background: var(--orange);
 }
 

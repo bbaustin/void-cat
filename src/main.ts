@@ -32,9 +32,6 @@ export function initGame({ gridSize, terrain }: Stage) {
 
   addDOMCatToGrid(DOM_CAT);
 
-  //where you at
-  // on stages after 0 cat of truth positions etc
-  //are NOT being reset
   CAT_OF_TRUTH.headX = 0;
   CAT_OF_TRUTH.headY = 0;
   CAT_OF_TRUTH.headFacing = 'top';

@@ -96,7 +96,7 @@ export function addXCardsToHand(
 }
 
 export function addCardToHandVisually(card: Card) {
-  const cardToAdd = createDOMCard(card, true);
+  const cardToAdd = createDOMCard(card);
   document.getElementById('card-holder')?.appendChild(cardToAdd);
 }
 
@@ -122,7 +122,7 @@ export function addWholeHandVisually() {
   // clear out first. Feels unwieldy but without, I'm getting doubles
   clearHandVisually();
   DECK_OF_TRUTH.hand.forEach((card) =>
-    cardHolder?.appendChild(createDOMCard(card, true))
+    cardHolder?.appendChild(createDOMCard(card))
   );
 
   replaceTextBasedOnRotation();
