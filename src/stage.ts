@@ -136,11 +136,20 @@ export const STAGES: Stage[] = [
     gridSize: { x: 5, y: 5 },
     terrain: 'street',
     attackCoordinates: [
-      undefined,
       [
         [0, 0],
         [2, 0],
         [4, 0],
+      ],
+      [
+        [0, 0],
+        [2, 0],
+        [4, 0],
+        [1, 2],
+        [3, 2],
+        [0, 4],
+        [2, 4],
+        [4, 4],
       ],
       [
         [0, 0],
@@ -280,9 +289,12 @@ export const STAGES: Stage[] = [
     attackCoordinates: [undefined, undefined, undefined, undefined, undefined],
     thingCoordinates: [
       [0, 1],
-      [4, 4],
-      [2, 3],
+      [0, 4],
       [1, 0],
+      [1, 3],
+      [2, 3],
+      [3, 0],
+      [4, 4],
     ],
     thingType: 'planet',
     drama: [

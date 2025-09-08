@@ -22,7 +22,7 @@ export function initNextTurnButton() {
   });
 }
 
-export function handleNextButtonClick() {
+export async function handleNextButtonClick() {
   if (GAME_STATE_OF_TRUTH.currentScreen === 'screen-intermission') {
     setGameState('currentScreen', 'screen-game');
     updateTurn(0);
@@ -38,10 +38,25 @@ export function handleNextButtonClick() {
   /** Add 1 to the stage
    * Switch the screen */
   if (isLastTurn()) {
-    setGameState('currentStage', GAME_STATE_OF_TRUTH.currentStage + 1);
-    setGameState('currentScreen', 'screen-intermission');
-    document.querySelector('.next')!.classList.remove('warning');
-    return initIntermission(GAME_STATE_OF_TRUTH.currentStage);
+    await handleEffectsSequentially([
+      // make everything unclickable
+      () => disableAllButtons(),
+
+      () => stopDramaEvents(),
+
+      // if there's an attack square, trigger it audiovisually
+      // also calculate how many tiles were struck with the attack
+      async () => await triggerAttack(),
+
+      // () => removeClassNamesFromGrid('attack'),
+
+      // go to next screen
+      () => setGameState('currentStage', GAME_STATE_OF_TRUTH.currentStage + 1),
+      () => setGameState('currentScreen', 'screen-intermission'),
+      () => document.querySelector('.next')!.classList.remove('warning'),
+      () => initIntermission(GAME_STATE_OF_TRUTH.currentStage),
+      () => enableAllButtons(),
+    ]);
   }
 }
 
@@ -91,8 +106,8 @@ export async function updateTurnViaButton() {
 }
 
 export function isLastTurn() {
-  const { currentTurn, currentStage } = GAME_STATE_OF_TRUTH;
-  const totalTurns = STAGES[currentStage].turns || 5;
+  const { currentTurn } = GAME_STATE_OF_TRUTH;
+  const totalTurns = 4; // Really it's STAGES[currentStage].attackCoordinates.length || 4;
 
   return currentTurn >= totalTurns;
 }
@@ -113,11 +128,4 @@ export function updateNextButtonText() {
     nextButton.classList.remove('warning');
     nextButton.innerHTML = 'Next turn';
   }
-}
-
-export function updateNextButtonBeforeGoingToIntermission() {
-  const nextButton = document.querySelector('.next');
-  if (!nextButton) return null;
-
-  nextButton.innerHTML = 'Go to next stage';
 }

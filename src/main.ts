@@ -4,10 +4,7 @@ import { createEmptyGrid, renderGrid } from './grid';
 import { initRotator } from './rotator';
 import { showScreen } from './screen';
 import { STAGES, type Stage } from './stage';
-import {
-  initNextTurnButton,
-  updateNextButtonBeforeGoingToIntermission,
-} from './nextButton';
+import { initNextTurnButton } from './nextButton';
 import { GAME_STATE_OF_TRUTH } from './gameState';
 import { updateTextAndButtonText } from './stageIntermission';
 import { handleDramaEventsSequentially, LAST_LINE } from './stageDrama';
@@ -75,11 +72,6 @@ export function initIntermission(currentStage: number) {
   showScreen('screen-intermission');
 
   updateTextAndButtonText(currentStage);
-
-  // TODO: Might not want this?
-  updateNextButtonBeforeGoingToIntermission();
 }
-
-// initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);
 
 initIntermission(GAME_STATE_OF_TRUTH.currentStage);

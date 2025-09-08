@@ -1,11 +1,7 @@
-// NOTE: Make all cards use "right/left", but run it through a helper which
-// Slightly big todo: would be better not to these functions in the effect array... just want to list them. annoying type problem
-
 import type { Card } from './card';
 import { changeStance, move } from './cardEffects';
 import { handleEffectsSequentially } from './utils';
 
-// when cat is rotated, will change that to "up/down"
 export const CARD_LIBRARY: Card[] = [
   {
     text: ['Roll 1 space right', 'Roll 2 spaces right'],
