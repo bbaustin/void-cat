@@ -1,11 +1,7 @@
-// NOTE: Make all cards use "right/left", but run it through a helper which
-// Slightly big todo: would be better not to these functions in the effect array... just want to list them. annoying type problem
-
 import type { Card } from './card';
 import { changeStance, move } from './cardEffects';
 import { handleEffectsSequentially } from './utils';
 
-// when cat is rotated, will change that to "up/down"
 export const CARD_LIBRARY: Card[] = [
   {
     text: ['Roll 1 space right', 'Roll 2 spaces right'],
@@ -63,9 +59,7 @@ export const CARD_LIBRARY: Card[] = [
     ],
   },
   {
-    text: [
-      'Roll to the left and right one space, ending in your original space',
-    ],
+    text: ['Roll back and forth'],
     cost: [2],
     caloriesBurned: [3],
     effect: [
@@ -102,9 +96,7 @@ export const CARD_LIBRARY: Card[] = [
     ],
   },
   {
-    text: [
-      'Assume longcat position, roll 1 space right, then assume defensive nap position',
-    ],
+    text: ['Longcat, then roll 1 space right, then nap'],
     caloriesBurned: [1],
     cost: [2],
     effect: [
@@ -117,34 +109,34 @@ export const CARD_LIBRARY: Card[] = [
       },
     ],
   },
-  {
-    text: ['Void warp to a random tile'],
-    cost: [1],
-    caloriesBurned: [0],
-    effect: [
-      // TODO!
-    ],
-    description:
-      'Immediately transport yourself to a random tile. Burn as many calories as you would have moving there physically.',
-  },
-  {
-    text: ['Send a void tendril to snatch an enemy to the right'],
-    cost: [1],
-    caloriesBurned: [0],
-    effect: [
-      // TODO!
-    ],
-    description:
-      'Shoot out a tentacle to the right, until it hits an enemy. That enemy will be eliminated from the grid',
-  },
-  {
-    text: ['Assume offensive nap position'],
-    cost: [3],
-    caloriesBurned: [0],
-    effect: [
-      // TODO!
-    ],
-    description:
-      'Curl into a ball. You only take up one tile (where your head is). You cannot move or burn calories. Pull in and consume all objects or enemies in a square shape around you. Once you are hit, you will enter standard position.',
-  },
+  // {
+  //   text: ['Void warp to a random tile'],
+  //   cost: [1],
+  //   caloriesBurned: [0],
+  //   effect: [
+  //     // TODO!
+  //   ],
+  //   description:
+  //     'Immediately transport yourself to a random tile. Burn as many calories as you would have moving there physically.',
+  // },
+  // {
+  //   text: ['Send a void tendril to snatch an enemy to the right'],
+  //   cost: [1],
+  //   caloriesBurned: [0],
+  //   effect: [
+  //     // TODO!
+  //   ],
+  //   description:
+  //     'Shoot out a tentacle to the right, until it hits an enemy. That enemy will be eliminated from the grid',
+  // },
+  // {
+  //   text: ['Assume offensive nap position'],
+  //   cost: [3],
+  //   caloriesBurned: [0],
+  //   effect: [
+  //     // TODO!
+  //   ],
+  //   description:
+  //     'Curl into a ball. You only take up one tile (where your head is). You cannot move or burn calories. Pull in and consume all objects or enemies in a square shape around you. Once you are hit, you will enter standard position.',
+  // },
 ];

@@ -1,8 +1,15 @@
-import { CAT_OF_TRUTH, getOccupiedTileCoordinates } from './cat';
+import { getOccupiedTileCoordinates } from './cat';
+import { GAME_STATE_OF_TRUTH } from './gameState';
 import { getTile } from './grid';
 import { updateMoney } from './meterUtils';
 import { playPickup1 } from './sounds';
-import { generateCoin, type ThingCoordinates, type Thing } from './thing';
+import { STAGES } from './stage';
+import {
+  generateDOMThing,
+  type ThingCoordinates,
+  type Thing,
+  isThing,
+} from './thing';
 
 type ThingOrClass =
   | { thing: Thing; className?: never }
@@ -33,8 +40,10 @@ export function addThingsToGrid(
       // You might not want/need to do this
       tileToAppendTo.innerHTML = '';
 
-      if (thing === 'coin') {
-        return tileToAppendTo.appendChild(generateCoin());
+      if (isThing(thing)) {
+        return tileToAppendTo.appendChild(
+          generateDOMThing(STAGES[GAME_STATE_OF_TRUTH.currentStage].thingType)
+        );
       }
     }
 
@@ -56,19 +65,18 @@ export function removeClassNamesFromGrid(className: string) {
 }
 
 /**
- *
+ * // spaceToAbsorbFrom?: ThingCoordinates
  */
-export function absorbThing(spaceToAbsorbFrom?: ThingCoordinates) {
+export function absorbThing() {
   const tilesOccupiedByCat = getOccupiedTileCoordinates();
 
   tilesOccupiedByCat.forEach((occupiedTile) => {
     const tile = getTile(occupiedTile.x, occupiedTile.y);
     if (!tile) return;
     // NOTE: Right now only absorbing coin of course
-    const coinTile = tile?.querySelector('.coin');
+    const coinTile = tile?.querySelector('.thing');
     if (coinTile) {
-      // This is always only 1 now; please never put non-numbers in here :>
-      updateMoney(Number(coinTile.innerHTML));
+      updateMoney(1);
       tile?.removeChild(coinTile);
       playPickup1();
     }

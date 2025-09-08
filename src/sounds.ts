@@ -138,62 +138,6 @@ export function playPickup1() {
   ); // Pickup 320
 }
 
-export function playPickup2() {
-  zzfx(
-    ...[
-      2.5,
-      ,
-      466,
-      0.01,
-      0.06,
-      0.18,
-      ,
-      0.6,
-      ,
-      ,
-      217,
-      0.05,
-      ,
-      ,
-      ,
-      ,
-      ,
-      0.59,
-      0.05,
-      ,
-      596,
-    ]
-  ); // Pickup 347
-}
-
-export function playExplosion1() {
-  zzfx(
-    ...[
-      1.2,
-      ,
-      67,
-      0.05,
-      0.04,
-      0.4,
-      1,
-      3.5,
-      ,
-      ,
-      ,
-      ,
-      ,
-      1.7,
-      16,
-      0.6,
-      ,
-      0.35,
-      0.06,
-      ,
-      104,
-    ]
-  ); // Explosion 348
-}
-
 export function playExplosion2() {
   zzfx(
     ...[
@@ -218,4 +162,183 @@ export function playExplosion2() {
       0.16,
     ]
   ); // Explosion 358
+}
+
+export function playDisappointment() {
+  zzfx(
+    ...[
+      0.7,
+      ,
+      129,
+      0.08,
+      0.11,
+      0.07,
+      ,
+      2.5,
+      ,
+      -1,
+      ,
+      ,
+      ,
+      ,
+      0.5,
+      0.1,
+      ,
+      0.58,
+      0.19,
+      ,
+      462,
+    ]
+  ); // Powerup 432
+}
+
+export function playSmallSound() {
+  zzfx(
+    ...[0.7, 0.2, 458, 0.03, 0.04, 0.09, 1, 3.2, , 54, , , , , , , , 0.72, 0.02]
+  ); // Jump 472
+}
+
+export function playLongcatSound() {
+  zzfx(
+    ...[
+      0.8,
+      ,
+      489,
+      0.01,
+      0.26,
+      0.27,
+      1,
+      2.8,
+      ,
+      20,
+      ,
+      ,
+      ,
+      ,
+      ,
+      ,
+      ,
+      0.7,
+      0.14,
+      ,
+      -665,
+    ]
+  ); // Powerup 436}
+}
+
+export function playNapSound() {
+  zzfx(
+    ...[
+      0.8,
+      ,
+      414,
+      0.01,
+      0.17,
+      0.38,
+      1,
+      2.1,
+      ,
+      1,
+      ,
+      ,
+      ,
+      ,
+      ,
+      ,
+      ,
+      0.97,
+      0.14,
+      ,
+      -1365,
+    ]
+  );
+} // Powerup 504}
+
+export function playBurnCals() {
+  zzfx(
+    ...[0.7, , 335, 0.02, 0.05, 0.08, , 0.8, , 178, , , , , , , , 0.59, 0.01]
+  ); // Jump 386
+}
+
+export function playWasAttacked() {
+  zzfx(
+    ...[
+      0.5,
+      ,
+      413,
+      0.08,
+      0.22,
+      0.38,
+      ,
+      0.9,
+      ,
+      ,
+      -113,
+      0.18,
+      ,
+      ,
+      ,
+      ,
+      ,
+      0.98,
+      0.28,
+      ,
+      109,
+    ]
+  ); // Powerup 482
+}
+
+export function playCannot() {
+  zzfx(
+    ...[
+      1,
+      ,
+      296,
+      ,
+      0.04,
+      0.02,
+      1,
+      2.5,
+      ,
+      -3,
+      ,
+      ,
+      ,
+      1.1,
+      ,
+      0.1,
+      0.03,
+      0.63,
+      0.03,
+      ,
+      1509,
+    ]
+  ); // Hit 527
+}
+
+export function playBoop() {
+  zzfx(
+    ...[
+      1.1,
+      ,
+      64,
+      0.01,
+      0.01,
+      0.03,
+      4,
+      2.9,
+      4,
+      -12,
+      ,
+      ,
+      ,
+      ,
+      143,
+      0.1,
+      0.34,
+      ,
+      0.02,
+      0.2,
+    ]
+  ); // Blip 592
 }

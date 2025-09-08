@@ -1,30 +1,14 @@
-import {
-  addXCardsToHand,
-  renderDiscardPile,
-  // renderWholeDeck,
-  setDeckCards,
-} from './cardDeck';
-import {
-  addDOMCatToGrid,
-  CAT_OF_TRUTH,
-  createDOMCat,
-  removeDOMCatFromGrid,
-} from './cat';
+import { addXCardsToHand, setDeckCards } from './cardDeck';
+import { addDOMCatToGrid, CAT_OF_TRUTH, createDOMCat } from './cat';
 import { createEmptyGrid, renderGrid } from './grid';
 import { initRotator } from './rotator';
-import { showScreen, type ScreenId } from './screen';
+import { showScreen } from './screen';
 import { STAGES, type Stage } from './stage';
-import {
-  initNextTurnButton,
-  updateNextButtonViaGoingToIntermission,
-} from './nextButton';
-import {
-  handleUpgradeCatButtonClick,
-  initBuyCardsButton,
-  initUpgradeCardsButton,
-  initUpgradeCatButton,
-} from './stageIntermission';
+import { initNextTurnButton } from './nextButton';
 import { GAME_STATE_OF_TRUTH } from './gameState';
+import { updateTextAndButtonText } from './stageIntermission';
+import { handleDramaEventsSequentially, LAST_LINE } from './stageDrama';
+import { addThingsToGrid } from './thingUtils';
 
 export let DOM_CAT = createDOMCat();
 
@@ -32,6 +16,12 @@ export function initGame({ gridSize, terrain }: Stage) {
   /* Draw game grid */
   const grid = createEmptyGrid(gridSize.x, gridSize.y, terrain);
   renderGrid(grid);
+
+  /* Add the attacks to the grid */
+  addThingsToGrid(
+    STAGES[GAME_STATE_OF_TRUTH.currentStage].attackCoordinates[0],
+    { className: 'attack' }
+  );
 
   /* Add the DOMcat to the grid! */
   DOM_CAT = createDOMCat();
@@ -65,21 +55,23 @@ export function initGame({ gridSize, terrain }: Stage) {
 
   /* Init the next turn button */
   initNextTurnButton();
-  // TODO: These should be in initIntermission
-  initBuyCardsButton();
-  initUpgradeCardsButton();
-  initUpgradeCatButton();
 
   /* Show the game screen */
   showScreen('screen-game');
+
+  handleDramaEventsSequentially([
+    ...STAGES[GAME_STATE_OF_TRUTH.currentStage].drama[0],
+    LAST_LINE,
+  ]);
 }
 
-export function initIntermission() {
+export function initIntermission(currentStage: number) {
+  /* Init the next turn button */
+  initNextTurnButton();
+
   showScreen('screen-intermission');
-  /* Initiate with first button clicked */
-  /* May get rid of this stuff as deadline draws near */
-  handleUpgradeCatButtonClick();
-  updateNextButtonViaGoingToIntermission();
+
+  updateTextAndButtonText(currentStage);
 }
 
-initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);
+initIntermission(GAME_STATE_OF_TRUTH.currentStage);

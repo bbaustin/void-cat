@@ -2,6 +2,7 @@
   /* WIDTHS */
   --width-of-grid: 370px;
   --thick-border: var(--black) 3px solid;
+  --thin-border: var(--black) 1.5px solid;
 
   /* COLORS */
   --black: #000;
@@ -55,20 +56,49 @@ button:disabled {
   cursor: not-allowed;
 }
 
-#top-bar {
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.top .placeholder {
+  width: 160px;
+}
+
+.middle {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-#top-bar div:first-child {
-  width: 33%;
+.middle .placeholder,
+.drama {
+  width: 100%;
+  margin: 0px 12px 36px 24px;
+}
+
+.drama {
+  outline: var(--thin-border);
+  border-radius: 10px;
+  background: var(--white);
+  overflow-y: scroll;
+  height: calc(var(--width-of-grid) + 24px);
+  font-size: 16px;
+}
+
+.drama div {
+  padding: 24px;
+  line-height: 24px;
+  border-bottom: var(--thin-border);
 }
 
 /**********************
 SCREENS
 **********************/
-#screen-game {
+#screen-game,
+#screen-intermission {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,39 +106,18 @@ SCREENS
 }
 
 #screen-intermission {
-  display: flex;
+  text-align: center;
+  margin: 0;
+  padding: 36px 48px;
 }
 
-.left-side-button-list {
-  width: 25%;
+#intermission-text {
+  font-size: 124px;
+  margin: 32px 0;
+}
+
+#intermission-button {
   padding: 24px;
-  height: 100%;
-}
-
-.left-side-button-list button {
-  padding: 12px;
-  margin-bottom: 36px;
-  width: 100%;
-  min-height: 86px;
-}
-
-.left-side-button-list button.active {
-  background: var(--green);
-}
-
-#mini-screen {
-  width: 75%;
-  display: flex;
-  padding: 26px 0px 0px 24px;
-}
-
-/**********************
-MINI SCREENS 
-**********************/
-#view-all {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* 2 equal-width columns */
-  gap: 24px;
 }
 
 /**********************
@@ -159,12 +168,8 @@ METERS
 }
 
 #next-holder {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 200px;
   text-align: right;
-  margin: 42px 45px;
+  margin: 0px 12px 12px 0px;
 }
 
 #next-holder button {
@@ -215,6 +220,33 @@ METERS
   }
 }
 
+.slight-attention {
+  animation: slight-attention-keyframes 0.4s ease;
+}
+
+@keyframes slight-attention-keyframes {
+  0% {
+    transform: scale(1);
+    filter: brightness(100%);
+  }
+  25% {
+    transform: scale(1.1);
+    filter: brightness(110%); /* lighten */
+  }
+  50% {
+    transform: scale(1.1);
+    filter: brightness(110%);
+  }
+  75% {
+    transform: scale(1.05);
+    filter: brightness(105%);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(100%);
+  }
+}
+
 /**********************
 GRID
 **********************/
@@ -222,18 +254,20 @@ GRID
 #grid {
   display: grid;
   gap: 6px;
-  padding: 18px 12px 12px 18px;
+  padding: 12px;
   border-radius: 12px;
   margin: 0 auto 32px;
   background: var(--purple-dark);
+  outline: var(--thin-border);
 }
 
 .tile {
-  outline: 1.5px solid var(--black);
+  outline: var(--thin-border);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  font-size: 48px;
 }
 
 .attack::after {
@@ -247,7 +281,6 @@ GRID
   position: relative;
   /* If you want it to be above cat */
   z-index: var(--atk-z);
-  position: relative;
   transition: opacity 0.3s ease;
 }
 
@@ -264,7 +297,7 @@ GRID
 }
 
 .street {
-  background: var(--grey);
+  background: var(--grey-dark);
 }
 
 .space {
@@ -276,6 +309,13 @@ GRID
   background-position: 0 0, 20px 20px, 40px 60px;
 }
 
+.thing {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .coin {
   width: 30px;
   height: 30px;
@@ -284,11 +324,26 @@ GRID
   background: var(--yellow);
   color: var(--red);
   border-radius: 100%;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-weight: 700;
+}
+
+.planet {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  box-shadow: inset -8px -5px 15px var(--black);
+}
+
+.planet-1 {
+  background: linear-gradient(to bottom right, var(--orange), var(--red));
+}
+
+.planet-2 {
+  background: linear-gradient(to bottom right, var(--pink), var(--purple-dark));
+}
+
+.planet-3 {
+  background: var(--green);
 }
 
 /**********************
@@ -303,7 +358,7 @@ CAT
   background: var(--black);
   /* This is a little weird, but oh well */
   zoom: 40%;
-  transition: left 0.5s, top 0.5s, transform 0.5s, height 0.5s;
+  transition: left 0.5s, top 0.5s, height 0.5s;
   z-index: var(--cat-z);
 }
 
@@ -472,15 +527,6 @@ CARD & ROTATE BUTTONS
 
 .card:focus {
   outline-width: 10px;
-}
-
-/* IDK THESE */
-.card.level2 {
-  background: lightyellow;
-}
-
-.card.level3 {
-  background: lightsalmon;
 }
 
 .stats {

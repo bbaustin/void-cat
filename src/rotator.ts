@@ -3,9 +3,10 @@ import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH, getOccupiedTileCoordinates } from './cat';
 import { updateEnergyAndCalMetersAfterPlayingCard } from './meterUtils';
 import { DOM_CAT } from './main';
-import { CURRENT_STAGE, STAGES } from './stage';
+import { STAGES } from './stage';
 import { absorbThing } from './thingUtils';
 import { GAME_STATE_OF_TRUTH } from './gameState';
+import { playCannot, playSmallSound } from './sounds';
 
 export function initRotator() {
   const buttonLeft = document.querySelector('.arrow.left');
@@ -75,15 +76,15 @@ export function rotate(rotationDirection: RotationDirection) {
       CAT_OF_TRUTH.headFacing,
       rotationDirection,
       CAT_OF_TRUTH.length,
-      STAGES[CURRENT_STAGE].gridSize
+      STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize
     )
   ) {
-    // TODO: Ideally do some half-animation and communicate that it'll be out of bounds.
-    // Or, you could grey out the button when this is the case. Not sure how hard that would be
-    return;
+    return playCannot();
   }
 
-  if (GAME_STATE_OF_TRUTH.energyCurrent === 0) {
+  const energy = GAME_STATE_OF_TRUTH.energyCurrent;
+
+  if (energy === 0 || (CAT_OF_TRUTH.stance === 'nap' && energy <= 1)) {
     return signifyNotEnoughEnergy();
   }
 
@@ -119,6 +120,9 @@ export function rotate(rotationDirection: RotationDirection) {
 
   /* Absorb thing (coin) if applicable */
   absorbThing();
+
+  /* Play sound */
+  playSmallSound();
 }
 
 function handleClockwiseRotation() {

@@ -1,8 +1,16 @@
-import { CAT_OF_TRUTH } from './cat';
+import { CAT_OF_TRUTH, getOccupiedTileCoordinates } from './cat';
 import { DOM_CAT } from './main';
 import { isOutOfBounds } from './grid';
 import { delay } from './utils';
 import { absorbThing } from './thingUtils';
+import {
+  playDisappointment,
+  playLongcatSound,
+  playNapSound,
+  playSmallSound,
+} from './sounds';
+import { GAME_STATE_OF_TRUTH } from './gameState';
+import { STAGES } from './stage';
 
 /** Distance in pixels one move left or right should take */
 export const ONE_MOVE_PX_X = 182;
@@ -55,6 +63,9 @@ export function move(
 
       /** Interact with Things on the grid */
       absorbThing();
+
+      /* Make sound */
+      playSmallSound();
     }
 
     delay(250);
@@ -71,6 +82,23 @@ export function changeStance(stance: Stance) {
   const stances: Stance[] = ['standard', 'nap', 'longcat'];
   const newLength = stanceLengths[stance];
 
+  const occupied = getOccupiedTileCoordinates(
+    CAT_OF_TRUTH.headX,
+    CAT_OF_TRUTH.headY,
+    CAT_OF_TRUTH.headFacing,
+    stanceLengths[stance]
+  );
+
+  const gridSize = STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize;
+
+  if (
+    occupied.some(
+      ({ x, y }) => x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y
+    )
+  ) {
+    return playDisappointment();
+  }
+
   CAT_OF_TRUTH.stance = stance;
   CAT_OF_TRUTH.length = newLength;
 
@@ -83,4 +111,12 @@ export function changeStance(stance: Stance) {
 
   // attempt to absorb from your new location
   absorbThing();
+
+  if (stance === 'longcat') {
+    playLongcatSound();
+  } else if (stance === 'nap') {
+    playNapSound();
+  } else {
+    playSmallSound();
+  }
 }

@@ -1,11 +1,8 @@
 import type { Direction } from './cardEffects';
 import { CAT_OF_TRUTH } from './cat';
-import { CURRENT_STAGE, STAGES } from './stage';
-import {
-  generateThingCoordinatesInDiamondShape,
-  generateThingCoordinatesInStraightRowsOrColumns,
-  type Thing,
-} from './thing';
+import { GAME_STATE_OF_TRUTH } from './gameState';
+import { STAGES } from './stage';
+import { type Thing } from './thing';
 import { addThingsToGrid } from './thingUtils';
 
 export type Terrain = 'floor' | 'grass' | 'street' | 'space';
@@ -67,16 +64,10 @@ export function renderGrid(grid: Grid) {
     }
   }
 
-  //   addThingsToGrid(generateThingCoordinatesInDiamondShape(5), { thing: 'coin' });
-  //
-  //   addThingsToGrid(
-  //     generateThingCoordinatesInStraightRowsOrColumns(
-  //       gridColumns,
-  //       [0, 2, 4],
-  //       'column'
-  //     ),
-  //     { className: 'attack' }
-  //   );
+  const currentStage = STAGES[GAME_STATE_OF_TRUTH.currentStage];
+  addThingsToGrid(currentStage.thingCoordinates, {
+    thing: currentStage.thingType,
+  });
 }
 
 export function getTile(x: number, y: number): HTMLElement | null {
@@ -98,6 +89,7 @@ export function isOutOfBounds(direction: Direction) {
 
   return (
     CAT_OF_TRUTH[headXOrHeadY] + addend < 0 ||
-    CAT_OF_TRUTH[headXOrHeadY] + addend >= STAGES[CURRENT_STAGE].gridSize[xOrY]
+    CAT_OF_TRUTH[headXOrHeadY] + addend >=
+      STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize[xOrY]
   );
 }

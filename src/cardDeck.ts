@@ -1,6 +1,5 @@
 import { createDOMCard, type Card } from './card';
 import { CARD_LIBRARY } from './cardLibrary';
-import { CAT_OF_TRUTH } from './cat';
 import { replaceTextBasedOnRotation } from './rotator';
 
 type DeckOfTruthType = {
@@ -12,17 +11,17 @@ type DeckOfTruthType = {
 export let DECK_OF_TRUTH: DeckOfTruthType = {
   unusedCards: [
     CARD_LIBRARY[0],
-    CARD_LIBRARY[0],
-    CARD_LIBRARY[0],
-    CARD_LIBRARY[0],
-    CARD_LIBRARY[0],
     CARD_LIBRARY[1],
     CARD_LIBRARY[2],
+    CARD_LIBRARY[3],
+    CARD_LIBRARY[4],
     CARD_LIBRARY[5],
+    CARD_LIBRARY[6],
+    CARD_LIBRARY[7],
     { ...CARD_LIBRARY[0], level: 1 },
-    CARD_LIBRARY[0],
-    CARD_LIBRARY[1],
-    CARD_LIBRARY[5],
+    CARD_LIBRARY[8],
+    CARD_LIBRARY[9],
+    CARD_LIBRARY[3],
   ],
   hand: [],
   discardPile: [],

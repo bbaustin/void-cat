@@ -1,7 +1,7 @@
 import { getOccupiedTileCoordinates } from './cat';
 import { getTile } from './grid';
 import { updateCaloriesBurned } from './meterUtils';
-import { playExplosion2 } from './sounds';
+import { playExplosion2, playWasAttacked } from './sounds';
 import { handleEffectsSequentially } from './utils';
 
 export function disableAllButtons() {
@@ -41,10 +41,8 @@ export async function triggerAttack() {
       const tile = getTile(x, y);
       if (tile?.classList.contains('attack')) {
         updateCaloriesBurned(-1);
-        // maybe another sound here if you want per-hit feedback
+        playWasAttacked();
       }
     });
-
-    // Play sound after a small delay, once
   }
 }

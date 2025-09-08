@@ -1,26 +1,24 @@
 MUST DO
 
-+ Make energy actually stop you from doing stuff 
 
-+ Implement script
 
-+ Remove intermission stuff 
++ Intermission stuff
+  + Remove, pretty much. But also:
+    + Beginning / ending
+    + This can use intermission page 
+    + 5 days left...
+    + 4 days left... 
 
-+ Make other "Things"
++ Assemble fun deck
+  + Add cards per level 
 
-+ Find use for money lol 
-  + Or reference in script 
++ If you can't play a card, don't discard it 
+  + Could be cheat-fixed by removing cards that ONLY apply position. It's a good idea.
+
 
 SHOULD DO
 
-+ Beginning / ending
-
-+ More sounds
-
-+ Rotation looks crazy because it can go from 0 --> 270 (rather than 0 ---> -90). Try and fix that 
-
-+ Animating when you can't roll or rotate in a certain direction
-
++ More sounds DONEISH? Anything missing?
 
 
 WONT DO
@@ -35,3 +33,5 @@ WONT DO
   + Figure out mathematically how to do this? Could be based on percentage..!
 
 + Animating the roll
+
++ Animating when you can't roll or rotate in a certain direction

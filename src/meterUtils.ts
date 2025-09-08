@@ -3,6 +3,7 @@ import { type Card, getCardAttribute } from './card';
 import { clamp } from './utils';
 import { STAGES } from './stage';
 import { CAT_OF_TRUTH } from './cat';
+import { playBurnCals } from './sounds';
 
 /**
  * Helper helper, to update the two most commonly updated meters.
@@ -40,9 +41,15 @@ export function updateEnergy(amountToAdd: number) {
   setGameState('energyCurrent', updatedEnergy);
 
   /* Update the DOM */
-  document.querySelector(
+  const energyMeter = document.querySelector(
     '.energy .meter-number .numerator'
-  )!.innerHTML = `${GAME_STATE_OF_TRUTH.energyCurrent}`;
+  );
+
+  energyMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.energyCurrent}`;
+
+  energyMeter!.classList.remove('slight-attention');
+  void (energyMeter as HTMLElement).offsetWidth;
+  energyMeter!.classList.add('slight-attention');
 }
 
 export function updateCaloriesBurned(amount: number) {
@@ -54,6 +61,23 @@ export function updateCaloriesBurned(amount: number) {
   document.querySelector(
     '.calories .meter-number'
   )!.innerHTML = `${GAME_STATE_OF_TRUTH.caloriesBurned}`;
+
+  if (amount > 0) {
+    playBurnCals();
+    const calorieMeter = document.querySelector('.meter.calories');
+    calorieMeter?.classList.remove('attention'); // remove the other one
+    calorieMeter?.classList.remove('slight-attention');
+    void (calorieMeter as HTMLElement).offsetWidth;
+    calorieMeter?.classList.add('slight-attention');
+  }
+
+  if (amount < 0) {
+    const calsMeter = document.querySelector('.meter.calories');
+    calsMeter?.classList.remove('slight-attention'); // remove the other one
+    calsMeter?.classList.remove('attention');
+    void (calsMeter as HTMLElement).offsetWidth;
+    calsMeter?.classList.add('attention');
+  }
 }
 
 /**
@@ -65,10 +89,15 @@ export function updateMoney(amount: number) {
   const updatedMoney = GAME_STATE_OF_TRUTH.money + amount;
   setGameState('money', updatedMoney);
 
+  const moneyMeter = document.querySelector('.money .meter-number');
+
   /* Update DOM */
-  document.querySelector(
-    '.money .meter-number'
-  )!.innerHTML = `${GAME_STATE_OF_TRUTH.money}`;
+  moneyMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.money}`;
+
+  /* Animate */
+  moneyMeter?.classList.remove('slight-attention');
+  void (moneyMeter as HTMLElement).offsetWidth;
+  moneyMeter?.classList.add('slight-attention');
 }
 
 // TODO: Might wanna be able to apply a turn here
@@ -86,9 +115,17 @@ export function updateTurn(turn: number) {
   setGameState('currentTurn', turn);
 
   /* Update DOM */
-  document.querySelector(
-    '.turn .meter-number .numerator'
-  )!.innerHTML = `${GAME_STATE_OF_TRUTH.currentTurn}`;
+  const turnMeter = document.querySelector('.turn .meter-number .numerator');
+
+  turnMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.currentTurn}`;
+
+  turnMeter!.classList.remove('slight-attention');
+  void (turnMeter as HTMLElement).offsetWidth;
+  turnMeter!.classList.add('slight-attention');
 
   return;
+}
+
+export function getCalorieCount() {
+  return document.querySelector('.calories .meter-number')!.innerHTML;
 }

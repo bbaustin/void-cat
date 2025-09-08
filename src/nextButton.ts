@@ -1,25 +1,31 @@
 import { disableAllButtons, enableAllButtons, triggerAttack } from './attack';
 import { addXCardsToHand } from './cardDeck';
+import {
+  handleDramaEventsSequentially,
+  LAST_LINE,
+  stopDramaEvents,
+} from './stageDrama';
 
 import { GAME_STATE_OF_TRUTH, setGameState } from './gameState';
-import { DOM_CAT, initGame, initIntermission } from './main';
+import { initGame, initIntermission } from './main';
 import { updateEnergy, updateTurn } from './meterUtils';
 import { STAGES } from './stage';
 import { addThingsToGrid, removeClassNamesFromGrid } from './thingUtils';
 import { handleEffectsSequentially } from './utils';
 
 export function initNextTurnButton() {
-  const nextButton = document.getElementById('next');
+  const nextButton = document.querySelectorAll('.next');
   if (!nextButton) return;
-  nextButton.removeEventListener('click', handleNextButtonClick);
-  nextButton.addEventListener('click', handleNextButtonClick);
+  nextButton.forEach((btn) => {
+    btn.removeEventListener('click', handleNextButtonClick);
+    btn.addEventListener('click', handleNextButtonClick);
+  });
 }
 
-export function handleNextButtonClick() {
+export async function handleNextButtonClick() {
   if (GAME_STATE_OF_TRUTH.currentScreen === 'screen-intermission') {
-    setGameState('currentStage', GAME_STATE_OF_TRUTH.currentStage + 1);
     setGameState('currentScreen', 'screen-game');
-    updateTurn(1);
+    updateTurn(0);
     updateEnergy(GAME_STATE_OF_TRUTH.energyMax);
     updateNextButtonText();
     return initGame(STAGES[GAME_STATE_OF_TRUTH.currentStage]);
@@ -29,16 +35,36 @@ export function handleNextButtonClick() {
     return updateTurnViaButton();
   }
 
+  /** Add 1 to the stage
+   * Switch the screen */
   if (isLastTurn()) {
-    setGameState('currentScreen', 'screen-intermission');
-    document.getElementById('next')!.classList.remove('warning');
-    return initIntermission();
+    await handleEffectsSequentially([
+      // make everything unclickable
+      () => disableAllButtons(),
+
+      () => stopDramaEvents(),
+
+      // if there's an attack square, trigger it audiovisually
+      // also calculate how many tiles were struck with the attack
+      async () => await triggerAttack(),
+
+      // () => removeClassNamesFromGrid('attack'),
+
+      // go to next screen
+      () => setGameState('currentStage', GAME_STATE_OF_TRUTH.currentStage + 1),
+      () => setGameState('currentScreen', 'screen-intermission'),
+      () => document.querySelector('.next')!.classList.remove('warning'),
+      () => initIntermission(GAME_STATE_OF_TRUTH.currentStage),
+      () => enableAllButtons(),
+    ]);
   }
 }
 
 export async function updateTurnViaButton() {
   const newTurnValue = GAME_STATE_OF_TRUTH.currentTurn + 1;
   addXCardsToHand();
+
+  stopDramaEvents();
 
   // trigger "attack" stage
   await handleEffectsSequentially(
@@ -52,38 +78,42 @@ export async function updateTurnViaButton() {
 
       // update meters
       () => updateTurn(newTurnValue),
-      () => updateEnergy(1),
+      () => updateEnergy(GAME_STATE_OF_TRUTH.energyMax),
       () => updateNextButtonText(),
 
       // update grid
       () => removeClassNamesFromGrid('attack'),
       () =>
         addThingsToGrid(
-          // generateThingCoordinatesInDiamondShape(
-          //   STAGES[GAME_STATE_OF_TRUTH.currentStage].gridSize.x
-          // ),
           STAGES[GAME_STATE_OF_TRUTH.currentStage].attackCoordinates[
-            GAME_STATE_OF_TRUTH.currentTurn
+            newTurnValue
           ],
           { className: 'attack' }
         ),
 
       // make everything clickable again
       () => enableAllButtons(),
+
+      // start next turn's text
+      () =>
+        handleDramaEventsSequentially([
+          ...STAGES[GAME_STATE_OF_TRUTH.currentStage].drama[newTurnValue],
+          LAST_LINE,
+        ]),
     ],
     300
   );
 }
 
 export function isLastTurn() {
-  const { currentTurn, currentStage } = GAME_STATE_OF_TRUTH;
-  const totalTurns = STAGES[currentStage].turns || 5;
+  const { currentTurn } = GAME_STATE_OF_TRUTH;
+  const totalTurns = 4; // Really it's STAGES[currentStage].attackCoordinates.length || 4;
 
   return currentTurn >= totalTurns;
 }
 
 export function updateNextButtonText() {
-  const nextButton = document.getElementById('next');
+  const nextButton = document.querySelector('.next');
   if (!nextButton) return null;
 
   if (isLastTurn()) {
@@ -98,11 +128,4 @@ export function updateNextButtonText() {
     nextButton.classList.remove('warning');
     nextButton.innerHTML = 'Next turn';
   }
-}
-
-export function updateNextButtonViaGoingToIntermission() {
-  const nextButton = document.getElementById('next');
-  if (!nextButton) return null;
-
-  nextButton.innerHTML = 'Go to next stage';
 }

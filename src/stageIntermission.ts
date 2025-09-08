@@ -1,77 +1,57 @@
-import { createDOMCard } from './card';
-import { DECK_OF_TRUTH } from './cardDeck';
-import { showScreen } from './screen';
+type Intermission = {
+  text: string;
+  buttonText: string;
+  isButtonDisabled?: boolean;
+  isGlitchy?: boolean;
+};
 
-export const miniScreenIds = [
-  'buy-cards-screen',
-  'view-cards-screen',
-  'upgrade-cat-screen',
-] as const;
+// Last turn of NextButton should +1 the stage and switch screens
+// Intermission button should just switch screens
 
-export type MiniScreenId = (typeof miniScreenIds)[number];
+export const STAGE_INTERMISSION: Intermission[] = [
+  {
+    text: 'VOID Cat',
+    buttonText: 'Start',
+    isGlitchy: true,
+  },
+  {
+    text: 'Nice job!',
+    buttonText: 'Continue to Day 2',
+  },
+  {
+    text: "Don't give up!",
+    buttonText: 'Continue to Day 3',
+  },
+  {
+    text: '...vast endless void...',
+    buttonText: 'Continue to Day 4',
+    isGlitchy: true,
+  },
+  {
+    text: 'soon...',
+    buttonText: 'Continue to last day',
+    isGlitchy: true,
+  },
+  {
+    text: 'END',
+    buttonText: 'thank you for playing',
+    isButtonDisabled: true,
+    isGlitchy: true,
+  },
+];
 
-/**
- * INIT BUTTON FUNCTIONS
- **/
-export function initUpgradeCatButton() {
-  document
-    .getElementById('upgrade-cat')
-    ?.addEventListener('click', handleUpgradeCatButtonClick);
-}
+export function updateTextAndButtonText(currentStage: number) {
+  const p = document.querySelector('#intermission-text');
+  const button: HTMLButtonElement | null = document.querySelector(
+    '#intermission-button'
+  );
 
-export function initBuyCardsButton() {
-  document
-    .getElementById('buy-cards')
-    ?.addEventListener('click', handleBuyCardsButtonClick);
-}
+  if (!p || !button) return;
 
-export function initUpgradeCardsButton() {
-  document
-    .getElementById('view-cards')
-    ?.addEventListener('click', handleUpgradeCardsButtonClick);
-}
+  const { text, buttonText, isButtonDisabled } =
+    STAGE_INTERMISSION[currentStage];
 
-/**
- * HANDLE BUTTON CLICK FUNCTIONS
- **/
-export function handleUpgradeCatButtonClick() {
-  showScreenAndApplyButtonClass('upgrade-cat-screen');
-}
-
-export function handleBuyCardsButtonClick() {
-  showScreenAndApplyButtonClass('buy-cards-screen');
-}
-
-export function handleUpgradeCardsButtonClick() {
-  showScreenAndApplyButtonClass('view-cards-screen');
-  renderWholeDeck();
-}
-
-function showScreenAndApplyButtonClass(id: MiniScreenId) {
-  showScreen(id);
-  applyButtonClasses(id);
-}
-
-/**
- * UTILS
- **/
-function applyButtonClasses(miniScreenId: MiniScreenId) {
-  /* Remove active from all buttons */
-  document
-    .querySelectorAll('.left-side-button-list button')
-    .forEach((btn) => btn.classList.remove('active'));
-
-  /* Get the className by augmenting the miniScreenId
-   * It's a little weird, but it's OK */
-  const id = miniScreenId.slice(0, -7);
-  document.querySelector(`button#${id}`)?.classList.add('active');
-}
-
-export function renderWholeDeck() {
-  const viewDeck = document.getElementById('view-all');
-  const allCards = DECK_OF_TRUTH.unusedCards.concat(DECK_OF_TRUTH.discardPile);
-  allCards.forEach((card) => {
-    const cardToDisplay = createDOMCard(card, false);
-    viewDeck?.appendChild(cardToDisplay);
-  });
+  p.innerHTML = text;
+  button.innerHTML = buttonText;
+  button.disabled = !!isButtonDisabled;
 }
