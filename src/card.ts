@@ -11,13 +11,6 @@ export interface Card {
   cost: number[];
   caloriesBurned: number[];
   level?: number;
-  /** Description of stuff that might not make sense immediately.
-   * Note that (for now) this is NOT an array.
-   * As of yet, level-based "text" is self-explanatory. */
-  description?: string;
-  /** We might want to have some cards that can't show up
-   * until later in the game for narrative or power purposes */
-  minimumStage?: number;
 }
 
 export type Effect = () => void;
@@ -33,15 +26,11 @@ type CardAttribute = Extract<
  * Can avoid adding the click event if needed.
  * Does NOT append the card to the DOM.
  * @param card Data for a card
- * @param shouldApplyEffect Whether or not to add the click event; would refrain, for example, in the "view deck" page
  * @returns HTML div
  */
-export function createDOMCard(
-  card: Card,
-  shouldApplyEffect: boolean
-): HTMLButtonElement {
+export function createDOMCard(card: Card): HTMLButtonElement {
   /** Create DOM element */
-  const cardToAdd = document.createElement('button'); // This should be a button
+  const cardToAdd = document.createElement('button');
   const cardText = document.createElement('div');
   const cardStats = document.createElement('div');
   cardStats.classList.add('stats');
@@ -71,40 +60,37 @@ export function createDOMCard(
    * We might not want to apply the effect if
    * viewing all cards during intermission, for example */
   // UPDATE: We probably won't ever not apply effect. Can remove this if needed
-  if (shouldApplyEffect) {
-    const effectToApply = getCardAttribute(card, 'effect');
-    const energyCost = getCardAttribute(card, 'cost');
-    const finalEffectToApply = () => {
-      const { hand } = DECK_OF_TRUTH;
-      const indexOfUsedCard = DECK_OF_TRUTH.hand.indexOf(card);
+  const effectToApply = getCardAttribute(card, 'effect');
+  const energyCost = getCardAttribute(card, 'cost');
+  const finalEffectToApply = () => {
+    const { hand } = DECK_OF_TRUTH;
+    const indexOfUsedCard = DECK_OF_TRUTH.hand.indexOf(card);
 
-      if (
-        CAT_OF_TRUTH.stance === 'nap' &&
-        energyCost + 1 > GAME_STATE_OF_TRUTH.energyCurrent &&
-        getCardAttribute(card, 'cost') > 0
-      ) {
-        signifyNotEnoughEnergy();
-      } else if (energyCost > GAME_STATE_OF_TRUTH.energyCurrent) {
-        signifyNotEnoughEnergy();
-      } else {
-        /* Do the effects */
-        handleEffectsSequentially(effectToApply);
+    if (
+      CAT_OF_TRUTH.stance === 'nap' &&
+      energyCost + 1 > GAME_STATE_OF_TRUTH.energyCurrent &&
+      getCardAttribute(card, 'cost') > 0
+    ) {
+      signifyNotEnoughEnergy();
+    } else if (energyCost > GAME_STATE_OF_TRUTH.energyCurrent) {
+      signifyNotEnoughEnergy();
+    } else {
+      /* Do the effects */
+      handleEffectsSequentially(effectToApply);
 
-        /* Update cals and energy */
-        updateEnergyAndCalMetersAfterPlayingCard(card);
+      /* Update cals and energy */
+      updateEnergyAndCalMetersAfterPlayingCard(card);
 
-        /* Remove the card from your hand,
-         * first in state, and then visually  */
-        hand.splice(indexOfUsedCard, 1);
-        addWholeHandVisually();
+      /* Remove the card from your hand,
+       * first in state, and then visually  */
+      hand.splice(indexOfUsedCard, 1);
+      addWholeHandVisually();
 
-        /* Add to discard pile */
-        discardCard(card);
-      }
-    };
-    cardToAdd.addEventListener('click', finalEffectToApply);
-  }
-
+      /* Add to discard pile */
+      discardCard(card);
+    }
+  };
+  cardToAdd.addEventListener('click', finalEffectToApply);
   return cardToAdd;
 }
 

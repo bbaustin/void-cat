@@ -11,16 +11,12 @@ type DeckOfTruthType = {
 export let DECK_OF_TRUTH: DeckOfTruthType = {
   unusedCards: [
     CARD_LIBRARY[0],
+    CARD_LIBRARY[0],
+    CARD_LIBRARY[0],
+    CARD_LIBRARY[1],
+    CARD_LIBRARY[1],
     CARD_LIBRARY[1],
     CARD_LIBRARY[2],
-    CARD_LIBRARY[3],
-    CARD_LIBRARY[4],
-    CARD_LIBRARY[5],
-    CARD_LIBRARY[6],
-    CARD_LIBRARY[7],
-    { ...CARD_LIBRARY[0], level: 1 },
-    CARD_LIBRARY[8],
-    CARD_LIBRARY[9],
     CARD_LIBRARY[3],
   ],
   hand: [],
@@ -51,7 +47,15 @@ export function setDeckCards() {
   DECK_OF_TRUTH.discardPile = [];
 }
 
-// Draw one card
+/**
+ * Add cards to your hand for use in a future stage.
+ * @param cards Array of Cards to add to hand, set in the STAGES const
+ */
+export function addCardsToDeck(cards: Card[]) {
+  cards.forEach((card) => DECK_OF_TRUTH.unusedCards.push(card));
+}
+
+/* Draw one card */
 export function drawCard(): Card | null {
   if (DECK_OF_TRUTH.unusedCards.length === 0) {
     reshuffleDiscardIntoDraw();
@@ -92,7 +96,7 @@ export function addXCardsToHand(
 }
 
 export function addCardToHandVisually(card: Card) {
-  const cardToAdd = createDOMCard(card, true);
+  const cardToAdd = createDOMCard(card);
   document.getElementById('card-holder')?.appendChild(cardToAdd);
 }
 
@@ -118,7 +122,7 @@ export function addWholeHandVisually() {
   // clear out first. Feels unwieldy but without, I'm getting doubles
   clearHandVisually();
   DECK_OF_TRUTH.hand.forEach((card) =>
-    cardHolder?.appendChild(createDOMCard(card, true))
+    cardHolder?.appendChild(createDOMCard(card))
   );
 
   replaceTextBasedOnRotation();
@@ -137,14 +141,4 @@ export function reshuffleDiscardIntoDraw() {
   if (DECK_OF_TRUTH.discardPile.length === 0) return;
   DECK_OF_TRUTH.unusedCards = shuffleCards(DECK_OF_TRUTH.discardPile);
   DECK_OF_TRUTH.discardPile = [];
-}
-
-// NOT IN USE
-export function renderDiscardPile() {
-  const discardPileDOM = document.getElementById('discard')!;
-  // console.log(discardPileDOM);
-  DECK_OF_TRUTH.discardPile.forEach((card) => {
-    const cardToAdd = createDOMCard(card, false);
-    discardPileDOM.appendChild(cardToAdd);
-  });
 }

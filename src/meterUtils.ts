@@ -41,9 +41,7 @@ export function updateEnergy(amountToAdd: number) {
   setGameState('energyCurrent', updatedEnergy);
 
   /* Update the DOM */
-  const energyMeter = document.querySelector(
-    '.energy .meter-number .numerator'
-  );
+  const energyMeter = document.querySelector('.energy .mn .numerator');
 
   energyMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.energyCurrent}`;
 
@@ -59,7 +57,7 @@ export function updateCaloriesBurned(amount: number) {
 
   /* Update DOM */
   document.querySelector(
-    '.calories .meter-number'
+    '.calories .mn'
   )!.innerHTML = `${GAME_STATE_OF_TRUTH.caloriesBurned}`;
 
   if (amount > 0) {
@@ -89,7 +87,7 @@ export function updateMoney(amount: number) {
   const updatedMoney = GAME_STATE_OF_TRUTH.money + amount;
   setGameState('money', updatedMoney);
 
-  const moneyMeter = document.querySelector('.money .meter-number');
+  const moneyMeter = document.querySelector('.money .mn');
 
   /* Update DOM */
   moneyMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.money}`;
@@ -115,7 +113,7 @@ export function updateTurn(turn: number) {
   setGameState('currentTurn', turn);
 
   /* Update DOM */
-  const turnMeter = document.querySelector('.turn .meter-number .numerator');
+  const turnMeter = document.querySelector('.turn .mn .numerator');
 
   turnMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.currentTurn}`;
 
@@ -127,5 +125,5 @@ export function updateTurn(turn: number) {
 }
 
 export function getCalorieCount() {
-  return document.querySelector('.calories .meter-number')!.innerHTML;
+  return document.querySelector('.calories .mn')!.innerHTML;
 }

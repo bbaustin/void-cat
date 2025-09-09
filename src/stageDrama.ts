@@ -30,7 +30,7 @@ export async function handleDramaEventsSequentially(
   STOP_REQUESTED = false; // reset before starting
 
   /* Calculate delay based on message length */
-  const baseDelay = 600; // Base delay in ms for short messages
+  const baseDelay = 500; // Base delay in ms for short messages
   const lengthFactor = 25; // Additional ms per character in the message
 
   for (const line of lines) {

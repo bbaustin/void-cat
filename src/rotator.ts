@@ -99,7 +99,6 @@ export function rotate(rotationDirection: RotationDirection) {
 
   /* Update state before visible DOM changes */
   CAT_OF_TRUTH.headFacing = newDirection;
-  DOM_CAT.dataset.headFacing = CAT_OF_TRUTH.headFacing;
 
   /* Also update energy game state */
   /* Create fake card to satisfy type. Yes this is dumb */
