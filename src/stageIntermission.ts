@@ -36,10 +36,8 @@ export const STAGE_INTERMISSION: Intermission[] = [
 ];
 
 export function updateTextAndButtonText(currentStage: number) {
-  const p = document.querySelector('#intermission-text');
-  const button: HTMLButtonElement | null = document.querySelector(
-    '#intermission-button'
-  );
+  const p = document.querySelector('#sit');
+  const button: HTMLButtonElement | null = document.querySelector('#sib');
 
   if (!p || !button) return;
 

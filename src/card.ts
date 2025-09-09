@@ -97,9 +97,9 @@ export function createDOMCard(card: Card): HTMLButtonElement {
 export function signifyNotEnoughEnergy() {
   /* Do little animation */
   const energyMeter = document.querySelector('.meter.energy');
-  energyMeter?.classList.remove('attention');
+  energyMeter?.classList.remove('attn');
   void (energyMeter as HTMLElement).offsetWidth;
-  energyMeter?.classList.add('attention');
+  energyMeter?.classList.add('attn');
 
   playDisappointment();
 }

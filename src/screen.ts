@@ -1,4 +1,4 @@
-const screenIds = ['screen-game', 'screen-intermission'] as const;
+const screenIds = ['sg', 'si'] as const;
 
 export type ScreenId = (typeof screenIds)[number];
 
@@ -10,8 +10,7 @@ export function showScreen(screen: ScreenId) {
   if (!screenToShow) return;
   screenToShow.style.display = 'flex';
 
-  const otherScreen: ScreenId =
-    screen === 'screen-game' ? 'screen-intermission' : 'screen-game';
+  const otherScreen: ScreenId = screen === 'sg' ? 'si' : 'sg';
 
   /* Hide the others in that group */
   const elementWithID = document.getElementById(otherScreen);

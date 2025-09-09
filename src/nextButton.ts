@@ -23,8 +23,8 @@ export function initNextTurnButton() {
 }
 
 export async function handleNextButtonClick() {
-  if (GAME_STATE_OF_TRUTH.currentScreen === 'screen-intermission') {
-    setGameState('currentScreen', 'screen-game');
+  if (GAME_STATE_OF_TRUTH.currentScreen === 'si') {
+    setGameState('currentScreen', 'sg');
     updateTurn(0);
     updateEnergy(GAME_STATE_OF_TRUTH.energyMax);
     updateNextButtonText();
@@ -52,7 +52,7 @@ export async function handleNextButtonClick() {
 
       // go to next screen
       () => setGameState('currentStage', GAME_STATE_OF_TRUTH.currentStage + 1),
-      () => setGameState('currentScreen', 'screen-intermission'),
+      () => setGameState('currentScreen', 'si'),
       () => document.querySelector('.next')!.classList.remove('warning'),
       () => initIntermission(GAME_STATE_OF_TRUTH.currentStage),
       () => enableAllButtons(),

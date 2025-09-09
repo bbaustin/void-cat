@@ -17,7 +17,7 @@ export const GAME_STATE_OF_TRUTH: GameStateType = {
   energyMax: 5,
   currentTurn: 0,
   currentStage: 0,
-  currentScreen: 'screen-intermission',
+  currentScreen: 'si',
 };
 
 export function setGameState<K extends keyof GameStateType>(

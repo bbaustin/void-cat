@@ -41,13 +41,13 @@ export function updateEnergy(amountToAdd: number) {
   setGameState('energyCurrent', updatedEnergy);
 
   /* Update the DOM */
-  const energyMeter = document.querySelector('.energy .mn .numerator');
+  const energyMeter = document.querySelector('.energy .mn .nmr');
 
   energyMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.energyCurrent}`;
 
-  energyMeter!.classList.remove('slight-attention');
+  energyMeter!.classList.remove('st-attn');
   void (energyMeter as HTMLElement).offsetWidth;
-  energyMeter!.classList.add('slight-attention');
+  energyMeter!.classList.add('st-attn');
 }
 
 export function updateCaloriesBurned(amount: number) {
@@ -63,18 +63,18 @@ export function updateCaloriesBurned(amount: number) {
   if (amount > 0) {
     playBurnCals();
     const calorieMeter = document.querySelector('.meter.calories');
-    calorieMeter?.classList.remove('attention'); // remove the other one
-    calorieMeter?.classList.remove('slight-attention');
+    calorieMeter?.classList.remove('attn'); // remove the other one
+    calorieMeter?.classList.remove('st-attn');
     void (calorieMeter as HTMLElement).offsetWidth;
-    calorieMeter?.classList.add('slight-attention');
+    calorieMeter?.classList.add('st-attn');
   }
 
   if (amount < 0) {
     const calsMeter = document.querySelector('.meter.calories');
-    calsMeter?.classList.remove('slight-attention'); // remove the other one
-    calsMeter?.classList.remove('attention');
+    calsMeter?.classList.remove('st-attn'); // remove the other one
+    calsMeter?.classList.remove('attn');
     void (calsMeter as HTMLElement).offsetWidth;
-    calsMeter?.classList.add('attention');
+    calsMeter?.classList.add('attn');
   }
 }
 
@@ -93,9 +93,9 @@ export function updateMoney(amount: number) {
   moneyMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.money}`;
 
   /* Animate */
-  moneyMeter?.classList.remove('slight-attention');
+  moneyMeter?.classList.remove('st-attn');
   void (moneyMeter as HTMLElement).offsetWidth;
-  moneyMeter?.classList.add('slight-attention');
+  moneyMeter?.classList.add('st-attn');
 }
 
 // TODO: Might wanna be able to apply a turn here
@@ -113,13 +113,13 @@ export function updateTurn(turn: number) {
   setGameState('currentTurn', turn);
 
   /* Update DOM */
-  const turnMeter = document.querySelector('.turn .mn .numerator');
+  const turnMeter = document.querySelector('.turn .mn .nmr');
 
   turnMeter!.innerHTML = `${GAME_STATE_OF_TRUTH.currentTurn}`;
 
-  turnMeter!.classList.remove('slight-attention');
+  turnMeter!.classList.remove('st-attn');
   void (turnMeter as HTMLElement).offsetWidth;
-  turnMeter!.classList.add('slight-attention');
+  turnMeter!.classList.add('st-attn');
 
   return;
 }

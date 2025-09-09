@@ -8,18 +8,11 @@ export const CARD_LIBRARY: Card[] = [
       'Roll 1 space right',
       'Roll 2 spaces right',
       'Roll 3 spaces right',
-      'Roll 4 spaces right',
       'Roll 5 spaces right',
     ],
-    effect: [
-      () => move(1),
-      () => move(2),
-      () => move(3),
-      () => move(4),
-      () => move(5),
-    ],
-    cost: [1, 1, 1, 2, 2],
-    caloriesBurned: [1, 2, 3, 4, 5],
+    effect: [() => move(1), () => move(2), () => move(3), () => move(5)],
+    cost: [1, 1, 1, 2],
+    caloriesBurned: [1, 2, 3, 5],
   },
   // 1
   {
@@ -27,37 +20,25 @@ export const CARD_LIBRARY: Card[] = [
       'Roll 1 space left',
       'Roll 2 spaces left',
       'Roll 3 spaces left',
-      'Roll 4 spaces left',
       'Roll 5 spaces left',
     ],
     effect: [
       () => move(1, 'left'),
       () => move(2, 'left'),
       () => move(3, 'left'),
-      () => move(4, 'left'),
       () => move(5, 'left'),
     ],
-    cost: [1, 1, 1, 2, 2],
-    caloriesBurned: [1, 2, 3, 4, 5],
+    cost: [1, 1, 1, 2],
+    caloriesBurned: [1, 2, 3, 5],
   },
   // 2
   {
-    text: [
-      'Roll 1 space right, then 1 space left',
-      'Roll 2 spaces right, then 2 spaces left',
-      'Roll 3 spaces right, then 3 spaces left',
-    ],
-    cost: [2, 2, 2],
-    caloriesBurned: [2, 4, 6],
+    text: ['Roll 1 space right, then 1 space left'],
+    cost: [2],
+    caloriesBurned: [2],
     effect: [
       () => {
         handleEffectsSequentially([() => move(1), () => move(1, 'left')]);
-      },
-      () => {
-        handleEffectsSequentially([() => move(2), () => move(2, 'left')]);
-      },
-      () => {
-        handleEffectsSequentially([() => move(3), () => move(3, 'left')]);
       },
     ],
   },
@@ -110,10 +91,9 @@ export const CARD_LIBRARY: Card[] = [
     text: [
       'Roll 1 space right, then longcat position',
       'Roll 2 spaces right, then longcat position',
-      'Roll 3 spaces right, then longcat position',
     ],
-    cost: [2, 2, 2],
-    caloriesBurned: [1, 2, 3],
+    cost: [2, 2],
+    caloriesBurned: [1, 2],
     effect: [
       () => {
         handleEffectsSequentially([
@@ -124,12 +104,6 @@ export const CARD_LIBRARY: Card[] = [
       () => {
         handleEffectsSequentially([
           () => move(2),
-          () => changeStance('longcat'),
-        ]);
-      },
-      () => {
-        handleEffectsSequentially([
-          () => move(3),
           () => changeStance('longcat'),
         ]);
       },
@@ -184,10 +158,9 @@ export const CARD_LIBRARY: Card[] = [
     text: [
       'Roll 1 space left, then longcat position',
       'Roll 2 spaces left, then longcat position',
-      'Roll 3 spaces left, then longcat position',
     ],
-    cost: [2, 2, 2],
-    caloriesBurned: [1, 2, 3],
+    cost: [2, 2],
+    caloriesBurned: [1, 2],
     effect: [
       () => {
         handleEffectsSequentially([
@@ -198,12 +171,6 @@ export const CARD_LIBRARY: Card[] = [
       () => {
         handleEffectsSequentially([
           () => move(2, 'left'),
-          () => changeStance('longcat'),
-        ]);
-      },
-      () => {
-        handleEffectsSequentially([
-          () => move(3, 'left'),
           () => changeStance('longcat'),
         ]);
       },

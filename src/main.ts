@@ -56,7 +56,7 @@ export function initGame({ gridSize, terrain }: Stage) {
   initNextTurnButton();
 
   /* Show the game screen */
-  showScreen('screen-game');
+  showScreen('sg');
 
   handleDramaEventsSequentially([
     ...STAGES[GAME_STATE_OF_TRUTH.currentStage].drama[0],
@@ -68,7 +68,7 @@ export function initIntermission(currentStage: number) {
   /* Init the next turn button */
   initNextTurnButton();
 
-  showScreen('screen-intermission');
+  showScreen('si');
 
   updateTextAndButtonText(currentStage);
 }

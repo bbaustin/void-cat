@@ -1,22 +1,21 @@
 :root {
   /* WIDTHS */
-  --width-of-grid: 370px;
-  --thick-border: var(--black) 3px solid;
-  --thin-border: var(--black) 1.5px solid;
+  --gw: 370px;
+  --tkb: var(--b) 3px solid;
+  --tnb: var(--b) 1.5px solid;
 
   /* COLORS */
-  --black: #000;
-  --grey-dark: #727272;
-  --grey: #b4b4b4;
-  --white: #fff;
-  --pink-hot: rgb(255, 136, 195);
-  --pink: #ffddee;
-  --purple-dark: #b384d4;
-  --purple: #e3c5f8;
-  --teal: #96e4d2;
-  --green: #a2ea5e;
-  --yellow: rgb(248, 248, 71);
-  --orange: rgb(254, 180, 43);
+  --b: #000;
+  --gyd: #727272;
+  --gy: #b4b4b4;
+  --w: #fff;
+  --ph: rgb(255, 136, 195);
+  --p: #ffddee;
+  --pd: #b384d4;
+  --t: #96e4d2;
+  --grn: #a2ea5e;
+  --yl: rgb(248, 248, 71);
+  --o: rgb(254, 180, 43);
   --red: rgb(249, 63, 63);
 
   /* Z-INDICES */
@@ -35,13 +34,12 @@ main {
   font-family: monospace;
   margin: 0 auto;
   padding: 12px 0;
-  /* width: 720px; */
-  background: var(--purple);
+  background: #e3c5f8;
 }
 
 button {
-  background: var(--white);
-  border: var(--thick-border);
+  background: var(--w);
+  border: var(--tkb);
   border-radius: 10px;
   cursor: pointer;
   font-family: monospace;
@@ -49,7 +47,7 @@ button {
 }
 
 button:focus {
-  outline: 5px solid var(--pink-hot);
+  outline: 5px solid var(--ph);
 }
 
 button:disabled {
@@ -63,7 +61,7 @@ button:disabled {
   width: 100%;
 }
 
-.top .placeholder {
+.top .phd {
   width: 160px;
 }
 
@@ -73,54 +71,54 @@ button:disabled {
   width: 100%;
 }
 
-.middle .placeholder,
+.middle .phd,
 .drama {
   width: 100%;
   margin: 0px 12px 36px 24px;
 }
 
 .drama {
-  outline: var(--thin-border);
+  outline: var(--tnb);
   border-radius: 10px;
-  background: var(--white);
+  background: var(--w);
   overflow-y: scroll;
-  height: calc(var(--width-of-grid) + 24px);
+  height: calc(var(--gw) + 24px);
   font-size: 16px;
 }
 
 .drama div {
   padding: 24px;
   line-height: 24px;
-  border-bottom: var(--thin-border);
+  border-bottom: var(--tnb);
 }
 
 /**********************
 SCREENS
 **********************/
-#screen-game,
-#screen-intermission {
+#sg,
+#si {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-#screen-game {
+#sg {
   display: none;
 }
 
-#screen-intermission {
+#si {
   text-align: center;
   margin: 0;
   padding: 36px 48px;
 }
 
-#intermission-text {
+#sit {
   font-size: 124px;
   margin: 32px 0;
 }
 
-#intermission-button {
+#sib {
   padding: 24px;
 }
 
@@ -130,7 +128,7 @@ METERS
 #meters {
   display: flex;
   justify-content: space-between;
-  width: var(--width-of-grid);
+  width: var(--gw);
   margin: 0 auto 12px;
 }
 
@@ -149,26 +147,26 @@ METERS
   display: flex;
   justify-content: center;
   padding: 12px;
-  border: var(--thick-border);
+  border: var(--tkb);
   border-radius: 10px;
   font-size: 24px;
   font-weight: 400;
 }
 
 .turn .mn {
-  background: var(--teal);
+  background: var(--t);
 }
 
 .energy .mn {
-  background: var(--green);
+  background: var(--grn);
 }
 
 .money .mn {
-  background: var(--yellow);
+  background: var(--yl);
 }
 
 .calories .mn {
-  background: var(--orange);
+  background: var(--o);
 }
 
 #next-holder {
@@ -181,30 +179,30 @@ METERS
 }
 
 .warning {
-  animation: warning-keyframes 2s infinite;
+  animation: warning-kf 2s infinite;
 }
 
-@keyframes warning-keyframes {
+@keyframes warning-kf {
   0% {
-    background: var(--white);
+    background: var(--w);
   }
   50% {
-    background: var(--teal);
+    background: var(--t);
   }
 }
 
-.attention {
-  animation: attention-keyframes 0.6s ease;
+.attn {
+  animation: attn-kf 0.6s ease;
 }
 
-@keyframes attention-keyframes {
+@keyframes attn-kf {
   0% {
     transform: scale(1) rotate(0deg);
     filter: brightness(100%);
   }
   20% {
     transform: scale(1.2) rotate(-2deg);
-    filter: brightness(110%); /* lighten */
+    filter: brightness(110%);
   }
   40% {
     transform: scale(1.2) rotate(2deg);
@@ -224,11 +222,11 @@ METERS
   }
 }
 
-.slight-attention {
-  animation: slight-attention-keyframes 0.4s ease;
+.st-attn {
+  animation: st-attn-kf 0.4s ease;
 }
 
-@keyframes slight-attention-keyframes {
+@keyframes st-attn-kf {
   0% {
     transform: scale(1);
     filter: brightness(100%);
@@ -261,12 +259,12 @@ GRID
   padding: 12px;
   border-radius: 12px;
   margin: 0 auto 32px;
-  background: var(--purple-dark);
-  outline: var(--thin-border);
+  background: var(--pd);
+  outline: var(--tnb);
 }
 
 .tile {
-  outline: var(--thin-border);
+  outline: var(--tnb);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -283,7 +281,6 @@ GRID
   border-radius: 5px;
   aspect-ratio: 1/1;
   position: relative;
-  /* If you want it to be above cat */
   z-index: var(--atk-z);
   transition: opacity 0.3s ease;
 }
@@ -293,28 +290,28 @@ GRID
 }
 
 .floor {
-  background: var(--teal);
+  background: var(--t);
 }
 
 .grass {
-  background: var(--green);
+  background: var(--grn);
 }
 
 .street {
-  background: var(--grey-dark);
+  background: var(--gyd);
 }
 
 .space {
-  background: var(--black);
-  background-image: radial-gradient(var(--white) 1px, transparent 1px),
-    radial-gradient(var(--grey) 1px, transparent 1px),
-    radial-gradient(var(--pink) 1px, transparent 1px);
+  background: var(--b);
+  background-image: radial-gradient(var(--w) 1px, transparent 1px),
+    radial-gradient(var(--gy) 1px, transparent 1px),
+    radial-gradient(var(--p) 1px, transparent 1px);
   background-size: 80px 50px, 80px 80px, 120px 40px;
   background-position: 0 0, 20px 20px, 40px 60px;
-  animation: starfield 90s linear infinite;
+  animation: star 90s linear infinite;
 }
 
-@keyframes starfield {
+@keyframes star {
   0% {
     background-position: 0 0, 20px 20px, 40px 60px;
   }
@@ -334,8 +331,8 @@ GRID
   width: 30px;
   height: 30px;
   font-size: 16px;
-  box-shadow: var(--orange) -2px 1px;
-  background: var(--yellow);
+  box-shadow: var(--o) -2px 1px;
+  background: var(--yl);
   color: var(--red);
   border-radius: 100%;
   font-weight: 700;
@@ -345,19 +342,19 @@ GRID
   width: 50px;
   height: 50px;
   border-radius: 100%;
-  box-shadow: inset -8px -5px 15px var(--black);
+  box-shadow: inset -8px -5px 15px var(--b);
 }
 
 .planet-1 {
-  background: linear-gradient(to bottom right, var(--orange), var(--red));
+  background: linear-gradient(to bottom right, var(--o), var(--red));
 }
 
 .planet-2 {
-  background: linear-gradient(to bottom right, var(--pink), var(--purple-dark));
+  background: linear-gradient(to bottom right, var(--p), var(--pd));
 }
 
 .planet-3 {
-  background: var(--green);
+  background: var(--grn);
 }
 
 /**********************
@@ -369,7 +366,7 @@ CAT
   width: 200px;
   height: 300px;
   border-radius: 50% / 55%;
-  background: var(--black);
+  background: var(--b);
   /* This is a little weird, but oh well */
   zoom: 40%;
   transition: left 0.5s, top 0.5s, height 0.5s;
@@ -388,7 +385,7 @@ CAT
   position: absolute;
   width: 40px;
   height: 40px;
-  background: var(--black);
+  background: var(--b);
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   top: -9px;
 }
@@ -422,7 +419,7 @@ CAT
   position: absolute;
   width: 30px;
   height: 16px;
-  background: var(--green);
+  background: var(--grn);
   border-radius: 50%;
   top: 45px;
 }
@@ -448,7 +445,7 @@ CAT
 
 .nose {
   position: absolute;
-  background: var(--pink);
+  background: var(--p);
   width: 9px;
   height: 5px;
   top: 63px;
@@ -460,7 +457,7 @@ CAT
   position: absolute;
   width: 25px;
   height: 12px;
-  border-bottom: 3px solid var(--pink-hot);
+  border-bottom: 3px solid var(--ph);
   border-radius: 0 0 60px 60px;
   top: 68px;
   left: 50%;
@@ -473,7 +470,7 @@ CAT
   height: 60px;
   background: black;
   border-radius: 50%;
-  border: 3px solid var(--grey-dark);
+  border: 3px solid var(--gyd);
 }
 
 .paw.front-left {
@@ -501,7 +498,7 @@ CAT
 }
 
 .glowing {
-  box-shadow: 0px 0px 66px 16px var(--pink-hot);
+  box-shadow: 0px 0px 66px 16px var(--ph);
 }
 /**********************
 CARD & ROTATE BUTTONS
@@ -511,7 +508,7 @@ CARD & ROTATE BUTTONS
   gap: 32px;
 }
 
-#card-and-rotator-holder {
+#cards-rotators {
   display: flex;
   gap: 32px;
 }
@@ -519,16 +516,16 @@ CARD & ROTATE BUTTONS
 .card,
 .arrow {
   align-items: center;
-  background: var(--white);
+  background: var(--w);
   border-radius: 10px;
-  border: 8px solid var(--teal);
+  border: 8px solid var(--t);
   cursor: pointer;
   display: flex;
   font-size: 16px;
   flex-direction: column;
   height: 190px;
   justify-content: space-between;
-  outline: var(--thick-border);
+  outline: var(--tkb);
   padding: 12px;
   text-align: center;
   width: 160px;
@@ -551,14 +548,14 @@ CARD & ROTATE BUTTONS
 }
 
 .stats div {
-  background: var(--orange);
+  background: var(--o);
   padding: 12px 16px;
   border-radius: 4px;
-  outline: var(--thick-border);
+  outline: var(--tkb);
   font-size: 24px;
   line-height: 24px;
 }
 
 .stats div:nth-child(2) {
-  background: var(--green);
+  background: var(--grn);
 }
