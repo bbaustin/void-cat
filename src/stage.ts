@@ -64,7 +64,7 @@ export const STAGES: Stage[] = [
         "But don't worry 😉 !! You'll recover your energy at the beginning of the next turn!",
         'The colors on the cards 🟧 🟩 match the colors of the meters 🟧 🟩 at the top of the screen ↖️ .',
         "It's really good design!!",
-        'OK, now try doing some workouts 🤸‍♀️ !!',
+        `OK, now try doing some workouts 🤸‍♀️ !! And click the "Next turn" button when you're done 👆 !`,
       ],
       [
         "By the way, life is really dangerous!! ! If you see a red square 🟥 on the grid, avoid it! It'll hurt you 😿 at the end of the turn!!",
@@ -257,6 +257,10 @@ export const STAGES: Stage[] = [
       { ...CARD_LIBRARY[1], level: 3 },
       { ...CARD_LIBRARY[1], level: 3 },
       { ...CARD_LIBRARY[3], level: 1 },
+      CARD_LIBRARY[4],
+      CARD_LIBRARY[7],
+      CARD_LIBRARY[10],
+      CARD_LIBRARY[11],
     ],
   },
   /* 3 - DAY 4 */
@@ -298,7 +302,7 @@ export const STAGES: Stage[] = [
         'Another weird thing is that each time the universe resets 🔂 , things end up really similar 👯 to how they used to be!',
         "Like, this time around, there's an Earth again 🌍, it's still filled with human people 🕴, they all have their routines...",
         "There's probably a parallel to draw here with the repetitive nature of working out 🤔!",
-        "I'll let you work out (no pun intended) a deeper meaning here!!",
+        "I'll let you work out (no pun intended) a deeper meaning!!",
       ],
       [
         "But anyway, if you didn't pick up on it yet 👁️👁️, VOID Cat is another harbinger of ⬛️ THE GREAT UNBECOMING ⬛️ !",
@@ -345,7 +349,7 @@ export const STAGES: Stage[] = [
       [
         "Hey! I'm glad you're still here!",
         "Earth is gone now 🚀, so we're just floating around in space 👽 .",
-        "Let's do some zero-G exercise 🧑‍🚀 !!",
+        "There's no one left to attack us anymore, so... let's just have some fun doing some zero-G exercise 🧑‍🚀 !!",
       ],
       [
         "The collectibles in this level are planets 🪐, if you couldn't tell.",

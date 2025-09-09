@@ -40,12 +40,7 @@ export const CAT_OF_TRUTH: Cat = {
  * @param startingY - number; the starting y value, saved as data-y in HTML. Default is CAT_OF_TRUTH's headY (0), but it can be overwritten
  * @returns HTMLDivElement - DOM element of **the** cat
  */
-export function createDOMCat(
-  startingX: number = CAT_OF_TRUTH.headX,
-  startingY: number = CAT_OF_TRUTH.headY
-): HTMLDivElement {
-  const { length, headFacing, stance } = CAT_OF_TRUTH;
-
+export function createDOMCat(): HTMLDivElement {
   const domCat = document.createElement('div');
 
   /** Add id (for container) and classes (for body parts) */
@@ -55,14 +50,6 @@ export function createDOMCat(
     catElement.className += ` ${catClass}`;
     domCat.appendChild(catElement);
   });
-
-  /** Add data-attributes */
-  // TODO: Worth wondering if these are needed
-  domCat.dataset.x = startingX.toString();
-  domCat.dataset.y = startingY.toString();
-  domCat.dataset.length = length.toString();
-  domCat.dataset.headFacing = headFacing;
-  domCat.dataset.stance = stance;
 
   /** Add initial position */
   // This is temporary and shoudl be handled better later... (later: it was not handled better)

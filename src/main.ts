@@ -38,12 +38,6 @@ export function initGame({ gridSize, terrain }: Stage) {
   CAT_OF_TRUTH.length = 2;
   CAT_OF_TRUTH.stance = 'standard';
 
-  DOM_CAT.dataset.x = `${CAT_OF_TRUTH.headX}`;
-  DOM_CAT.dataset.y = `${CAT_OF_TRUTH.headY}`;
-  DOM_CAT.dataset.length = `${CAT_OF_TRUTH.length}`;
-  DOM_CAT.dataset.headFacing = CAT_OF_TRUTH.headFacing;
-  DOM_CAT.dataset.stance = CAT_OF_TRUTH.stance;
-
   /* Add this stage's new cards */
   addCardsToDeck(STAGES[GAME_STATE_OF_TRUTH.currentStage].cardsAdded);
 

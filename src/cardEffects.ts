@@ -13,9 +13,7 @@ import { GAME_STATE_OF_TRUTH } from './gameState';
 import { STAGES } from './stage';
 
 /** Distance in pixels one move left or right should take */
-export const ONE_MOVE_PX_X = 182;
-// TODO: If this ends up being the same, obviously remove
-export const ONE_MOVE_PX_Y = 182;
+export const ONE_MOVE = 182;
 
 export type Direction = 'left' | 'right' | 'top' | 'bottom';
 export type Stance = 'standard' | 'nap' | 'longcat';
@@ -39,24 +37,20 @@ export function move(
   const shouldMoveHorizontally =
     CAT_OF_TRUTH.headFacing === 'top' || CAT_OF_TRUTH.headFacing === 'bottom';
 
-  const oneMovePx = shouldMoveHorizontally ? ONE_MOVE_PX_X : ONE_MOVE_PX_Y;
+  const oneMovePx = shouldMoveHorizontally ? ONE_MOVE : ONE_MOVE;
   const headDirection = shouldMoveHorizontally ? 'headX' : 'headY';
-  const xOrY = shouldMoveHorizontally ? 'x' : 'y';
   const leftOrTop = shouldMoveHorizontally ? 'left' : 'top';
 
   for (let i = 1; i <= numberOfTiles; i++) {
     /** Get the current x and multiply it by tile width
      * to get the current horizontal px count. */
     const movementPx = shouldMoveHorizontally
-      ? CAT_OF_TRUTH.headX * ONE_MOVE_PX_X
-      : CAT_OF_TRUTH.headY * ONE_MOVE_PX_Y;
+      ? CAT_OF_TRUTH.headX * ONE_MOVE
+      : CAT_OF_TRUTH.headY * ONE_MOVE;
 
     if (!isOutOfBounds(direction)) {
       /** Add or subtract 1 to the current x */
       CAT_OF_TRUTH[headDirection] += factor;
-
-      /** Also update the data-attribute */
-      DOM_CAT.dataset[xOrY] = CAT_OF_TRUTH[headDirection].toString();
 
       /** Move the cat on the DOM */
       DOM_CAT.style[leftOrTop] = `${movementPx + oneMovePx * factor}px`;
@@ -103,11 +97,8 @@ export function changeStance(stance: Stance) {
   CAT_OF_TRUTH.length = newLength;
 
   // remove all stance classes and add the intended one
-  // also change the dataset... still not sure if you're really using this but useful for debuggin
   DOM_CAT.classList.remove(...stances);
   DOM_CAT.classList.add(stance);
-  DOM_CAT.dataset.stance = stance;
-  DOM_CAT.dataset.length = `${newLength}`;
 
   // attempt to absorb from your new location
   absorbThing();
